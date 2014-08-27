@@ -1,0 +1,12 @@
+/*
+
+!.gitignore
+
+!sites
+sites/*
+!sites/all
+sites/all/*
+!sites/all/themes
+sites/all/themes/*
+!sites/all/themes/bootstrap_ofbi/
+

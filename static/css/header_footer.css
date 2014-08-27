@@ -1,0 +1,148 @@
+@font-face {
+  font-family: 'OfBi';
+  src: url('/fonts/Ubuntu-R-derivative-OfBi.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+    position: relative;
+    font-family: 'Open Sans', 'OfBi', 'sans-serif';
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-width: 45em;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Open Sans', 'OfBi', 'sans-serif';
+    border-bottom: 1px solid #C0D9AF;
+}
+h1 { font-size: 188%; color: #69A54F; }
+h2 { font-size: 150%; }
+h3, h4, h5, h6 {
+    border-bottom: none;
+    line-height: 1.5em;
+}
+h3 { font-size: 140%; }
+h4 { font-size: 130%; }
+h5 { font-size: 120%; }
+h6 { font-size: 110%; }
+
+
+/* Scripture specifics */
+.scripture {
+}
+
+.scripture_study {
+    font-size: 85%;
+}
+
+.verse_num {
+    vertical-align: super;
+    font-size: 70%;
+    color: #AAAAAA;
+}
+
+.alternative {
+    /*display: none;*/ /* Do this to hide alternatives */
+    font-size: 90%;
+    color: #777777;
+}
+
+.omission {
+    font-size: 90%;
+    color: #777777;
+    text-decoration:line-through;
+}
+
+.insertion-start,.insertion-end {
+    color: #BBBBBB;
+}
+
+.ofbi_no_header h2.pane-title,
+.ofbi_no_header div.pane-content>div.node>h2
+{
+    display: none;
+}
+
+.ofbi_hr {
+    height: 1px;
+    color: #C0D9AF;
+    background-color: #C0D9AF;
+    border: 0;
+    margin: 0.2em 0 0.2em 0;
+}
+
+#header-image {
+    vertical-align: top;
+    margin-top: -5px;
+    height: 42px;
+}
+
+/* Fixed header */
+    html, body {
+        /* The html and body elements cannot have any padding or margin. */
+        padding-top: 40px;
+        height: 100%;
+    }
+
+/* Wrapper for page content to push down footer */
+    #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+    /* Negative indent by footer + header height */
+        margin: 0 auto -120px;
+    /* Pad bottom by footer + header height */
+        padding: 0 0 120px;
+    }
+/* Set the fixed height of the footer here */
+    footer {
+        height: 80px;
+    }
+
+/* Fixes for the options menu. Buttons in dropdowns don't work, since environment is position:absolute'd, so they always wrap. */
+    .dropdown-menu>li>div {
+        padding: 3px 20px;
+        white-space: nowrap;
+    }
+
+    #options-menu {
+        width:322px;
+    }
+
+/* Tuning to allow bigger logo in header menu */
+    #navbar-large-logo {
+        padding-top:10px;
+        padding-bottom:0px;
+    }
+
+/* Bigger text in navbars */
+    .navbar-default .navbar-nav > li > a {
+        font-size: 150%;
+        color: #69A54F;
+    }
+
+/* No hover underline in header */
+    .navbar-default .navbar a:hover {
+        border-bottom: none;
+    }
+
+    .navbar-brand {
+        font-size: 200%;
+    }
+
+/* Fixes required for the two multi column dropdown menus in the header. */
+    .dropdown-menu.multi-column {
+        width: 400px;
+    }
+
+    .dropdown-menu.multi-column .dropdown-menu {
+        display: block !important;
+        position: static !important;
+        margin: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+

@@ -1,0 +1,15 @@
+/*
+
+!.gitignore
+!README.md
+
+!extensions/
+extensions/*
+!extensions/OffeneBibel/
+
+!skins/
+skins/*
+!skins/OffeneBibel.deps.php
+!skins/OffeneBibel.php
+!skins/offenebibel/
+

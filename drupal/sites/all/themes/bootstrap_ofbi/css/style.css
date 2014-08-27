@@ -1,0 +1,40 @@
+@import url('header_footer.css');
+
+body:not(.ofbi-full-width)>div#wrap>div.container>div.row>section
+{
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+h1,h2,h3,h4,h5,h6 {
+color: #69A54F;
+}
+
+/* Forum */
+div#forum>table>tbody>tr>td.container>div.name {
+    font-weight: bold;
+}
+div#forum>table>tbody>tr>td.container {
+    padding-left: 0px;
+}
+div#forum>table>tbody>tr>td.forum {
+    padding-left: 25px;
+}
+div#forum>table>tbody>tr>td.title>div:nth-child(1) {
+    font-weight: bold;
+}
+div#forum>table>tbody>tr>td.title>div:nth-child(2) {
+    padding-left: 25px;
+}
+div#forum>table>thead * {
+    text-decoration:underline;
+}
+div#forum>table>tbody:before {
+    line-height:1em;
+    content:"-";
+    color:white; /* to hide text */
+    display:block;
+}
+

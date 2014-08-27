@@ -1,0 +1,8 @@
+The Ubuntu-R-derivative-Ofbi font is a converted and renamed version of the Ubuntu font.
+See the file license-Ubuntu.txt for copyright information and license.
+
+The Hebrew-OfBi font is a converted and renamed version of the SILEOT font.
+See the file License-SILEOT.txt for copyright information and license.
+
+The Hebrew-OfBi font also includes two characters from the Linux Libertine font.
+See the file for copyright information and license.

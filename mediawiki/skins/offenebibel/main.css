@@ -1,0 +1,1051 @@
+/*
+** 'OffeneBibel' style sheet (for MediaWiki)
+** Version 1.4
+** Olaf Schmidt-Wischhöfer, 2011-03-26
+** License: GPL (http://www.gnu.org/copyleft/gpl.html)
+**
+** Based on Chick by Timwi
+** Loosely based on Monobook by Gabriel Wicke
+*/
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic&subset=latin,greek-ext,greek,latin-ext);
+
+@font-face {
+  font-family: 'OfBi-Hebrew';
+  src: url('/fonts/Hebrew-OfBi.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.hebr {
+  direction:rtl;
+  font-size: 100%;
+  font-family: "OfBi-Hebrew", "Ezra SIL", "Ezra SIL SR", "SBL Hebrew", "Times New Roman", serif;
+}
+
+.hebr16 {
+  direction:rtl;
+  font-size: 115%;
+  font-family: "OfBi-Hebrew", "Ezra SIL", "Ezra SIL SR", "SBL Hebrew", "Times New Roman", serif;
+}
+
+.name {
+  font-family: "OfBi-Hebrew", "Ezra SIL", "Ezra SIL SR", "SBL Hebrew", "Times New Roman", serif;
+}
+
+.name span {
+    font-family: 'Open Sans', 'OfBi', 'sans-serif';
+}
+
+#column-content-large {
+    position: absolute;
+    overflow: visible;
+    top: 0;
+    right: 0px;
+    width: 100%;
+    z-index: 2;
+    padding: 1em 0 2em 0;
+    background-color: #FFFFFF;
+}
+
+#column-content {
+    position: absolute;
+    overflow: visible;
+    top: 0;
+    right: 0px;
+    width: 76.5%;
+    z-index: 2;
+    padding: 1em 0 2em 0;
+    background-color: #FFFFFF;
+}
+
+#content {
+  padding: 0 0.75em;
+}
+
+#column-one {
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+    margin: 0 0 0 0;
+    padding: 1em 0 0 0;
+    font-size: 80%;
+}
+
+#column-one {
+    left: 0px;
+    z-index: 1;
+    width: 20%;
+}
+
+#one {
+    border-top: 1px solid #E4F0DE;
+    border-bottom: 1px solid #E4F0DE;
+    background-color: #F8FDF5;
+}
+
+#column-one .portlet {
+    padding-bottom: 20px;
+    border-right: 1px solid #E4F0DE;
+}
+
+#column-one ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#column-one li {
+    margin: 0;
+    padding: 0 0 0 7px;
+    text-indent: -7px;
+}
+
+#column-one li a {
+    padding: 0 0 0 7px;
+    background: url(listenzeichen.png) 0 50% no-repeat;
+}
+
+#column-one .pBody {
+  margin: 0 0 0;
+  padding: 0 0.6em 0 0.6em;
+}
+
+#column-one h5 {
+  padding: 0 0.6em 0.2em 0.6em;
+}
+
+#siteSub, #jump-to-nav {
+    display: none;
+}
+
+#searchInput {
+    width: 100%;
+}
+
+.visualClear {
+    clear: both;
+}
+
+a:link { color: #3E6A96; text-decoration: none; }
+a:active { color: #ffa500; text-decoration: none; }
+a:visited { color:#7C95AF; text-decoration: none; }
+
+a.new:link, #p-personal a.new:link, a.stub:link,
+a.new:visited, #p-personal a.new:visited, a.stub:visited {
+    color: #992233;
+}
+
+.comment_edit a:link, .comment_edit a:visited, .comment_delete a:link, .comment_delete a:visited {
+  color: #990000;
+}
+
+#toc .toctoggle a:link, #toc .toctoggle a:visited {
+    color: #666666;
+}
+
+a:link:hover, a.new:link:hover, #p-personal a.new:link:hover, a.stub:link:hover,
+a:visited:hover, a.new:visited:hover, #p-personal a.new:visited:hover, a.stub:visited:hover,
+#toc .toctoggle a:link:hover, #toc .toctoggle a:visited:hover {
+    color: #177BDE;
+    text-decoration: none;
+    border-bottom: 1px dotted #177BDE;
+}
+
+#preftoc a:link:hover, #preftoc a:visited:hover {
+    color: #177BDE;
+    text-decoration: none;
+    border-bottom: none;
+}
+
+img {
+    border: none;
+    vertical-align: middle;
+}
+p {
+    margin : 0 0 0.5em 0;
+    padding: 0;
+    line-height: 1.5em;
+}
+sup {
+  vertical-align : super;
+  font-size : 80%;
+  line-height:100%;
+}
+
+p img { margin: 0; }
+
+hr {
+    height: 1px;
+    color: #C0D9AF;
+    background-color: #C0D9AF;
+    border: 0;
+    margin: 0.2em 0 0.2em 0;
+}
+
+.editsection {
+	font-weight: normal;
+}
+h1 .editsection { font-size: 53.2%; }
+h2 .editsection { font-size: 66.7%; }
+h3 .editsection { font-size: 75.8%; }
+h4 .editsection { font-size: 86.2%; }
+h6 .editsection { font-size: 125%; }
+
+#content h1,#content h2,#content h3,#content h4,#content h5,#content h6 {
+color: #69A54F;
+}
+/* To fix up heading color of boxes */
+#hauptseite h2 { color: #000; }
+
+ul {
+    line-height: 1.5em;
+    margin: 0.3em 0 0 1.5em;
+    padding:0;
+}
+ol {
+    line-height: 1.5em;
+    margin: 0.3em 0 0 3.2em;
+    padding:0;
+    list-style-image: none;
+}
+li { margin-bottom: 0.1em; }
+dt {
+    font-weight: bold;
+    margin-bottom: 0.1em;
+}
+dl{
+    margin-top: 0.2em;
+    margin-bottom: 0.5em;
+}
+dd {
+    line-height: 1.5em;
+    margin-left: 2em;
+    margin-bottom: 0.1em;
+}
+
+fieldset {
+    border: 1px solid #2f6fab;
+    margin: 1em 0em 1em 0em;
+    padding: 0em 1em 1em 1em;
+    line-height: 1.5em;
+}
+legend {
+    background: White;
+    padding: 0.5em;
+    font-size: 95%;
+}
+form {
+    border: none;
+    margin: 0;
+}
+
+textarea {
+    border: 1px solid #2f6fab;
+    color: Black;
+    background-color: white;
+    width: 100%;
+    padding: 0.1em;
+    overflow: auto;
+}
+input.historysubmit {
+    padding: 0 0.3em 0.3em 0.3em !important;
+    font-size: 94%;
+    cursor: pointer;
+    height: 1.7em !important;
+    margin-left: 1.6em;
+}
+input[type="radio"],
+input[type="checkbox"] { border:none; }
+input[type="text"],
+input[type="password"] { border: 1px solid #999999; }
+select {
+    border: 1px solid #2f6fab;
+    color: Black;
+    vertical-align: top;
+}
+abbr, acronym, .explain {
+    border-bottom: 1px dotted Black;
+    color: Black;
+    background: none;
+    cursor: help;
+}
+q {
+    font-family: Times, "Times New Roman", serif;
+    font-style: italic;
+}
+code { background-color: #f9f9f9; }
+pre {
+    padding: 1em;
+    border: 1px dashed #2f6fab;
+    color: Black;
+    background-color: #f9f9f9;
+    line-height: 1.1em;
+}
+
+/*
+** the main content area
+*/
+
+span.subpages { display: block; }
+
+/* Some space under the headers in the content area */
+#bodyContent h1, #bodyContent h2 { margin-bottom:0.6em; }
+#bodyContent h3,
+#bodyContent h4,
+#bodyContent h5 {
+    margin-bottom: 0.3em;
+}
+#firstHeading { margin-bottom: 0.7em; }
+
+/* user notification thing */
+.usermessage {
+    background-color: #ffce7b;
+    border: 1px solid #ffa500;
+    color: Black;
+    font-weight: bold;
+    margin: 0.1em 0 0 0;
+    padding: 2px 5px;
+    vertical-align: middle;
+}
+#siteNotice {
+    text-align: center;
+    font-size: 95%;
+    padding: 0 0.9em 0 0.9em;
+}
+#siteNotice p { margin: 0; padding: 0; }
+.error {
+    color: red;
+    font-size: larger;
+}
+.catlinks {
+    border:1px solid #aaaaaa;
+    background-color:#f9f9f9;
+    padding: 2px 5px;
+    margin: 0.1em 0 0 0;
+    clear: both;
+}
+.catlinks { margin: 0; padding: 0; }
+
+
+/* currently unused, intended to be used by a metadata box
+in the bottom-right corner of the content area */
+.documentDescription {
+    /* The summary text describing the document */
+    font-weight: bold;
+    display: block;
+    margin: 1em 0em;
+    line-height: 1.5em;
+}
+.documentByLine {
+    text-align: right;
+    font-size: 90%;
+    clear: both;
+    font-family: 'Open Sans', 'OfBi', 'sans-serif';
+    color: #76797c;
+}
+
+/* emulate center */
+.center {
+    width: 100%;
+    text-align: center;
+}
+*.center * {
+    margin-left: auto;
+    margin-right: auto;
+}
+/* small for tables and similar */
+.small, .small * { font-size: 94%; }
+table.small { font-size: 100% }
+
+/*
+** content styles
+*/
+
+#toc {
+    /*border:1px solid #2f6fab;*/
+    position: relative;
+    border:1px solid #aaaaaa;
+    background-color:#f9f9f9;
+    padding:5px;
+    font-size: 80%;
+    margin: 0 0 1em 1em;
+    float: right;
+}
+#toc ul { margin-left: 2em; }
+#toctitle { position: relative; }
+#toc .toctoggle { position: absolute; top: -5px; right: -5px; color: #666666; font-size: 80%; }
+#toc .editsection {
+    margin-top: 0.7em;
+    font-size: 94%;
+}
+
+/* images */
+div.floatright, table.floatright {
+    clear: right;
+    float: right;
+    margin: 0;
+    position: relative;
+    padding: 0.5em 0 0.8em 1.4em;
+}
+div.floatright p { font-style: italic; }
+div.floatleft, table.floatleft {
+    float: left;
+    clear: left;
+    margin: 0.3em 0.5em 0.5em 0;
+    position: relative;
+    border: 0.5em solid White;
+    border-width: 0.5em 1.4em 0.8em 0;
+}
+div.floatleft p { font-style: italic; }
+/* thumbnails */
+div.thumb {
+    margin-bottom: 0.5em;
+    border-style: solid; border-color: White;
+    width: auto;
+}
+div.thumb div {
+    border:1px solid #cccccc;
+    padding: 3px !important;
+    background-color:#f9f9f9;
+    font-size: 94%;
+    text-align: center;
+    overflow: hidden;
+}
+div.thumb div a img {
+    border:1px solid #cccccc;
+}
+div.thumb div div.thumbcaption {
+    border: none;
+    text-align: left;
+    line-height: 1.4em;
+    padding: 0.3em 0 0.1em 0;
+}
+div.magnify {
+    float: right;
+    border: none !important;
+    background: none !important;
+}
+div.magnify a, div.magnify img {
+    display: block;
+    border: none !important;
+    background: none !important;
+}
+div.tright {
+    clear: right;
+    float: right;
+    border-width: 0.5em 0 0.8em 1.4em;
+}
+div.tleft {
+    float: left;
+    clear: left;
+    margin-right:0.5em;
+    border-width: 0.5em 1.4em 0.8em 0;
+}
+img.thumbborder {
+	border: 1px solid #dddddd;
+}
+
+.hiddenStructure {
+    display: none;
+}
+
+/* js pref toc */
+#preftoc {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	clear: both;
+}
+#preftoc li {
+	background-color: #f0f0f0;
+	color: #000;
+}
+#preftoc li {
+	margin: 1px -2px 1px 2px;
+	float: left;
+	padding: 2px 0 3px 0;
+	border: 1px solid #fff;
+	border-right-color: #716f64;
+	border-bottom: 0;
+	position: relative;
+	white-space: nowrap;
+	list-style-type: none;
+	list-style-image: none;
+	z-index: 3;
+}
+#preftoc li.selected {
+	font-weight: bold;
+	background-color: #f9f9f9;
+	border: 1px solid #aaa;
+	border-bottom: none;
+	cursor: default;
+	top: 1px;
+	padding-top: 2px;
+	margin-right: -3px;
+}
+#preftoc > li.selected {
+	top: 2px;
+}
+#preftoc a,
+#preftoc a:active {
+	display: block;
+	color: #000;
+	padding: 0 .7em;
+	position: relative;
+	text-decoration: none;
+}
+#preftoc li.selected a {
+	cursor: default;
+	text-decoration: none;
+}
+#prefcontrol {
+	padding-top: 2em;
+	clear: both;
+}
+#preferences {
+	margin: 0;
+	border: 1px solid #aaa;
+	clear: both;
+	padding: 1.5em;
+	background-color: #f9f9f9;
+}
+.prefsection {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+.prefsection fieldset {
+	border: 1px solid #aaa;
+	float: left;
+	margin-right: 2em;
+}
+.prefsection legend {
+	font-weight: bold;
+}
+.prefsection table, .prefsection legend {
+	background-color: #f9f9f9;
+}
+.mainLegend {
+	display: none;
+}
+div.prefsectiontip {
+	font-size: x-small;
+	padding: .2em 2em;
+	color: #666;
+}
+.btnSavePrefs {
+	font-weight: bold;
+	padding-left: .3em;
+	padding-right: .3em;
+}
+
+.preferences-login {
+	clear: both;
+	margin-bottom: 1.5em;
+}
+
+.prefcache {
+	font-size: 90%;
+	margin-top: 2em;
+}
+
+/*
+** classes for special content elements like town boxes
+** intended to be referenced directly from the wiki src
+*/
+
+/*
+** User styles
+*/
+/* table standards */
+table.rimage {
+    float:right;
+    position:relative;
+    margin-left:1em;
+    margin-bottom:1em;
+    text-align:center;
+}
+.toccolours {
+    border:1px solid #aaaaaa;
+    background-color:#f9f9f9;
+    padding:5px;
+    font-size: 95%;
+}
+
+/*
+** edit views etc
+*/
+.special li {
+    line-height: 1.4em;
+    margin: 0;
+    padding: 0;
+}
+
+.redirectText {
+	font-size:150%;
+	margin:5px;
+}
+
+ul.special li.not-patrolled, ol.special li.not-patrolled {
+	background-color: #ffa;
+}
+div.patrollink {
+	font-size: 75%;
+	text-align: right;
+}
+span.newpage, span.minor {
+	font-weight: bold;
+}
+
+span.updatedmarker {
+	color:black;
+	background-color:#00FF00;
+}
+
+table.gallery {
+        border:  1px solid #cccccc;
+        margin:  2px;
+        padding: 2px;
+        background-color:#ffffff;
+}
+
+table.gallery tr { 
+        vertical-align:top;
+}
+
+table.gallery td {
+      vertical-align:top;
+      background-color:#f9f9f9;
+      border: solid 2px white;
+}
+
+div.gallerybox {
+        margin: 2px;
+        width:  150px;
+}
+
+div.gallerybox div.thumb {
+        text-align: center;
+        border: 1px solid #cccccc;
+        margin: 2px;
+}       
+
+div.gallerytext {
+	overflow: hidden;
+        font-size: 94%;
+        padding: 2px 4px;
+}       
+
+#xjump-to-nav {
+  display: none;
+}
+
+.templatesUsed { margin-top: 1.5em; }
+
+.printfooter {
+	display: none;
+}
+
+#footer {
+  clear: both;
+  overflow: visible;
+	background-color: white;
+	margin: 6em 0 0 0;
+	padding: 1em 0 0 0;
+	font-size: 80%;
+	position: relative;
+  border-top: 1px solid #C0D9AF;
+}
+#footer img {
+  float: right;
+  margin: 0 0 0.5em 0.5em;
+}
+#footer ul {
+	margin:0;
+	padding:0;
+	vertical-align: top;
+}
+#footer li {
+	list-style: none;
+	margin:0;
+	padding:0;
+	vertical-align: top;
+}
+
+#p-cactions {
+    font-size: 80%;
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 2em;
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;
+    text-align: right;
+}
+
+.cactions {
+    font-size: 80%;
+    float: right;
+}
+
+#p-cactions .pBody {
+    position : relative;
+    z-index: 3;
+}
+
+#p-cactions h5 {
+    display: none;
+}
+
+#p-cactions ul, .cactions ul {
+    margin: 0;
+    padding: 0;
+}
+
+#p-cactions li, .cactions li {
+    display: inline;
+    border: none;
+}
+
+#p-cactions li.selected, .cactions li.selected {
+	font-weight: bold;
+    border: none;
+}
+
+#p-cactions li a, .cactions li a {
+    background: none;
+    padding: 0;
+    margin: 0 0.5em 0 0;
+}
+
+#column-one #p-Navigator, #p-Navigator {
+    padding-top: 1em;
+}
+
+#p-Rubriken {
+    display:none;visibility:hidden
+}
+
+#p-cactions a:link, #p-cactions a:visited, .cactions a:link, .cactions a:visited {
+    color: #666666;
+}
+
+#p-cactions a:link:hover, #p-cactions a:visited:hover, .cactions a:link:hover, .cactions a:visited:hover {
+    color: #177BDE;
+    text-decoration: none;
+    border-bottom: 1px dotted #177BDE;
+}
+
+.pBody .form-item {
+    margin-bottom:0;
+    margin-top:0;
+}
+
+.pBody #user-login-form {
+    text-align:left;
+}
+
+.pBody .form-item label {
+    display:block;
+    font-family: 'Open Sans', 'OfBi', 'sans-serif';
+}
+
+.pBody .marker, .pBody .form-required {
+    color:#666666;
+}
+
+.pBody tbody {
+    border-top:none;
+}
+
+div.comment-published {
+    border: 2px solid #75bd5c;
+    background-color:#f7f7f7;
+    -moz-border-radius:10px;
+    -khtml-border-radius:10px;
+    padding: 0.1em 0.3em 0.1em 0.3em;
+    margin-top:0.1em;
+}
+
+div.status {
+    border: 2px solid #75bd5c;
+    -moz-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    font-size: 90%;
+    padding: 0.5em;
+}
+
+div.submitted {
+	font-size: 75%;
+	font-style: italic;
+}
+
+ul.links {
+	text-align: right;
+	font-size: 80%;
+    padding: 0 0.2em 0 0.1em;
+}
+
+.picture {
+float: right;
+padding: 0.3em 0.3em 0.3em 0.3em;
+}
+
+.navi {
+  font-size: 80%;
+}
+
+.studienfassung, .lesefassung {
+  margin: 0 0 0.5em 0;
+  padding: 0;
+}
+
+.lesefassung .poem,
+.studienfassung .poem {
+  border-left: 2px solid #F7F7F7;
+  padding-left: 1em;
+}
+
+sup.versnummer {
+  font-style: italic;
+  color: #808080;
+}
+
+.aktiv sup.versnummer {
+  font-family: "Walter Turncoat";
+  vertical-align: baseline;
+  font-size: 80%;
+  font-weight: bold;
+  margin: 0 0.25em 0 0;
+  color: #009900;
+}
+
+.studienfassung .vor_vers {
+  display: block;
+}
+
+.pfeil {
+  width: 25px;
+  height: 22px;
+  position: absolute;
+  right: 100%;
+  margin-right: 12px;
+  background: url(pfeil.png) 0% 0% no-repeat;
+}
+
+.vor_aktiv {
+  padding-right: 10px;
+}
+
+.aktiv_anfang {
+  vertical-align: top;
+  font-size: 140%;
+  position: relative;
+  left: -10px;
+}
+
+.aktiv_anfang span {
+  position: absolute;
+  padding-right: 30px;
+  background: url(startstrich2.png) 0% 0% no-repeat;
+}
+
+.aktiv_ende {
+  vertical-align: top;
+  font-size: 140%;
+  position: relative;
+  left: -20px;
+  padding-right: 10px;
+}
+
+ .aktiv_ende span {
+  position: absolute;
+  padding-right: 30px;
+  background: url(schlussstriche2.png) 0% 100% no-repeat;
+}
+
+.aktiv_link {
+  line-height: 140%;
+  font-style: italic;
+  color: #009900;
+  font-size:125%;
+}
+
+.kapitelwahl {
+   float: right;
+   display: table;
+}
+
+#hauptseite .kapitelwahl {
+  padding: 0.25em 0.25em 0 0.25em;
+}
+
+.kapitelwahl form {
+  display: table-row;
+}
+
+.kapitelwahl .zelle {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 80%;
+}
+
+.kapitelwahl select, .kapitelwahl input {
+  vertical-align: baseline;
+  font-size: 80%;
+}
+
+/*** Vernummern Ende ***/
+
+/****** Klammern *****/
+
+.studienfassung .eckige-klammer, .lesefassung .eckige-klammer {
+  color: #CCCCCC;
+  font-weight: bold;
+}
+
+.studienfassung .eckige-klammer-inhalt, .lesefassung .eckige-klammer-inhalt {
+  padding: 0.1em;
+}
+
+.studienfassung .runde-klammer,
+.studienfassung .geschweifte-klammer,
+.studienfassung .runde-klammer-inhalt {
+  color: #808080;
+  font-size: 80%;
+}
+
+.studienfassung .geschweifte-klammer-inhalt {
+  font-size: 80%;
+  color: #808080;
+  text-decoration : line-through;
+}
+
+.studienfassung h2 .runde-klammer, .studienfassung h2 .runde-klammer-inhalt,
+.lesefassung h2 .runde-klammer, .lesefassung h2 .runde-klammer-inhalt {
+  color: #808080;
+  font-size: 100%;
+}
+
+.studienfassung a:link .runde-klammer, .studienfassung a:link .runde-klammer-inhalt,
+.lesefassung a:link .runde-klammer, .lesefassung a:link .runde-klammer-inhalt {
+  color: inherit;
+  font-size: 100%;
+}
+
+.studienfassung .runde-klammer-inhalt .runde-klammer,
+.studienfassung .runde-klammer-inhalt .geschweifte-klammer,
+.studienfassung .runde-klammer-inhalt .runde-klammer-inhalt,
+.studienfassung .runde-klammer-inhalt .geschweifte-klammer-inhalt,
+.studienfassung .geschweifte-klammer-inhalt .runde-klammer,
+.studienfassung .geschweifte-klammer-inhalt .geschweifte-klammer,
+.studienfassung .geschweifte-klammer-inhalt .runde-klammer-inhalt,
+.studienfassung .geschweifte-klammer-inhalt .geschweifte-klammer-inhalt {
+  font-size:100%;
+}
+
+/*** Fußnoten ***/
+.studienfassung sup.reference, .lesefassung sup.reference {
+  padding-left : 0.1em;
+  font-weight : normal;
+  color : #808080;
+}
+
+.studienfassung sup.reference .eckige-klammer-inhalt, .lesefassung sup.reference .eckige-klammer-inhalt {
+  padding: 0;
+}
+
+.studienfassung sup.reference .eckige-klammer, .lesefassung sup.reference .eckige-klammer {
+  font-weight: normal;
+}
+
+.references {
+  border-spacing: 0;
+  margin: 0.5em 2em 0 0;
+}
+
+.note_id {
+  vertical-align: top;
+  text-align: left;
+  color: #808080;
+  font-size: 90%;
+  font-style: italic;
+  line-height: 1.5em;
+  padding: 0 0.75em 0.5em 0;
+}
+
+.note {
+  vertical-align: top;
+  text-align: justify;
+  font-size: 90%;
+  line-height: 1.5em;
+  padding: 0 0 0.5em 0.5em;
+  border-left: 1px solid #EEEEEE;
+}
+
+.backlinks {
+  font-size: 89%;
+  color: #808080;
+}
+
+.backlinks a:link, .backlinks a:visited {
+  color: #808080;
+}
+
+.backlinks a:hover {
+    color: #177BDE;
+}
+
+.backlinks a:active {
+    color: #ffa500;
+}
+
+.close-references {
+  float : right;
+  line-height : 1em;
+}
+
+.lesefassung .zwischenueberschrift .runde-klammer,
+.lesefassung .zwischenueberschrift .runde-klammer-inhalt,
+.studienfassung .zwischenueberschrift .runde-klammer,
+.studienfassung .zwischenueberschrift .runde-klammer-inhalt {
+  font-size: 80%;
+  color: #999999;
+}
+
+/*** Fußnoten-Links mit Klammern ***/
+
+.studienfassung .runde-klammer-inhalt sup.reference,
+.studienfassung .geschweifte-klammer-inhalt sup.reference {
+  font-size:100%;
+  font-weight: normal;
+}
+
+.studienfassung sup.reference a:link, .lesefassung sup.reference a:link,
+.studienfassung sup.reference a:visited, .lesefassung sup.reference a:visited,
+.studienfassung sup.reference a:active, .lesefassung sup.reference a:active {
+  text-decoration: none;
+  border-bottom: 1px solid white;   
+}
+
+.studienfassung sup.reference a:hover, .lesefassung sup.reference a:hover {
+  text-decoration: none;
+  border-bottom: 1px dotted #177BDE;   
+}
+/*** Fußnoten Ende ***/
+
+  .name {position: relative; top:-0.1em; padding: 0 0.1em 0.2em 0.1em; margin:0 -0.1em; border-radius: 0.5em; background-color : #f6f3f0;}
+  .name span {position: relative; top:0.1em; color : black; border-bottom : 1px solid #dcb; padding: 0 0.1em; white-space : nowrap;}
+  .name:link, .name:link:hover, .name:visited, .name:visited:hover {color : #876; text-decoration : none; border-width:0;}
+  .muster {display : none; visibility : none;}
+  #Ersatzlesungen {visibility : hidden; z-index:10; font-size : 80%; line-height : 100%; padding : 1em 0 0.5em 1em; border : 1px solid #ccc; background-color : #f6f3f0; border-radius : 1em; position: absolute; top : 0; left : 0; -moz-box-shadow: 0.25em 0.25em 0.25em #ccc; -webkit-box-shadow : 0.25em 0.25em 0.25em #ccc; box-shadow : 0.25em 0.25em 0.25em #ccc;}
+  #Ersatzlesungen div {float : left; padding : 0.5em 1em 0.5em 0;}
+  #Ersatzlesungen p {clear : left; padding-right : 1em;}
+  #Ersatzlesungen div a:link, #Ersatzlesungen div a:visited {color : black; text-decoration : none;}
+  #inhalt {float : right; border : 1px solid #ddd; background-color : #f7f7f7; padding : 0.5em;}
+  #inhalt ul {margin : 0 0 0 1em; padding : 0;}
+  #inhalt li {display : block; margin : 0; padding : 0;}
+  #inhalt a:link, #inhalt a:visited {text-decoration : none;}
+
