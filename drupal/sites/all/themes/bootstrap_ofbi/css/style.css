@@ -1,4 +1,4 @@
-@import url('header_footer.css');
+@import url('/static/css/header_footer.css');
 
 body:not(.ofbi-full-width)>div#wrap>div.container>div.row>section
 {

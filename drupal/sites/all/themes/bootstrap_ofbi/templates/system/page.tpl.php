@@ -73,7 +73,7 @@
  * @ingroup themeable
  */
 ?>
-<?php require 'headerFooter.php';
+<?php require DRUPAL_ROOT . '/../static/server-side/headerFooter.php';
 print getOfBiHeader();
 ?>
     <div class="row">
