@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'OfBi';
-  src: url('/fonts/Ubuntu-R-derivative-OfBi.woff') format('woff');
+  src: url('/static/fonts/Ubuntu-R-derivative-OfBi.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }

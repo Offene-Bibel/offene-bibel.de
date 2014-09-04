@@ -12,7 +12,7 @@
 
 @font-face {
   font-family: 'OfBi-Hebrew';
-  src: url('/fonts/Hebrew-OfBi.woff') format('woff');
+  src: url('/static/fonts/Hebrew-OfBi.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }

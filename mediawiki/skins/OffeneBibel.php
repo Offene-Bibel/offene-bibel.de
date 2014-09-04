@@ -3,7 +3,7 @@ if ( ! defined( 'MEDIAWIKI' ) )
         die( 1 );
  
 require_once( dirname( dirname( __FILE__ ) ) . '/includes/SkinTemplate.php');
-require_once('offenebibel/headerFooter.php');
+require_once( $GLOBALS["IP"] . '/../static/server-side/headerFooter.php');
 /**
  * OffeneBibel skin
  *
@@ -33,8 +33,8 @@ class SkinOffeneBibel extends SkinTemplate {
     global $wgHandheldStyle;
     parent::setupSkinUserCss( $out );
     // Append to the default screen common & print styles...
-    $out->addStyle( 'offenebibel/bootstrap.min.css', 'screen' );
-    $out->addStyle( 'offenebibel/header_footer.css', 'screen' );
+    $out->addStyle( '/static/css/lib/bootstrap.css', 'screen' );
+    $out->addStyle( '/static/css/header_footer.css', 'screen' );
     $out->addStyle( 'offenebibel/main.css', 'screen' );
   }
 }
@@ -57,7 +57,7 @@ class OffeneBibelTemplate extends QuickTemplate {
 
     $this->html( 'headelement' );
     ?>
-    <script data-main="<?php echo htmlspecialchars($skin->getSkinStylePath("js/main.js"));?>" src="<?php echo htmlspecialchars($skin->getSkinStylePath("js/vendor/require.js"));?>"></script>
+    <script data-main="/static/js/main.js" src="/static/js/lib/require.js"></script>
     <?php echo getOfBiHeader();?>
 
     <div id="globalWrapper">
