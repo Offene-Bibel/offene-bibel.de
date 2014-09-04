@@ -13,7 +13,12 @@ class OfBi {
   var $from = false;
   var $to = false;
 
-  const regex = '([^>"\']|"([^"\\\\]|\\\\.)*+"|\'(|[^\'\\\\]|\\\\.)*+\')*+';
+  # This regex matches the stuff inside a HTML <> tag.
+  # It matches any character and " or ' quoted strings and handles \ correctly.
+  #               [^"\]   \.           [^'\]   \.
+  #   [^>"']   "(       |    )*+"   '(       |    )*+'
+  # (        |                    |                    )*+
+  const tag_content = '([^>"\']|"([^"\\\\]|\\\\.)*+"|\'([^\'\\\\]|\\\\.)*+\')*+';
   const regex_ich_du_er = 'ICH|DU|ER|MIR|DIR|IHM|MICH|DICH|IHN|(M|D|S)EIN(E[M|N|R|S]?)?';
   const regex_unser_euer = '(Uns|uns|Eu|eu)er\\s(GOTT|HERR)|(Unse|unse|Eu|eu)re[mn]\\s(GOTT|HERRN)|(Unse|unse|Eu|eu)res\\s(GOTTES|HERRN)';
   const regex_sonst = 'GOTTES|GOTT|[Dd]e[mns]\\sHERRN|([Dd]er\\s)?HERR|Jahwes|JAHWEs|JAHWES|Jahwe|JAHWE';
@@ -44,8 +49,11 @@ class OfBi {
   }
 
   function hook_ParserBeforeTidy ( &$parser, &$text ) {
+    # Search patterns...
+    # (?<FOO>pattern) is a named capture. They can be referenced with \g{FOO} later on.
+    # ++ is 1 or more, without backtracking.
     $patterns = array (
-      '(?<Tag>(<' . self::regex . '>)++)',
+      '(?<Tag>(<' . self::tag_content . '>)++)',
       '(?<Normal>[^<>(){}[\]]++)',
       '(?<Headline>\(\((?<Headline1>[^)]++)\)\))',
       '(?<JHWH>\(/(?<JHWH1>[^/)]++)/(?<JHWH2>[^/)]++)/((?<JHWH3>[^/)]++)/)?\))',
@@ -56,6 +64,7 @@ class OfBi {
       '(?<OpeningSquared>\[)',
       '(?<ClosingSquared>\])',
     );
+    # ... and their replacements.
     $replace = array (
       'Tag' => array (),
       'Normal' => array (),
@@ -83,10 +92,17 @@ class OfBi {
       ),
     );
 
+    # Search for occurences of our patterns in the text and save them to $matches..
     preg_match_all ('#' . implode ('|', $patterns) . '#u', $text, $matches, PREG_SET_ORDER);
 
+    # $mode designates how the parser should react. The mode changes as we move through the file.
+    # First it's 'Start' then changes to 'Lesefassung' and is finally 'Studienfassung'.
     $mode = 'Start';
+
+    # Clear the $text because we are rebuilding it from scratch now.
     $text = '';
+
+    # Go through our matches.
     foreach ($matches as $match) {
       if ($mode == 'Start') {
         if (mb_strpos ($match ['Tag'], 'id="Lesefassung"') !== false) {
@@ -98,10 +114,10 @@ class OfBi {
         }
       }
       foreach ($replace as $key=>$values) {
-        if (! ($match [$key] == '')) {
-          if (array_key_exists ($mode, $values)) {
+        if (array_key_exists ($key, $match)) { # Correct replacement ...
+          if (array_key_exists ($mode, $values)) { # ... and correct mode
             if ($key == 'JHWH') {
-              if ($match ['JHWH3'] == '') {
+              if (! array_key_exists ('JHWH3', $match)) {
                 $unser_euer = $match ['JHWH1'];
                 $ich_du_er = $match ['JHWH2'];
               } else {
@@ -109,13 +125,21 @@ class OfBi {
                 $ich_du_er = $match ['JHWH3'];
               }
               $regex_name = self::regex_ich_du_er . '|' . self::regex_unser_euer . '|' . self::regex_sonst;
-              if ((preg_match ('#(?<prefix>[^|]*+)\\|(?<name>[^|]*+)\\|(?<suffix>[^|]*+)#u', $match ['JHWH1'], $matches_gemischt) === 1
-                    || (preg_match ('#(?<prefix>.*?)(?<name>\\b(' . $regex_name . ')\\b)(?<suffix>.*+)#u', $match ['JHWH1'], $matches_gemischt) === 1
-                      && preg_match ('#(\\b(' . $regex_name . ')\\b).*(\\b(' . $regex_name . ')\\b)#u', $match ['JHWH1']) === 0))
-                  && preg_match ('#(?<prefix>.*?)(?<name>\\b(' . self::regex_ich_du_er . ')\\b)(?<suffix>.*+)#u', $ich_du_er, $matches_ich_du_er) === 1
-                  && preg_match ('#(\\b(' . $regex_name . ')\\b).*(\\b(' . $regex_name . ')\\b)#u', $ich_du_er) === 0
-                  && preg_match ('#(?<prefix>.*?)(?<name>\\b(' . self::regex_unser_euer . ')\\b)(?<suffix>.*+)#u', $unser_euer, $matches_unser_euer) === 1
-                  && preg_match ('#(\\b(' . $regex_name . ')\\b).*(\\b(' . $regex_name . ')\\b)#u', $unser_euer) === 0) {
+              if (
+                (
+                  preg_match ('#(?<prefix>[^|]*+)\\|(?<name>[^|]*+)\\|(?<suffix>[^|]*+)#u', $match ['JHWH1'], $matches_gemischt) === 1
+                  ||
+                  (
+                     preg_match ('#(?<prefix>.*?)(?<name>\\b(' . $regex_name . ')\\b)(?<suffix>.*+)#u', $match ['JHWH1'], $matches_gemischt) === 1
+                     &&
+                     preg_match ('#(\\b(' . $regex_name . ')\\b).*(\\b(' . $regex_name . ')\\b)#u', $match ['JHWH1']) === 0
+                  )
+                )
+                && preg_match ('#(?<prefix>.*?)(?<name>\\b(' . self::regex_ich_du_er . ')\\b)(?<suffix>.*+)#u', $ich_du_er, $matches_ich_du_er) === 1
+                && preg_match ('#(\\b(' . $regex_name . ')\\b).*(\\b(' . $regex_name . ')\\b)#u', $ich_du_er) === 0
+                && preg_match ('#(?<prefix>.*?)(?<name>\\b(' . self::regex_unser_euer . ')\\b)(?<suffix>.*+)#u', $unser_euer, $matches_unser_euer) === 1
+                && preg_match ('#(\\b(' . $regex_name . ')\\b).*(\\b(' . $regex_name . ')\\b)#u', $unser_euer) === 0
+              ) {
                 $text .= '<span class="schalter"';
                 $text .= ' data-prefix1="' . htmlspecialchars ($matches_ich_du_er ['prefix']) . '"';
                 $text .= ' data-pattern1="' . htmlspecialchars ($matches_ich_du_er ['name']) . '"';
@@ -148,7 +172,7 @@ class OfBi {
   }
 
   function hook_OutputPageBeforeHTML ( &$output, &$text ) {
-    $text = preg_replace ('#((?>[\pZ\n\r]*)(</?p([\pZ\n\r]' . self::regex . ')?>(?>[\pZ\n\r]*))+)<span class="aktiv_ende"><span>&nbsp;</span>&nbsp;</span>#u', '<span class="aktiv_ende"><span>&nbsp;</span>&nbsp;</span>\1', $text);
+    $text = preg_replace ('#((?>[\pZ\n\r]*)(</?p([\pZ\n\r]' . self::tag_content . ')?>(?>[\pZ\n\r]*))+)<span class="aktiv_ende"><span>&nbsp;</span>&nbsp;</span>#u', '<span class="aktiv_ende"><span>&nbsp;</span>&nbsp;</span>\1', $text);
     return true;
   }
 
@@ -332,7 +356,7 @@ class OfBi {
 
       $offset = 0;
       $output = '';
-      while (preg_match ('#(([^<]++|<br([\pZ\n\r]' . self::regex . ')?>)*+)<' . self::regex . '>#u', $text, $matches, 0, $offset) === 1) {
+      while (preg_match ('#(([^<]++|<br([\pZ\n\r]' . self::tag_content . ')?>)*+)<' . self::tag_content . '>#u', $text, $matches, 0, $offset) === 1) {
         $output .= $this->replace_newlines ($matches [1]);
         $output .= substr ($matches [0], strlen ($matches [1]));
         $offset += strlen ($matches [0]);
