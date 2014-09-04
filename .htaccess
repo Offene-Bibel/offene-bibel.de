@@ -86,10 +86,13 @@ DirectoryIndex index.php index.html index.htm
 
   RewriteBase /
 
-  # Rewrite URLs of the form 'wiki/x' to the form 'mediawiki/index.php?q=x'.
+  # Rewrite URLs of the form 'wiki/x' to the form 'mediawiki/x'.
+  RewriteRule ^/?wiki/(.*)?$ /mediawiki/$1 [PT,DPI]
+
+  # Rewrite URLs of the form 'mediawiki/x' to the form 'mediawiki/index.php?q=x'.
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^/?wiki/(.*)?$ /mediawiki/index.php [L]
+  RewriteRule ^/?mediawiki/(.*)?$ /mediawiki/index.php [L]
 
   # Pass all requests not referring directly to files in the filesystem to
   # index.php. Clean URLs are handled in drupal_environment_initialize().
