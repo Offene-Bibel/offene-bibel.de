@@ -114,10 +114,10 @@ class OfBi {
         }
       }
       foreach ($replace as $key=>$values) {
-        if (array_key_exists ($key, $match)) { # Correct replacement ...
+        if (! ($match[$key] == '')) { # Correct replacement ...
           if (array_key_exists ($mode, $values)) { # ... and correct mode
             if ($key == 'JHWH') {
-              if (! array_key_exists ('JHWH3', $match)) {
+              if ($match['JHWH3'] == '') {
                 $unser_euer = $match ['JHWH1'];
                 $ich_du_er = $match ['JHWH2'];
               } else {
