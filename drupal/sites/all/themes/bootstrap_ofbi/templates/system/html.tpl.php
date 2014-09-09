@@ -58,6 +58,7 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
   <?php print $scripts; ?>
+  <script data-main="/static/js/main.js" src="/static/js/lib/require.js"></script>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   <div id="skip-link">
@@ -66,9 +67,6 @@
   <?php print $page_top; ?>
   <?php print $page; ?>
   <?php print $page_bottom; ?>
-  <!-- WIP: CONTINUE HERE!!!!!!!!!!! -->
   <div id='Ersatzlesungen'></div>
-  <script src="/static/js/ofbi.js"></script>
-  
 </body>
 </html>

@@ -19,5 +19,7 @@ requirejs.config({
 
 require([
 'login_popover',
-'fill_resize'
+'fill_resize',
+'ofbi'
 ], function ($) {});
+

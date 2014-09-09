@@ -1,5 +1,5 @@
-require  ([ "jquery"],
-function  ( $       ) {
+require  ([ "jquery" ],
+function  (  $       ) {
     /*
      * The name selector looks as follows:
      * <span
@@ -205,57 +205,58 @@ function  ( $       ) {
      */
     function setJavascriptFunctions () {
         $( ".name" ).each(function ( index ) {
-            this.setAttribute ("id", "ersatzlesung" + index);
-            this.setAttribute ("href", "Javascript:showErsatzlesungen('ersatzlesung" + index + "')");
-            this.setAttribute ("title", "Hier steht im Urtext der Gottesname JHWH. Für weitere Information und zum Ändern der Ersatzlesung bitte klicken.");
+            $( this ).attr("id", "ersatzlesung" + index);
+            $( this ).attr("title", "Hier steht im Urtext der Gottesname JHWH. Für weitere Information und zum Ändern der Ersatzlesung bitte klicken.");
+            $( this ).on("click", function( e ) {
+                showErsatzlesungen( e.target.id );
+                e.preventDefault();
+            });
         });
     }
 
-    /*
-     * Activate/Deactivate the replacement dialog on the given element.
-     */
-    function showErsatzlesungen (id) {
+    function showErsatzlesungen(id) {
         var el = $( "#Ersatzlesungen" );
-        if (el.style.visibility == "visible") {
+        if (el.is(":visible")) {
             close ();
         } else {
             var obj = $( "#" + id );
-            var left = obj.offsetLeft;
-            var top = obj.offsetTop;
-            for (var parent = obj.offsetParent; parent.tagName != "BODY"; parent = parent.offsetParent) {
-                left += parent.offsetLeft;
-                top += parent.offsetTop;
+            var left = obj.offset().left;
+            var top = obj.offset().top;
+            for (var parent = obj.offsetParent(); ! parent.is( "BODY" ); parent = parent.offsetParent()) {
+                left += parent.offset().left;
+                top += parent.offset().top;
             }
 
-            var maxleft = $( "html" ).get( 0 ).offsetWidth - el.offsetWidth - 10;
+            var maxleft = $( "html" ).offset().width - el.offset().width - 10;
             if (maxleft <= 0) {
-                el.style.left = "0";
+                el.css("left", "0");
                 left = 0;
             } else if (maxleft < left) {
-                el.style.left = maxleft + "px";
+                el.css("left", maxleft + "px");
             } else {
-                el.style.left = left + "px";
+                el.css("left", left + "px");
             }
 
-            el.style.top = (top + obj.offsetHeight) + "px";
-            el.style.visibility = "visible";
+            el.css("top", (top + obj.offset().height) + "px");
+            el.show();
             $( "#beginErsatzlesungen" ).focus();
         }
-        $( "#" + Ersatzlesung ).style.fontWeight="bold";
+        $( "#" + Ersatzlesung ).css("fontWeight", "bold");
     }
+
 
     function changeLink (ersatzlesung) {
         return "<p><a id=\""  + htmlspecialchars (ersatzlesung.replace (/[\0\s\f\n\r\t\v]/, "_")) + "\" href='Javascript:replaceAllNames(\""  + htmlspecialchars (ersatzlesung) + "\")'>" + htmlspecialchars (ersatzlesung) + "</a></p>";
     }
 
     function close () {
-        el = document.getElementById ("Ersatzlesungen");
-        el.style.visibility = "hidden";
-        el.style.left = 0;
-        el.style.top = 0;
+        $( "#Ersatzlesungen" )
+        .hide()
+        .css("left", 0)
+        .css("top", 0);
     }
 
-    $(function () {
+    $(function(){
         var html = "<p><span id=beginErsatzlesungen tabindex=-1>Ersatzlesung auswählen:</span>";
         html += "<div>";
         var count = 0;
@@ -278,6 +279,6 @@ function  ( $       ) {
         });
 
         setJavascriptFunctions();
-    })();
+    });
 });
 
