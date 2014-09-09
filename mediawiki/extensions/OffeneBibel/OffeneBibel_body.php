@@ -134,7 +134,7 @@ class OfBi {
               $regex_name = self::regex_ich_du_er . '|' . self::regex_unser_euer . '|' . self::regex_sonst;
               if (
                 (
-                  # PART1 is in "prefix|name|postfix" format
+                  # PART1 is in "prefix|name|postfix" format (has to be the three parameter variant)
                   # (?<prefix> [^|]*+ ) \| (?<name> [^|]*+ ) \| (?<suffix> [^|]*+ )
                   preg_match ('#(?<prefix>[^|]*+)\\|(?<name>[^|]*+)\\|(?<suffix>[^|]*+)#u', $match ['JHWH1'], $matches_gemischt) === 1
                   ||
@@ -143,7 +143,7 @@ class OfBi {
                      # (?<prefix> .*? ) (?<name> \b ($regex_name) \b ) (?<suffix> .*+ )
                      preg_match ('#(?<prefix>.*?)(?<name>\\b(' . $regex_name . ')\\b)(?<suffix>.*+)#u', $match ['JHWH1'], $matches_gemischt) === 1
                      &&
-                     # PART1 is in "( \b ($regex_name) \b ) .* (\b ($regex_name) \b )"
+                     # in PART1 prefix and postfix are *NOT BOTH* in "$regex_name" format
                      preg_match ('#(\\b(' . $regex_name . ')\\b).*(\\b(' . $regex_name . ')\\b)#u', $match ['JHWH1']) === 0
                   )
                 )
