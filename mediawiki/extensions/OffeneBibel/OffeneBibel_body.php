@@ -147,7 +147,7 @@ class OfBi {
                 $text .= ' data-prefix2="' . htmlspecialchars ($matches_unser_euer ['prefix']) . '"';
                 $text .= ' data-pattern2="' . htmlspecialchars (strtr ($matches_unser_euer ['name'], array ('HERRN'=>'Herrn', 'HERR'=>'Herr', 'GOTTES'=>'Herrn', 'rem GOTT'=>'rem Herrn', 'ren GOTT'=>'ren Herrn', 'GOTT'=>'Herr', ))) . '"';
                 $text .= ' data-suffix2="' . htmlspecialchars ($matches_unser_euer ['suffix']) . '"';
-                $text .= '">';
+                $text .= '>';
                 $text .= $matches_gemischt ['prefix'];
                 $text .= '<a class="name">⸂<span>';
                 $text .= strtr ($matches_gemischt ['name'], array ('HERRN'=>'Herrn', 'HERR'=>'Herr', 'GOTTES'=>'Gottes', 'GOTT'=>'Gott', ));
