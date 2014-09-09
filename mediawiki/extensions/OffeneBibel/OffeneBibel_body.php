@@ -56,6 +56,11 @@ class OfBi {
       '(?<Tag>(<' . self::tag_content . '>)++)',
       '(?<Normal>[^<>(){}[\]]++)',
       '(?<Headline>\(\((?<Headline1>[^)]++)\)\))',
+      # This is the name-of-god replacement regex. It looks as follows:
+      # (/PART1/PART2/PART3/)
+      # PART1 is the default word to display, e.g. "|Gott|". It is optional.
+      # PART2 is the possessive pronoun version, ich/du/er e.g. "unserem GOTT".
+      # PART3 is the pronoun version, unser/euer/ihm/ihn/...
       '(?<JHWH>\(/(?<JHWH1>[^/)]++)/(?<JHWH2>[^/)]++)/((?<JHWH3>[^/)]++)/)?\))',
       '(?<OpeningRound>\()',
       '(?<ClosingRound>\))',
@@ -118,20 +123,27 @@ class OfBi {
           if (array_key_exists ($mode, $values)) { # ... and correct mode
             if ($key == 'JHWH') {
               if ($match['JHWH3'] == '') {
+                # Two parameters.
                 $unser_euer = $match ['JHWH1'];
                 $ich_du_er = $match ['JHWH2'];
               } else {
+                # Three parameters.
                 $unser_euer = $match ['JHWH2'];
                 $ich_du_er = $match ['JHWH3'];
               }
               $regex_name = self::regex_ich_du_er . '|' . self::regex_unser_euer . '|' . self::regex_sonst;
               if (
                 (
+                  # PART1 is in "prefix|name|postfix" format
+                  # (?<prefix> [^|]*+ ) \| (?<name> [^|]*+ ) \| (?<suffix> [^|]*+ )
                   preg_match ('#(?<prefix>[^|]*+)\\|(?<name>[^|]*+)\\|(?<suffix>[^|]*+)#u', $match ['JHWH1'], $matches_gemischt) === 1
                   ||
                   (
+                     # PART1 is in "prefix spec postfix" format
+                     # (?<prefix> .*? ) (?<name> \b ($regex_name) \b ) (?<suffix> .*+ )
                      preg_match ('#(?<prefix>.*?)(?<name>\\b(' . $regex_name . ')\\b)(?<suffix>.*+)#u', $match ['JHWH1'], $matches_gemischt) === 1
                      &&
+                     # PART1 is in "( \b ($regex_name) \b ) .* (\b ($regex_name) \b )"
                      preg_match ('#(\\b(' . $regex_name . ')\\b).*(\\b(' . $regex_name . ')\\b)#u', $match ['JHWH1']) === 0
                   )
                 )
