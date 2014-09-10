@@ -81,7 +81,7 @@ function  (  $                   ) {
          * Perform this replacement on the given element.
          */
         this.replaceName = function (obj) {
-            $( obj ).html( this.prefix (obj) + this.ersatzlesung (obj) + this.suffix (obj) );
+            $( obj ).html( '⸂' + this.prefix (obj) + this.ersatzlesung (obj) + this.suffix (obj) + '⸃' );
         }
     }
 
