@@ -60,6 +60,26 @@ h6 { font-size: 110%; }
     color: #BBBBBB;
 }
 
+.ofbi-schalter {
+    color: #69A54F;
+}
+
+.ofbi-replacements > div {
+    float: left;
+    padding: 0.5em 1em 0.5em 0em;
+}
+
+.ofbi-replacements ~ p {
+    clear: left;
+}
+
+.ofbi-popover-dynamic-width {
+    width: auto;
+    max-width: none;
+}
+
+/* Header and footer tunings */
+
 .ofbi_no_header h2.pane-title,
 .ofbi_no_header div.pane-content>div.node>h2
 {

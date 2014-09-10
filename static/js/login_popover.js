@@ -1,5 +1,5 @@
 require  ([ "jquery", "bootstrap"],
-function  ( $                    ) {
+function  (  $                   ) {
     $(function(){
         var host = (window.location.protocol).concat("//").concat(window.location.hostname);
 

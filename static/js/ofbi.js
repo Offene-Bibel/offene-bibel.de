@@ -1,5 +1,5 @@
-require  ([ "jquery" ],
-function  (  $       ) {
+require  ([ "jquery", "bootstrap"],
+function  (  $                   ) {
     /*
      * The name selector looks as follows:
      * <span
@@ -197,21 +197,6 @@ function  (  $       ) {
 
         $( "#" + Ersatzlesung ).style.fontWeight = "normal";
         Ersatzlesung = neuerName.replace (/[\0\s\f\n\r\t\v]/, "_");
-        setJavascriptFunctions();
-    }
-
-    /*
-     * Enumerate the switches, set event handlers on them and fill in a title in each of them.
-     */
-    function setJavascriptFunctions () {
-        $( ".name" ).each(function ( index ) {
-            $( this ).attr("id", "ersatzlesung" + index);
-            $( this ).attr("title", "Hier steht im Urtext der Gottesname JHWH. Für weitere Information und zum Ändern der Ersatzlesung bitte klicken.");
-            $( this ).on("click", function( e ) {
-                showErsatzlesungen( e.target.id );
-                e.preventDefault();
-            });
-        });
     }
 
     function showErsatzlesungen(id) {
@@ -256,29 +241,36 @@ function  (  $       ) {
         .css("top", 0);
     }
 
-    $(function(){
-        var html = "<p><span id=beginErsatzlesungen tabindex=-1>Ersatzlesung auswählen:</span>";
-        html += "<div>";
+    $( function() {
+        // Fill in the replacements in the replacement dropdown.
+        var html = "<div>";
         var count = 0;
-        for (var ersatzlesung in Ersatzlesungen) {
-            if (count++ >= 5) {
+        for( var ersatzlesung in Ersatzlesungen ) {
+            if( count++ >= 5 ) {
                 html += "</div><div>";
                 count = 1;
             }
             html += changeLink (ersatzlesung);
         }
         html += "</div>";
-        html += "<p>Hier steht im Urtext der Gottesname <a href=/wiki/?title=JHWH>JHWH</a>,<br/>dessen genaue Aussprache unbekannt ist und<br/>der im Christentum und Judentum meistens<br/>durch eine Ersatzlesung wiedergegeben wird.";
-        html += "<p><a href='Javascript:close()'>schließen</a>";
-
-        $( "#Ersatzlesungen" ).html( html );
+        $( "#ofbi-replacement-dropdown-content div.ofbi-replacements" ).html( html );
 
         // Fill the data-original attribue in all switch elements.
         $( ".schalter" ).each( function ( index ) {
             this.setAttribute( "data-original", this.innerHTML);
         });
 
-        setJavascriptFunctions();
+        // Activate the dropdown handler.
+        $( ".ofbi-schalter" ).popover({
+            html: true,
+            container: 'body',
+            placement: 'bottom',
+            title: 'Ersatzlesung auswählen',
+            template: '<div class="popover ofbi-popover-dynamic-width"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
+            content: function() {
+                return $( '#ofbi-replacement-dropdown-content' ).html();
+            }
+        });
     });
 });
 
