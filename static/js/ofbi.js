@@ -60,7 +60,7 @@ function  (  $                   ) {
          * Puts link and span elements around the argument and returns it.
          */
         this.span_name = function (ersatzlesung) {
-            return "<a class=name><span>" + htmlspecialchars (ersatzlesung) + "</span></a>";
+            return "" + htmlspecialchars (ersatzlesung) + "";
         }
 
         /*
@@ -81,7 +81,7 @@ function  (  $                   ) {
          * Perform this replacement on the given element.
          */
         this.replaceName = function (obj) {
-            obj.innerHTML =  this.prefix (obj) + this.ersatzlesung (obj) + this.suffix (obj);
+            $( obj ).html( this.prefix (obj) + this.ersatzlesung (obj) + this.suffix (obj) );
         }
     }
 
@@ -155,7 +155,7 @@ function  (  $                   ) {
 
     function ErsatzlesungOriginal () {
         this.replaceName = function (obj) {
-            obj.innerHTML = obj.getAttribute ("data-original");
+            $( obj ).html( $( obj ).attr( "data-original" ) );
         }
     }
 
@@ -183,62 +183,23 @@ function  (  $                   ) {
     /*
      * Currently selected replacement. Will be highlighted in dropdown.
      */
-    var Ersatzlesung = "gemischt";
+    var currentErsatzlesung = "ofbi-replace-gemischt";
+
+    function replaceClassNameForErsatzlesung( ersatzlesung ) {
+        return 'ofbi-replace-' + ersatzlesung.replace( /[\0\s\f\n\r\t\v\/]/g, "-" );
+    }
 
     /*
      * Perform the replacement for the given name on all switches on the page.
      * Also sets the Ersatzlesung variable to its new value.
      */
     function replaceAllNames (neuerName) {
-        $( ".schalter" ).each( function( index ) {
+        $( ".ofbi-schalter" ).each( function( index ) {
             Ersatzlesungen [neuerName].replaceName ( this );
         });
-        close ();
 
-        $( "#" + Ersatzlesung ).style.fontWeight = "normal";
-        Ersatzlesung = neuerName.replace (/[\0\s\f\n\r\t\v]/, "_");
-    }
-
-    function showErsatzlesungen(id) {
-        var el = $( "#Ersatzlesungen" );
-        if (el.is(":visible")) {
-            close ();
-        } else {
-            var obj = $( "#" + id );
-            var left = obj.offset().left;
-            var top = obj.offset().top;
-            for (var parent = obj.offsetParent(); ! parent.is( "BODY" ); parent = parent.offsetParent()) {
-                left += parent.offset().left;
-                top += parent.offset().top;
-            }
-
-            var maxleft = $( "html" ).offset().width - el.offset().width - 10;
-            if (maxleft <= 0) {
-                el.css("left", "0");
-                left = 0;
-            } else if (maxleft < left) {
-                el.css("left", maxleft + "px");
-            } else {
-                el.css("left", left + "px");
-            }
-
-            el.css("top", (top + obj.offset().height) + "px");
-            el.show();
-            $( "#beginErsatzlesungen" ).focus();
-        }
-        $( "#" + Ersatzlesung ).css("fontWeight", "bold");
-    }
-
-
-    function changeLink (ersatzlesung) {
-        return "<p><a id=\""  + htmlspecialchars (ersatzlesung.replace (/[\0\s\f\n\r\t\v]/, "_")) + "\" href='Javascript:replaceAllNames(\""  + htmlspecialchars (ersatzlesung) + "\")'>" + htmlspecialchars (ersatzlesung) + "</a></p>";
-    }
-
-    function close () {
-        $( "#Ersatzlesungen" )
-        .hide()
-        .css("left", 0)
-        .css("top", 0);
+        $( '.' + currentErsatzlesung ).css( 'fontWeight', "normal" );
+        currentErsatzlesung = replaceClassNameForErsatzlesung( neuerName );
     }
 
     $( function() {
@@ -246,18 +207,21 @@ function  (  $                   ) {
         var html = "<div>";
         var count = 0;
         for( var ersatzlesung in Ersatzlesungen ) {
+            var id_tag, replacement_name;
             if( count++ >= 5 ) {
                 html += "</div><div>";
                 count = 1;
             }
-            html += changeLink (ersatzlesung);
+            class_tag = replaceClassNameForErsatzlesung( ersatzlesung );
+            replacement_name = htmlspecialchars( ersatzlesung );
+            html += '<p><a class="' + class_tag + '">' + replacement_name + '</a></p>';
         }
         html += "</div>";
         $( "#ofbi-replacement-dropdown-content div.ofbi-replacements" ).html( html );
 
         // Fill the data-original attribue in all switch elements.
-        $( ".schalter" ).each( function ( index ) {
-            this.setAttribute( "data-original", this.innerHTML);
+        $( ".ofbi-schalter" ).each( function ( index ) {
+            $( this ).attr( "data-original", $( this ).html() );
         });
 
         // Activate the dropdown handler.
@@ -270,7 +234,20 @@ function  (  $                   ) {
             content: function() {
                 return $( '#ofbi-replacement-dropdown-content' ).html();
             }
+        })
+        .on('shown.bs.popover', function() {
+            // Now that the dropdown content is duplicated to every button we set the handlers.
+            for( var ersatzlesung in Ersatzlesungen ) {
+                var class_tag = replaceClassNameForErsatzlesung( ersatzlesung );
+                $( '.' + class_tag ).on('click', function() {
+                    var closureErsatzlesung = ersatzlesung;
+                    return function() {
+                        replaceAllNames( closureErsatzlesung );
+                    }
+                }() );
+            }
         });
+
     });
 });
 
