@@ -63,6 +63,16 @@ h6 { font-size: 110%; }
 .ofbi-schalter {
     color: #69A54F;
 }
+/*.ofbi-schalter {position: relative; top:-0.1em; padding: 0 0.1em 0.2em 0.1em; margin:0 -0.1em; border-radius: 0.5em; background-color : #f6f3f0;}
+.ofbi-schalter span {position: relative; top:0.1em; color : black; border-bottom : 1px solid #dcb; padding: 0 0.1em; white-space : nowrap;}
+.name {
+  font-family: "OfBi-Hebrew", "Ezra SIL", "Ezra SIL SR", "SBL Hebrew", "Times New Roman", serif;
+}
+.name span {
+    font-family: 'Open Sans', 'OfBi', 'sans-serif';
+}*/
+
+
 
 .ofbi-replacements > div {
     float: left;

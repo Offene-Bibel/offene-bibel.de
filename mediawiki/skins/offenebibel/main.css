@@ -29,14 +29,6 @@
   font-family: "OfBi-Hebrew", "Ezra SIL", "Ezra SIL SR", "SBL Hebrew", "Times New Roman", serif;
 }
 
-.name {
-  font-family: "OfBi-Hebrew", "Ezra SIL", "Ezra SIL SR", "SBL Hebrew", "Times New Roman", serif;
-}
-
-.name span {
-    font-family: 'Open Sans', 'OfBi', 'sans-serif';
-}
-
 #column-content-large {
     position: absolute;
     overflow: visible;
@@ -1036,14 +1028,7 @@ sup.versnummer {
 }
 /*** Fußnoten Ende ***/
 
-  .name {position: relative; top:-0.1em; padding: 0 0.1em 0.2em 0.1em; margin:0 -0.1em; border-radius: 0.5em; background-color : #f6f3f0;}
-  .name span {position: relative; top:0.1em; color : black; border-bottom : 1px solid #dcb; padding: 0 0.1em; white-space : nowrap;}
-  .name:link, .name:link:hover, .name:visited, .name:visited:hover {color : #876; text-decoration : none; border-width:0;}
   .muster {display : none; visibility : none;}
-  #Ersatzlesungen {visibility : hidden; z-index:10; font-size : 80%; line-height : 100%; padding : 1em 0 0.5em 1em; border : 1px solid #ccc; background-color : #f6f3f0; border-radius : 1em; position: absolute; top : 0; left : 0; -moz-box-shadow: 0.25em 0.25em 0.25em #ccc; -webkit-box-shadow : 0.25em 0.25em 0.25em #ccc; box-shadow : 0.25em 0.25em 0.25em #ccc;}
-  #Ersatzlesungen div {float : left; padding : 0.5em 1em 0.5em 0;}
-  #Ersatzlesungen p {clear : left; padding-right : 1em;}
-  #Ersatzlesungen div a:link, #Ersatzlesungen div a:visited {color : black; text-decoration : none;}
   #inhalt {float : right; border : 1px solid #ddd; background-color : #f7f7f7; padding : 0.5em;}
   #inhalt ul {margin : 0 0 0 1em; padding : 0;}
   #inhalt li {display : block; margin : 0; padding : 0;}

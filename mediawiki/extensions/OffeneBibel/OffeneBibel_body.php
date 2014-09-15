@@ -152,7 +152,7 @@ class OfBi {
                 && preg_match ('#(?<prefix>.*?)(?<name>\\b(' . self::regex_unser_euer . ')\\b)(?<suffix>.*+)#u', $unser_euer, $matches_unser_euer) === 1
                 && preg_match ('#(\\b(' . $regex_name . ')\\b).*(\\b(' . $regex_name . ')\\b)#u', $unser_euer) === 0
               ) {
-                $text .= '<span class="schalter"';
+                $text .= '<span class="ofbi-schalter"';
                 $text .= ' data-prefix1="' . htmlspecialchars ($matches_ich_du_er ['prefix']) . '"';
                 $text .= ' data-pattern1="' . htmlspecialchars ($matches_ich_du_er ['name']) . '"';
                 $text .= ' data-suffix1="' . htmlspecialchars ($matches_ich_du_er ['suffix']) . '"';
@@ -161,9 +161,9 @@ class OfBi {
                 $text .= ' data-suffix2="' . htmlspecialchars ($matches_unser_euer ['suffix']) . '"';
                 $text .= '>';
                 $text .= $matches_gemischt ['prefix'];
-                $text .= '<a class="name">⸂<span>';
+                $text .= '⸂';
                 $text .= strtr ($matches_gemischt ['name'], array ('HERRN'=>'Herrn', 'HERR'=>'Herr', 'GOTTES'=>'Gottes', 'GOTT'=>'Gott', ));
-                $text .= '</span>⸃</a>';
+                $text .= '⸃';
                 $text .= $matches_gemischt ['suffix'];
                 $text .= '</span>';
               } else {
@@ -248,7 +248,7 @@ class OfBi {
   }
 
   function hook_yhwh ($input, $args, $parser, $frame) {
-    $text = '<span class="schalter"';
+    $text = '<span class="ofbi-schalter"';
     if (isset ($args ['prefix1'])) {
       $text .= ' data-prefix1="' . htmlspecialchars ($args ['prefix1']) .'"';
     }
@@ -271,10 +271,7 @@ class OfBi {
     if (isset ($args ['prefix'])) {
       $text .= $parser->recursiveTagParse ($args ['prefix'], $frame);
     }
-    $text .= '<a class="name"><span>';
     $text .= $parser->recursiveTagParse ($input, $frame);
-    $text .= '</span></a>';
-    if (isset ($args ['suffix'])) {
       $text .= $parser->recursiveTagParse ($args ['suffix'], $frame);
     }
     $text .= '</span>';
