@@ -3,7 +3,7 @@ function  (  $                   ) {
     /*
      * The name selector looks as follows:
      * <span
-     *     class="schalter"
+     *     class="ofbi-schalter"
      *     data-prefix1=""
      *     data-pattern1="DU"
      *     data-suffix1=""
@@ -11,10 +11,8 @@ function  (  $                   ) {
      *     data-pattern2="Unser Herr"
      *     data-suffix2=""
      *     v-- this element is added once we do a replacement
-     *     data-original="<a class="name"><span>Herr</span></a>">
-     *         <a class="name">
-     *             <span>Herr</span>
-     *         </a>
+     *     data-original="<span>Herr</span>">
+     *         ^Herr^
      * </span>
      *
      * 1 means ich/du/er replacements
@@ -60,7 +58,7 @@ function  (  $                   ) {
          * Puts link and span elements around the argument and returns it.
          */
         this.span_name = function (ersatzlesung) {
-            return "" + htmlspecialchars (ersatzlesung) + "";
+            return htmlspecialchars (ersatzlesung);
         }
 
         /*
