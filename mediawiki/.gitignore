@@ -1,5 +1,9 @@
 /*
 
+*.zip
+*.tgz
+*.swp
+
 !.gitignore
 !README.md
 
@@ -12,4 +16,5 @@ skins/*
 !skins/OffeneBibel.deps.php
 !skins/OffeneBibel.php
 !skins/offenebibel/
+
 
