@@ -65,7 +65,7 @@ class OfBiAbk {
   public static function naechstes_kapitel ($buchname, $kapitel) {
     if (isset (self::$versnummern [$buchname]) && isset (self::$versnummern [$buchname] [$kapitel])) {
       $kapitelnummern = array_keys (self::$versnummern [$buchname]);
-      $currentkey = reset (array_keys ($kapitelnummern, $kapitel));
+      $currentkey = array_search ($kapitel, $kapitelnummern);
       if ($currentkey + 1 < count ($kapitelnummern)) { 
         return $kapitelnummern [$currentkey + 1];
       } else {
@@ -79,7 +79,7 @@ class OfBiAbk {
   public static function voriges_kapitel ($buchname, $kapitel) {
     if (isset (self::$versnummern [$buchname]) && isset (self::$versnummern [$buchname] [$kapitel])) {
       $kapitelnummern = array_keys (self::$versnummern [$buchname]);
-      $currentkey = reset (array_keys ($kapitelnummern, $kapitel));
+      $currentkey = array_search ($kapitel, $kapitelnummern);
       if ($currentkey > 0) { 
         return $kapitelnummern [$currentkey - 1];
       } else {
