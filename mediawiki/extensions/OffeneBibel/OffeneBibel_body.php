@@ -272,6 +272,7 @@ class OfBi {
       $text .= $parser->recursiveTagParse ($args ['prefix'], $frame);
     }
     $text .= $parser->recursiveTagParse ($input, $frame);
+    if (isset ($args ['suffix'])) {
       $text .= $parser->recursiveTagParse ($args ['suffix'], $frame);
     }
     $text .= '</span>';
