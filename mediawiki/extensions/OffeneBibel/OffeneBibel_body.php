@@ -119,7 +119,7 @@ class OfBi {
         }
       }
       foreach ($replace as $key=>$values) {
-        if (! ($match[$key] == '')) { # Correct replacement ...
+        if (array_key_exists ($key, $match) && $match[$key] != '') { # Correct replacement ...
           if (array_key_exists ($mode, $values)) { # ... and correct mode
             if ($key == 'JHWH') {
               if ($match['JHWH3'] == '') {
