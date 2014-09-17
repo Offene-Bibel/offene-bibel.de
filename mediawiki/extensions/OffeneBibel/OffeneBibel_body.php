@@ -479,7 +479,7 @@ class OfBi {
     if (isset ($args ['name']) && isset ($args ['chapter'])) {
       $text .= '<div class="kapitelwahl">';
 
-      $text .= '<form action="' . htmlspecialchars ($GLOBALS ['wgScriptPath']) . '">';
+      $text .= '<form>';
       $text .= '<input type="submit" id="submitbutton1" value="Geh zu" class="zelle" /> ';
       $text .= '<label for="ofbi-nav-book" class="zelle">&nbsp;Buch:&nbsp;</label>';
       $text .= '<span class="zelle">';
@@ -495,16 +495,15 @@ class OfBi {
       $text .= '</form>';
 
       if (OfBiAbk::erstes_kapitel ($args ['name']) !== false) {
-        $text .= '<form action="' . htmlspecialchars ($GLOBALS ['wgScriptPath']) . '">';
+        $text .= '<form>';
         $text .= '<input type="submit" id="submitbutton2" value="Geh zu" onload="" class="zelle" /> ';
         $text .= '<label for="ofbi-nav-chapter" class="zelle">&nbsp;Kapitel:&nbsp;</label>';
         $text .= '<span class="zelle">';
-
         $text .= '<select name="title" id="ofbi-nav-chapter">';
+
         if (intval (trim ($args ['chapter'])) == 0) {
           $text .= $this->make_option ($args ['name'], '(auswählen)', true);
         }
-
         $chapternumber = OfBiAbk::erstes_kapitel ($args ['name']);
         do {
           $option = htmlspecialchars ($args ['name'] . ' ' . $chapternumber);
@@ -517,6 +516,7 @@ class OfBi {
           $text .= '</option>';
           $chapternumber = OfBiAbk::naechstes_kapitel ($args ['name'], $chapternumber);
         } while ($chapternumber !== false);
+
         $text .= '</select>';
 
         if (OfBiAbk::voriges_kapitel ($args ['name'], $args ['chapter']) !== false) {
