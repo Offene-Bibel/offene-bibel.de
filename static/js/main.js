@@ -14,7 +14,6 @@ requirejs.config({
 require([
 'bootstrap_setup',
 'login_popover',
-'fill_resize',
 'replacement'
 ], function ($) {});
 
