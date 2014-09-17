@@ -25,10 +25,10 @@ function getOfBiHeader() {
                                 <b>Bibel</b>
                         </li>
                 <li>
-                  <a href="/wiki/index.php5?title=Übersetzungen">Online</a>
+                  <a href="/wiki/Übersetzungen">Online</a>
                 </li>
                 <li>
-                  <a href="/wiki/index.php5?title=Offene_Bibel_Module_für_Bibelprogramme">Download</a>
+                  <a href="/wiki/Offene_Bibel_Module_für_Bibelprogramme">Download</a>
                 </li>
         </ul>
         <ul class="dropdown-menu col-md-6">
@@ -36,13 +36,13 @@ function getOfBiHeader() {
                                 <b>Nebenprojekte</b>
                         </li>
                 <li>
-                  <a href="/wiki/index.php5?title=Bibellexikon">Bibellexikon</a>
+                  <a href="/wiki/Bibellexikon">Bibellexikon</a>
                 </li>
                 <li>
-                  <a href="/wiki/index.php5?title=Grammatik">Grammatik</a>
+                  <a href="/wiki/Grammatik">Grammatik</a>
                 </li>
                 <li>
-                  <a href="/wiki/index.php5?title=Sekundärliteratur_Hauptseite">Sekundärliteratur</a>
+                  <a href="/wiki/Sekundärliteratur_Hauptseite">Sekundärliteratur</a>
                 </li>
         </ul>
        </div>
@@ -51,9 +51,9 @@ function getOfBiHeader() {
         <a href="#about" class="dropdown-toggle" data-toggle="dropdown">Über uns <span class="caret"></span></a>
         <ul class="dropdown-menu">
                 <li><a href="/kurzinfo">Kurzinfo</a></li>
-                <li><a href="/wiki/index.php5?title=über_uns">Unsere Ziele</a></li>
-                <li><a href="/wiki/index.php5?title=Übersetzungskriterien">Eigenschaften der Übersetzungen</a></li>
-                <li><a href="/wiki/index.php5?title=Leichte_Sprache">Bibel in Leichter Sprache</a></li>
+                <li><a href="/wiki/über_uns">Unsere Ziele</a></li>
+                <li><a href="/wiki/Übersetzungskriterien">Eigenschaften der Übersetzungen</a></li>
+                <li><a href="/wiki/Leichte_Sprache">Bibel in Leichter Sprache</a></li>
                 <li><a href="/verein">Verein</a></li>
         </ul>
 </li>
@@ -73,16 +73,16 @@ function getOfBiHeader() {
                   <b>Mitmachen</b>
                 </li>
                 <li>
-                  <a href="/wiki/index.php5?title=Mithelfen">Wie kann ich helfen?</a>
+                  <a href="/wiki/Mithelfen">Wie kann ich helfen?</a>
                 </li>
                 <li>
-                  <a href="/wiki/index.php5?title=Autorenportal">Autorenportal</a>
+                  <a href="/wiki/Autorenportal">Autorenportal</a>
                 </li>
                 <li>
                   <a href="/spenden">Spenden</a>
                 </li>
                 <li>
-                  <a href="/wiki/index.php5?title=Werben">Weitersagen</a>
+                  <a href="/wiki/Werben">Weitersagen</a>
                 </li>
         </ul>
         <ul class="dropdown-menu col-md-6">
@@ -155,7 +155,7 @@ function getOfBiFooter() {
 <div id="ofbi-replacement-dropdown-content" style="display:none">
     <!-- This container holds the contents injected into all replacement name selector dropdowns. -->
     <div class="ofbi-replacements"><!-- Filled via JS --></div>
-    <p><small>Hier steht im Urtext der Gottesname <a href=/wiki/?title=JHWH>JHWH</a>,<br/>dessen genaue Aussprache unbekannt ist und<br/>der im Christentum und Judentum meistens<br/>durch eine Ersatzlesung wiedergegeben wird.</small></p>
+    <p><small>Hier steht im Urtext der Gottesname <a href=/wiki/JHWH>JHWH</a>,<br/>dessen genaue Aussprache unbekannt ist und<br/>der im Christentum und Judentum meistens<br/>durch eine Ersatzlesung wiedergegeben wird.</small></p>
 </div>
     <footer>
         <hr/>
