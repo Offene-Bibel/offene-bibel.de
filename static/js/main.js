@@ -14,6 +14,7 @@ requirejs.config({
 require([
 'bootstrap_setup',
 'login_popover',
-'replacement'
+'replacement',
+'chapter_navigator'
 ], function ($) {});
 

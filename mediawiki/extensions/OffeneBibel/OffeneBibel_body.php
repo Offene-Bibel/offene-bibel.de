@@ -481,9 +481,9 @@ class OfBi {
 
       $text .= '<form action="' . htmlspecialchars ($GLOBALS ['wgScriptPath']) . '">';
       $text .= '<input type="submit" id="submitbutton1" value="Geh zu" class="zelle" /> ';
-      $text .= '<label for="buch" class="zelle">&nbsp;Buch:&nbsp;</label>';
+      $text .= '<label for="ofbi-nav-book" class="zelle">&nbsp;Buch:&nbsp;</label>';
       $text .= '<span class="zelle">';
-      $text .= '<select name="title" id="buch" onchange="this.form.submit()">';
+      $text .= '<select name="title" id="ofbi-nav-book">';
 
       $current_bookname = $args ['name'];
       $options = OfBiAbk::buchnamen_alphabetisch ($current_bookname);
@@ -497,10 +497,10 @@ class OfBi {
       if (OfBiAbk::erstes_kapitel ($args ['name']) !== false) {
         $text .= '<form action="' . htmlspecialchars ($GLOBALS ['wgScriptPath']) . '">';
         $text .= '<input type="submit" id="submitbutton2" value="Geh zu" onload="" class="zelle" /> ';
-        $text .= '<label for="kapitel" class="zelle">&nbsp;Kapitel:&nbsp;</label>';
+        $text .= '<label for="ofbi-nav-chapter" class="zelle">&nbsp;Kapitel:&nbsp;</label>';
         $text .= '<span class="zelle">';
 
-        $text .= '<select name="title" id="kapitel" onchange="this.form.submit()">';
+        $text .= '<select name="title" id="ofbi-nav-chapter">';
         if (intval (trim ($args ['chapter'])) == 0) {
           $text .= $this->make_option ($args ['name'], '(auswählen)', true);
         }
