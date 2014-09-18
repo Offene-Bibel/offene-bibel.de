@@ -347,9 +347,9 @@ class OfBi {
       if ($in_active_verse_new) {
         $output .= '<span class="aktiv">';
       }
-      $output .= '<sup class="versnummer">';
+      $output .= '<sup class="versnummer"><a href="#' . htmlspecialchars ($this->verse_id) . '">';
       $output .= $this->versenumber;
-      $output .= '</sup>';
+      $output .= '</a></sup>';
       if ($in_active_verse_new) {
         $output .= '</span>';
       }
