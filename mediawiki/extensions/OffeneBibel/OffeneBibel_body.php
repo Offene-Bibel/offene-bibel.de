@@ -545,7 +545,9 @@ class OfBi {
 
       $text .= '<script type="text/javascript"> ';
       $text .= 'document.getElementById ("submitbutton1").style.display = "none"; ';
-      $text .= 'document.getElementById ("submitbutton2").style.display = "none"; ';
+      if (OfBiAbk::erstes_kapitel ($args ['name']) !== false) {
+        $text .= 'document.getElementById ("submitbutton2").style.display = "none"; ';
+      }
       $text .= '</script>';
 
       $text .= '</div>';
