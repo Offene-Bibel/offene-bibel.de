@@ -38,3 +38,27 @@ div#forum>table>tbody:before {
     display:block;
 }
 
+div#ofbi-startpage-jumbo {
+    background-image: url('/static/img/clouds_bright.png');
+    background-position: center center;
+    background-size: cover;
+    color: white;
+    border-style: solid;
+    border-color: #92AAC5;
+    border-width: 1px;
+}
+
+#ofbi-startpage-jumbo a:not(.btn) {
+    color: #97CEFE;
+}
+
+#ofbi-text-offene {
+    /*color: #75bc5c;*/
+    font-weight: bold;
+}
+#ofbi-text-bibel {
+    /*color: #399bff;*/
+    font-weight: bold;
+}
+
+

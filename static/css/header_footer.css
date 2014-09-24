@@ -110,6 +110,25 @@ h6 { font-size: 110%; }
     height: 42px;
 }
 
+.dropdown-menu > li > b {
+    padding: 3px 20px;
+}
+
+.dropdown-menu > li > a {
+    padding: 3px 40px;
+}
+
+.btn-primary {
+    color: #FFF;
+    background-color: #69b050;
+    border-color: #66ab4e;
+}
+
+.btn-primary:hover {
+    background-color: #539a3a;
+    border-color: #539a3a;
+}
+
 /* Fixed header */
     html, body {
         /* The html and body elements cannot have any padding or margin. */
