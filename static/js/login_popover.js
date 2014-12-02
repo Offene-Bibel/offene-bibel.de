@@ -10,8 +10,7 @@ function (  $                    ) {
 
             // Install login trigger.
             $('#ofbi-auth-login').submit(function( event ) {
-                wiki_auth($('#ofbi-login-name').text(), $('#ofbi-login-password').text(), '#');
-                alert('Hi there');
+                wiki_auth($('#ofbi-login-name').val(), $('#ofbi-login-password').val(), '#');
                 event.preventDefault();
             });
         });
@@ -75,12 +74,12 @@ function (  $                    ) {
                             $('#ofbi-login-error').show();
                         }
                     } else {
-                        $('#ofbi-login-error').text('Error: ' + data.error);
+                        $('#ofbi-login-error').text('Error 1: ' + data.error);
                         $('#ofbi-login-error').show();
                     }
                 });
             } else {
-                $('#ofbi-login-error').text('Error: ' + data.login.result)
+                $('#ofbi-login-error').text('Error 2: ' + data.login.result)
                 $('#ofbi-login-error').show();
             }
         });
