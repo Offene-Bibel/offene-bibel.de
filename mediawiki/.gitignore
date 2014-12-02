@@ -1,11 +1,7 @@
 /*
 
-*.zip
-*.tgz
-*.swp
-
 !.gitignore
-!README.md
+!LocalSettings.php_TEMPLATE
 
 !extensions/
 extensions/*
