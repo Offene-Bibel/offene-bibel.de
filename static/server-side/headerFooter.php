@@ -105,15 +105,15 @@ function getOfBiHeader() {
                   <ul class="nav navbar-nav navbar-right">
                       <li id="ofbi-auth-login-button" class="dropdown" data-container="body" data-toggle="popover" data-placement="bottom" style="display: none" data-html="true" data-content="
 <form role='form' accept-charset='UTF-8' id='ofbi-auth-login'>
-    <div class='form-group has-error'>
+    <div class='form-group'>
         <label for='ofbi-login-name'>Benutzername:<span class='form-required' title='Diese Angabe wird benötigt.'></span></label>
         <input id='ofbi-login-name' class='form-control input-sm' type='text' name='name' maxlength='60' size='15' placeholder='Benutzername'/>
     </div>
-    <div class='form-group has-error'>
+    <div class='form-group'>
         <label for='ofbi-login-password'>Passwort:<span class='form-required' title='Diese Angabe wird benötigt.'></span></label>
         <input id='ofbi-login-password' class='form-control input-sm' type='password' name='pass' maxlength='60' size='15' placeholder='Passwort'/>
     </div>
-    <div class='has-error' id='ofbi-login-error' type='hidden'>Benutzername oder Passwort falsch.</div>
+    <div class='has-error' id='ofbi-login-error' style='display: none;'>Benutzername oder Passwort falsch.</div>
     <button type='submit' name='op' class='btn btn-default'>Anmelden</button>
     <div class='item-list'>
         <ul>

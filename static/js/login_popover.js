@@ -56,6 +56,14 @@ function (  $                    ) {
         $('#ofbi-auth-login-button').show();
     }
 
+    function toggleLoginErrorHighlight(on) {
+        if(on) {
+            $('#ofbi-login-error').show();
+        } else {
+            $('#ofbi-login-error').hide();
+        }
+    }
+
     function wiki_auth(login, pass, ref){
         $.post('/wiki/api.php?action=login&lgname=' + login + 
                 '&lgpassword=' + pass + '&format=json',
@@ -66,21 +74,20 @@ function (  $                    ) {
                 function(data) {
                     if(!data.error){
                         if (data.login.result == "Success") { 
-                            //location.reload(true);
-                            document.location.href=ref; 
+                            location.reload(true);
                         } else {
                             $('#ofbi-login-password').text('');
                             $('#ofbi-login-error').text('Wrong username or password');
-                            $('#ofbi-login-error').show();
+                            toggleLoginErrorHighlight(true);
                         }
                     } else {
                         $('#ofbi-login-error').text('Error 1: ' + data.error);
-                        $('#ofbi-login-error').show();
+                        toggleLoginErrorHighlight(true);
                     }
                 });
             } else {
                 $('#ofbi-login-error').text('Error 2: ' + data.login.result)
-                $('#ofbi-login-error').show();
+                toggleLoginErrorHighlight(true);
             }
         });
     }
