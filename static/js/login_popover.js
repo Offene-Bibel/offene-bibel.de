@@ -10,6 +10,7 @@ function (  $                    ) {
 
             // Install login trigger.
             $('#ofbi-auth-login').submit(function( event ) {
+                toggleLoginErrorHighlight(false);
                 wiki_auth($('#ofbi-login-name').val(), $('#ofbi-login-password').val(), '#');
                 event.preventDefault();
             });
@@ -58,9 +59,11 @@ function (  $                    ) {
 
     function toggleLoginErrorHighlight(on) {
         if(on) {
-            $('#ofbi-login-error').show();
+            $('#ofbi-login-error').removeClass('hidden');
+            //$('#ofbi-login-error').show();
         } else {
-            $('#ofbi-login-error').hide();
+            $('#ofbi-login-error').addClass('hidden');
+            //$('#ofbi-login-error').hide();
         }
     }
 
@@ -77,7 +80,6 @@ function (  $                    ) {
                             location.reload(true);
                         } else {
                             $('#ofbi-login-password').text('');
-                            $('#ofbi-login-error').text('Wrong username or password');
                             toggleLoginErrorHighlight(true);
                         }
                     } else {
