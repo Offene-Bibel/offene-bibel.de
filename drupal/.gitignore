@@ -10,3 +10,7 @@ sites/all/*
 sites/all/themes/*
 !sites/all/themes/bootstrap_ofbi/
 
+!sites/default
+sites/default/*
+!sites/default/settings.php_TEMPLATE
+
