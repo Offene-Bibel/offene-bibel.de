@@ -119,8 +119,8 @@ function getOfBiHeader() {
     <button type='submit' name='op' class='btn btn-default'>Anmelden</button>
     <div class='item-list'>
         <ul>
-          <li><a href='/user/register' title='Ein neues Benutzerkonto erstellen.'>Registrieren</a></li>
-          <li><a href='/user/password' title='Ein neues Passwort per E-Mail anfordern.'>Neues Passwort anfordern</a></li>
+          <li><a href='/wiki/Spezial:Anmelden?type=signup' title='Ein neues Benutzerkonto erstellen.'>Registrieren</a></li>
+          <li><a href='/wiki/Spezial:Anmelden' title='Ein neues Passwort per E-Mail anfordern.'>Neues Passwort anfordern</a></li>
         </ul>
     </div>
 </form>
@@ -130,13 +130,12 @@ function getOfBiHeader() {
                       <li id="ofbi-auth-logged-in-button" class="dropdown" style="display: none">
                           <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span id="ofbi-auth-logged-in-name"></span> <b class="caret"></b></a>
                           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Beobachtungsliste</a></li>
+                              <li role="presentation"><a role="menuitem" tabindex="-1" href="/wiki/Spezial:Beobachtungsliste">Beobachtungsliste</a></li>
                               <li role="presentation"><a id="ofbi-auth-userpage" role="menuitem" tabindex="-1" href="#">Eigene Benutzerseite</a></li>
-                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Eigene Diskussion</a></li>
-                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Eigene Beiträge</a></li>
-                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#"></a></li>
+                              <li role="presentation"><a id="ofbi-auth-user-discussion" role="menuitem" tabindex="-1" href="#">Eigene Diskussion</a></li>
+                              <li role="presentation"><a id="ofbi-auth-user-contributions" role="menuitem" tabindex="-1" href="#">Eigene Beiträge</a></li>
                               <li role="presentation" class="divider"></li>
-                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Einstellungen</a></li>
+                              <li role="presentation"><a role="menuitem" tabindex="-1" href="/wiki/Spezial:Einstellungen">Einstellungen</a></li>
                               <li id="ofbi-auth-logout" role="presentation"><a role="menuitem" tabindex="-1" href="#">Abmelden</a></li>
                         </ul>
                     </li>

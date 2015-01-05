@@ -30,7 +30,9 @@ function (  $                    ) {
                     $('#ofbi-auth-logged-in-name').text(username);
                     $('#ofbi-auth-logged-in-button').show();
 
-                    $('#ofbi-auth-userpage').attr('href', '/wiki/index.php5?title=Benutzer:' + username);
+                    $('#ofbi-auth-userpage').attr('href', '/wiki/Benutzer:' + username);
+                    $('#ofbi-auth-user-discussion').attr('href', '/wiki/Benutzer_Diskussion:' + username);
+                    $('#ofbi-auth-user-contributions').attr('href', '/wiki/Spezial:Beiträge/' + username);
 
                     // Install logout trigger.
                     $('#ofbi-auth-logout').click(function() {
