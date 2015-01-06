@@ -22,19 +22,16 @@ if( defined( 'MW_INSTALL_PATH' ) ) {
 $path = array( "$IP", "$IP/includes", "$IP/languages" );
 set_include_path( implode( PATH_SEPARATOR, $path ) . PATH_SEPARATOR . get_include_path() );
 require_once( "$IP/includes/DefaultSettings.php" );
-// require_once('extensions/Cite/Cite.php');   // Wird nicht mehr gebraucht: Funktionalität jetzt in der OffeneBibel-Extension
 require_once("$IP/extensions/Collection/Collection.php");
 require_once($IP.'/extensions/Poem/Poem.php');
 require_once( "$IP/extensions/OffeneBibel/OffeneBibel.php" );
 require_once ( "$IP/extensions/ParserFunctions/ParserFunctions.php" );
-#$wgPFEnableStringFunctions = true;
-require_once ( "$IP/extensions/StringFunctions/StringFunctions.php" );
+$wgPFEnableStringFunctions = true;
 require_once ( "$IP/extensions/Variables/Variables.php" );
 require_once( "$IP/extensions/Loops/Loops.php" );
 ExtLoops::$maxLoops = 1080;
 require_once( "$IP/extensions/CategoryTests/CategoryTests.php" );
-require_once( "$IP/extensions/MagicNoCache.php" );
-require_once("extensions/ePubExport/ePubExport.php");
+require_once( "$IP/extensions/MagicNoCache/MagicNoCache.php" );
 #Piwik
 #require_once('extensions/Piwik/Piwik.php');
 $wgPiwikURL = "piwik.offene-bibel.de/";
@@ -107,12 +104,10 @@ $wgMemCachedServers = array();
 ## Zeitzoneneinstellung
 #Set Default Timezone
 $wgLocaltimezone = "Europe/Berlin";
-$oldtz = getenv("TZ");
-putenv("TZ=$wgLocaltimezone");
+date_default_timezone_set($wgLocaltimezone);
 # Versions before 1.7.0 used $wgLocalTZoffset as hours.
 # After 1.7.0 offset as minutes
 $wgLocalTZoffset = date("Z") / 60;
-putenv("TZ=$oldtz");
 
 ## To enable image uploads, make sure the 'images' directory
 ## is writable, then set this to true:
@@ -429,7 +424,6 @@ $wgAuthDrupal_LogMessages = false;
 /////////////////////////////////////////////////////////////
 
 //////////Die Extension für Tooltips, z.B. bei JHWH ////
-#require_once( "$IP/extensions/terminology.php" );
 require_once("$IP/extensions/Lingo/Lingo.php");
 $wgexLingoPage = 'Terminologie';
 
@@ -469,6 +463,8 @@ $wgGroupPermissions['user']['collectionsaveasuserpage'] = true;
 //////////Ende Collection-Extension für Bücher und PDFs ////
 
 
-require_once( "$IP/extensions/Gadgets/Gadgets.php" );
+require_once("$IP/extensions/Gadgets/Gadgets.php");
 
+
+require_once("$IP/skins/OffeneBibel/OffeneBibel.php");
 
