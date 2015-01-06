@@ -122,7 +122,7 @@ class OfBi {
         if (array_key_exists ($key, $match) && $match[$key] != '') { # Correct replacement ...
           if (array_key_exists ($mode, $values)) { # ... and correct mode
             if ($key == 'JHWH') {
-              if ($match['JHWH3'] == '') {
+              if (!isset($match['JHWH3']) or $match['JHWH3'] == '') {
                 # Two parameters.
                 $unser_euer = $match ['JHWH1'];
                 $ich_du_er = $match ['JHWH2'];
