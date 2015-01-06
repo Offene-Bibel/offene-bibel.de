@@ -32,6 +32,15 @@ require_once( "$IP/extensions/Loops/Loops.php" );
 ExtLoops::$maxLoops = 1080;
 require_once( "$IP/extensions/CategoryTests/CategoryTests.php" );
 require_once( "$IP/extensions/MagicNoCache/MagicNoCache.php" );
+require_once("$IP/extensions/Gadgets/Gadgets.php");
+require_once( "$IP/extensions/ConfirmEdit/ConfirmEdit.php" );
+require_once( "$IP/extensions/ConfirmEdit/ReCaptcha.php" );
+$wgCaptchaClass = 'ReCaptcha';
+$wgReCaptchaPublicKey = '<&recaptcha_public_key&>';
+$wgReCaptchaPrivateKey = '<&recaptcha_private_key&>';
+$wgGroupPermissions['emailconfirmed']['skipcaptcha'] = true;
+$ceAllowConfirmedEmail = true;
+require_once("$IP/extensions/NewSignupPage/NewSignupPage.php");
 #Piwik
 #require_once('extensions/Piwik/Piwik.php');
 $wgPiwikURL = "piwik.offene-bibel.de/";
@@ -79,6 +88,7 @@ $wgPasswordSender = "webmaster@offene-bibel.de";
 $wgEnotifUserTalk = true; # UPO
 $wgEnotifWatchlist = true; # UPO
 $wgEmailAuthentication = true;
+$wgEmailConfirmToEdit = true;
 
 ## Database settings
 $wgDBtype           = "mysql";
@@ -461,9 +471,6 @@ $wgGroupPermissions['user']['collectionsaveasuserpage'] = true;
 
 
 //////////Ende Collection-Extension für Bücher und PDFs ////
-
-
-require_once("$IP/extensions/Gadgets/Gadgets.php");
 
 
 require_once("$IP/skins/OffeneBibel/OffeneBibel.php");
