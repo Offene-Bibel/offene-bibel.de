@@ -9,8 +9,6 @@ extensions/*
 
 !skins/
 skins/*
-!skins/OffeneBibel.deps.php
-!skins/OffeneBibel.php
-!skins/offenebibel/
+!skins/OffeneBibel/
 
 

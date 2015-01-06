@@ -1,9 +1,4 @@
 <?php
-if ( ! defined( 'MEDIAWIKI' ) )
-        die( 1 );
- 
-require_once( dirname( dirname( __FILE__ ) ) . '/includes/SkinTemplate.php');
-require_once( $GLOBALS["IP"] . '/../static/server-side/headerFooter.php');
 /**
  * OffeneBibel skin
  *
@@ -13,11 +8,15 @@ require_once( $GLOBALS["IP"] . '/../static/server-side/headerFooter.php');
  * @author Olaf Schmidt-Wischhöfer (olaf@offene-bibel.de)
  * @license http://www.gnu.org/copyleft/gpl.html GPL
  */
-
-// initialize
 if ( ! defined ('MEDIAWIKI')) {
   die ("This is a skins file for mediawiki and should not be viewed directly.\n");
 }
+
+$wgValidSkinNames['offenebibel'] = 'OffeneBibel';
+ 
+require_once( $GLOBALS["IP"] . '/includes/skins/SkinTemplate.php');
+require_once( $GLOBALS["IP"] . '/../static/server-side/headerFooter.php');
+
 
 // inherit main code from SkinTemplate, set the CSS and template filter
 class SkinOffeneBibel extends SkinTemplate {
@@ -35,7 +34,7 @@ class SkinOffeneBibel extends SkinTemplate {
     // Append to the default screen common & print styles...
     $out->addStyle( '/static/css/lib/bootstrap.css', 'screen' );
     $out->addStyle( '/static/css/header_footer.css', 'screen' );
-    $out->addStyle( 'offenebibel/main.css', 'screen' );
+    $out->addStyle( 'OffeneBibel/main.css', 'screen' );
   }
 }
 
