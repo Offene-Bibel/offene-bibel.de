@@ -608,26 +608,76 @@ class OfBi {
   }
 
   function hook_syntax_status ($input, $args, $parser, $frame) {
+    $result_html;
+    // Sometimes the revision of the page parsed is not generated yet (e.g. on page edit).
+    // This flag causes the page to be generated twice, second time with correct ID.
+    {
+        $parser->getOutput()->setFlag( 'vary-revision' );
+        if($parser->getRevisionId() == null) {
+            // This is entered when no revision ID is generated yet. Due to the flag above the page is
+            // generated a second time, once the revision ID is available.
+            return "dummy";
+        }
+    }
     $dbr = wfGetDB(DB_SLAVE);
     $result = $dbr->select('parse_errors', array('error_occurred', 'error_string'),
-    	array(
-	  'pageid=' . $parser->getTitle()->getArticleID(),
-	  'revid=' . $parser->getRevisionId()
-	)
-      );
+      array(
+        'pageid=' . $parser->getTitle()->getArticleID(),
+        'revid=' . $parser->getRevisionId()
+      )
+    );
     if($result->numRows() > 1) {
       return 'Datenbankfehler, ' . $result->numRows() . ' Eintraege fuer diese Seite gefunden, 0 oder 1 erwartet. PageID: ' . $parser->getTitle()->getArticleID() . ' RevID: ' . $parser->getRevisionId();
     }
-    if($result->numRows() == 0) {
-      return 'Noch kein Ergebnis verfuegbar. PageID: ' . $parser->getTitle()->getArticleID() . ' RevID: ' . $parser->getRevisionId();
-    }
-    $row = $result->fetchRow();
-    if($row['error_occurred']) {
-      return 'Fehler vorhanden:\n' . $row['error_string'] . 'PageID: ' . $parser->getTitle()->getArticleID() . ' RevID: ' . $parser->getRevisionId();
+    else if($result->numRows() == 0) {
+      $result_html = <<<EOT
+<span class="label label-warning ofbi-syntax-tag">
+  Syntax unchecked
+</span>
+EOT;
+      #return 'Noch kein Ergebnis verfuegbar. PageID: ' . $parser->getTitle()->getArticleID() . ' RevID: ' . $parser->getRevisionId();
     }
     else {
-      return 'Keine Fehler.' . 'PageID: ' . $parser->getTitle()->getArticleID() . ' RevID: ' . $parser->getRevisionId();
+        $row = $result->fetchRow();
+        if($row['error_occurred']) {
+          $result_html = <<<EOT
+    <button type="button" class="btn btn-xs btn-danger ofbi-syntax-tag" data-toggle="modal" data-target="#syntaxErrorModal">
+    Syntax Broken
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="syntaxErrorModal" tabindex="-1" role="dialog" aria-labelledby="syntaxErrorModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="syntaxErrorModalLabel">Diese Seite enthält einen oder mehrere Syntaxfehler</h4>
+          </div>
+          <div class="modal-body">
+            Unser Parser hat diese Seite auf Syntaxfehler geprüft und folgendes ausgegeben:</br>
+            <pre>{$row['error_string']}</pre>
+      So lange die Fehler nicht behoben sind wird diese Seite nicht in unseren generierten Modulen auftauchen.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+EOT;
+          #return 'Fehler vorhanden:\n' . $row['error_string'] . 'PageID: ' . $parser->getTitle()->getArticleID() . ' RevID: ' . $parser->getRevisionId();
+        }
+        else {
+          $result_html = <<<EOT
+    <span class="label label-success ofbi-syntax-tag">
+    Syntax OK <span class="glyphicon glyphicon-ok"></span>
+    </span>
+EOT;
+          #return 'Keine Fehler.' . 'PageID: ' . $parser->getTitle()->getArticleID() . ' RevID: ' . $parser->getRevisionId();
+        }
     }
+
+    // Prevent MediaWiki from processing the HTML we produce. That causes all sorts of strange behavior.
+    return array( $result_html, "markerType" => 'nowiki' );
   }
 }
 ?>

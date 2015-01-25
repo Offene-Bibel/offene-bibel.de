@@ -870,6 +870,10 @@ sup.versnummer {
    display: table;
 }
 
+.ofbi-syntax-tag {
+   float: right;
+}
+
 #hauptseite .kapitelwahl {
   padding: 0.25em 0.25em 0 0.25em;
 }
