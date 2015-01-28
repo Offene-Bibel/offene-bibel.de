@@ -46,6 +46,7 @@ class OfBi {
     $GLOBALS ['wgParser']->setHook ('activeverses' , array ($this, 'hook_activeverses'));
     $GLOBALS ['wgParser']->setFunctionHook ('syntax_status' , array ($this, 'functionhook_syntax_status'));
     $GLOBALS ['wgParser']->setHook ('syntax_status' , array ($this, 'hook_syntax_status'));
+    $GLOBALS ['wgParser']->setHook ('syntax_status_overview' , array ($this, 'hook_syntax_status_overview'));
   }
 
   function hook_ParserBeforeTidy ( &$parser, &$text ) {
@@ -675,6 +676,52 @@ EOT;
           #return 'Keine Fehler.' . 'PageID: ' . $parser->getTitle()->getArticleID() . ' RevID: ' . $parser->getRevisionId();
         }
     }
+
+    // Prevent MediaWiki from processing the HTML we produce. That causes all sorts of strange behavior.
+    return array( $result_html, "markerType" => 'nowiki' );
+  }
+
+  function hook_syntax_status_overview ($input, $args, $parser, $frame) {
+    // The syntax check table shouldn't be cached.
+    $parser->disableCache();
+
+    $dbr = wfGetDB(DB_SLAVE);
+    $res = $dbr->select(
+        array( 'page', 'revision', 'parse_errors' ),
+        array( 'page_id', 'error_string' ),
+        array( 'error_occurred = 1' ),
+        __METHOD__,
+        array(),
+        array( 'revision' => array( 'INNER JOIN', array( 'page_latest = rev_id' ) ),
+               'parse_errors' => array( 'INNER JOIN', array( 'rev_id = revid' ) )
+        )
+    );
+
+    $result_html = <<<EOB
+<table class='table table-striped'>
+    <thead>
+        <tr>
+            <th>Page</th>
+            <th>Error</th>
+        </tr>
+    </thead>
+EOB;
+    foreach( $res as $row ) {
+        $title = Title::newFromID($row->page_id);
+        $url = $title->getFullURL();
+        $name = $title->getFullText();
+        $result_html .= <<<EOC
+    <tr>
+        <th scope='row'><a href='$url'>$name</a></th>
+        <td>{$row->error_string}</td>
+    </tr>
+
+EOC;
+    }
+    $result_html .= <<<EOE
+    </tr>
+</table>
+EOE;
 
     // Prevent MediaWiki from processing the HTML we produce. That causes all sorts of strange behavior.
     return array( $result_html, "markerType" => 'nowiki' );
