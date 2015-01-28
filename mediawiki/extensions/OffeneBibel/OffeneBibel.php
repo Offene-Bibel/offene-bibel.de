@@ -13,8 +13,8 @@ $wgExtensionCredits ['parserhook'][] = array (
 );
 
 $wgHooks ['ParserFirstCallInit'][] = 'ofbiSetup';
-$wgHooks ['LanguageGetMagic'][] = 'ofbiLanguageGetMagic';
-$wgHooks['BeforePageDisplay'][] = 'addLicencing';
+$wgHooks ['LanguageGetMagic'][]    = 'ofbiLanguageGetMagic';
+$wgHooks ['BeforePageDisplay'][]   = 'addLicencing';
 
 $wgAutoloadClasses ['OfBi'] = dirname ( __FILE__ ) . "/OffeneBibel_body.php";
 $wgAutoloadClasses ['Bibelstelle'] = dirname ( __FILE__ ) . "/OffeneBibel_Bibelstelle.php";
