@@ -384,6 +384,10 @@ class OfBi {
     $text = preg_replace ("#(\n|\r|\r\n)#u", "<br />\r\n", $text);
     $text = preg_replace ('#(<br[\pZ\n\r]*+/?>)+#u', '<br />', $text);
     $text = preg_replace ("#\r\n<br />#u", "\r\n", $text);
+    $text = preg_replace ("#\r\n____([^\r\n]*)#u", "\r\n<span class='poem5'>\\1</span>", $text);
+    $text = preg_replace ("#\r\n___([^\r\n]*)#u", "\r\n<span class='poem4'>\\1</span>", $text);
+    $text = preg_replace ("#\r\n__([^\r\n]*)#u", "\r\n<span class='poem3'>\\1</span>", $text);
+    $text = preg_replace ("#\r\n_([^\r\n]*)#u", "\r\n<span class='poem2'>\\1</span>", $text);
     return $text;
   }
 
@@ -418,7 +422,7 @@ class OfBi {
     $result = '<sup class="reference">〈';
     $result .= '<a href="' . htmlspecialchars ($html_href) . '" ';
     $result .= 'id="' . htmlspecialchars ($html_id) . '" ';
-    $result .= 'title="' . htmlspecialchars ($html_title) . '">';
+    $result .= 'title="<200e>' . htmlspecialchars (str_replace("'", '', str_replace('"', '', $html_title))) . '">';
     $result .= htmlspecialchars ($id);
     $result .= '</a>';
     $result .= '〉</sup>';

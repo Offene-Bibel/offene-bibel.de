@@ -800,6 +800,26 @@ padding: 0.3em 0.3em 0.3em 0.3em;
   padding-left: 1em;
 }
 
+.poem2 {
+  display:block;
+  padding-left:1.75em;
+}
+
+.poem3 {
+  display:block;
+  padding-left:3.5em;
+}
+
+.poem4 {
+  display:block;
+  padding-left:5.25em;
+}
+
+.poem5 {
+  display:block;
+  padding-left:7em;
+}
+
 sup.versnummer {
   font-style: italic;
   color: #808080;
