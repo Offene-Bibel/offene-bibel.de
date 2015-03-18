@@ -1,6 +1,7 @@
-require  ([ "jquery", "bootstrap"],
-function  (  $                   ) {
-    $(function(){
+require  ([ "bootstrap" ],
+function  () {
+    var $ = jQuery;
+    $(function() {
         $('.dropdown-toggle').dropdown();
     });
 });

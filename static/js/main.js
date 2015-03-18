@@ -1,13 +1,6 @@
 requirejs.config({
     paths: {
-        "jquery": "lib/jquery",
-        "bootstrap": "lib/bootstrap"
-    },
-    shim: {
-        "bootstrap": {
-            deps: ["jquery"],
-            exports: 'jQuery.fn.modal'
-        }
+        'bootstrap': 'lib/bootstrap'
     }
 });
 
@@ -16,5 +9,5 @@ require([
 'login_popover',
 'replacement',
 'chapter_navigator'
-], function ($) {});
+], function () {});
 

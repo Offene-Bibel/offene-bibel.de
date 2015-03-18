@@ -1,5 +1,6 @@
-require  ([ "jquery" ],
-function  (  $       ) {
+require  ([],
+function  () {
+    var $ = jQuery;
     $(function(){
         $( '#ofbi-nav-book' ).change(function () {
             var book = $( '#ofbi-nav-book option:selected' ).val();

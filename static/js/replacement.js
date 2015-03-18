@@ -1,5 +1,6 @@
-require  ([ "jquery", "bootstrap"],
-function  (  $                   ) {
+require  ([ 'bootstrap'],
+function  () {
+    var $ = jQuery;
     /*
      * The name selector looks as follows:
      * <span

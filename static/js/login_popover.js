@@ -1,5 +1,6 @@
-require ([ 'jquery', 'bootstrap' ],
-function (  $                    ) {
+require ([ 'bootstrap' ],
+function () {
+    var $ = jQuery;
     $(function(){
         // Enable popover for login button.
         $('#ofbi-auth-login-button')
