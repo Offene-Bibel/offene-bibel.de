@@ -84,12 +84,12 @@ DirectoryIndex index.php index.html index.htm
   RewriteBase /
 
   # Rewrite URLs of the form 'wiki/x' to the form 'mediawiki/x'.
-  RewriteRule ^/?wiki/(.*)?$ /mediawiki/$1 [PT,DPI]
+  RewriteRule ^/?wiki/(.*)?$ /mediawiki/$1 [PT,DPI,QSA]
 
   # Rewrite URLs of the form 'mediawiki/x' to the form 'mediawiki/index.php?q=x'.
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^/?mediawiki/(.*)?$ /mediawiki/index.php [L]
+  RewriteRule ^/?mediawiki/(.*)?$ /mediawiki/index.php [L,QSA]
 
   # Pass all requests not referring directly to files in the filesystem to
   # index.php. Clean URLs are handled in drupal_environment_initialize().
@@ -97,7 +97,7 @@ DirectoryIndex index.php index.html index.htm
   # Disable check for directory to make / also be forwarded to drupal
   #RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_URI} !=/favicon.ico
-  RewriteRule ^.*$ /drupal/index.php?q=$0 [L,QSA]
+  RewriteRule ^.*$ /drupal/$0 [DPI,QSA]
 
   # Rules to correctly serve gzip compressed CSS and JS files.
   # Requires both mod_rewrite and mod_headers to be enabled.
