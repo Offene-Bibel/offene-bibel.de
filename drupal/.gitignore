@@ -1,6 +1,7 @@
 /*
 
 !.gitignore
+!.htaccess
 
 !sites
 sites/*

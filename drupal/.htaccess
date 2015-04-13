@@ -1,3 +1,7 @@
+#
+# Apache/PHP/Drupal settings:
+#
+
 # Protect files and directories from prying eyes.
 <FilesMatch "\.(engine|inc|info|install|make|module|profile|test|po|sh|.*sql|theme|tpl(\.php)?|xtmpl)(~|\.sw[op]|\.bak|\.orig|\.save)?$|^(\..*|Entries.*|Repository|Root|Tag|Template)$|^#.*#$|\.php(~|\.sw[op]|\.bak|\.orig\.save)$">
   Order allow,deny
@@ -5,6 +9,9 @@
 
 # Don't show directory listings for URLs which map to a directory.
 Options -Indexes
+
+# Follow symbolic links in this directory.
+#Options +FollowSymLinks
 
 # Make Drupal handle any 404 errors.
 ErrorDocument 404 /index.php
@@ -75,29 +82,39 @@ DirectoryIndex index.php index.html index.htm
   # downloaded.
   RewriteRule "(^|/)\." - [F]
 
+  # If your site can be accessed both with and without the 'www.' prefix, you
+  # can use one of the following settings to redirect users to your preferred
+  # URL, either WITH or WITHOUT the 'www.' prefix. Choose ONLY one option:
+  #
+  # To redirect all users to access the site WITH the 'www.' prefix,
+  # (http://example.com/... will be redirected to http://www.example.com/...)
+  # uncomment the following:
+  # RewriteCond %{HTTP_HOST} .
+  # RewriteCond %{HTTP_HOST} !^www\. [NC]
+  # RewriteRule ^ http%{ENV:protossl}://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  #
   # To redirect all users to access the site WITHOUT the 'www.' prefix,
   # (http://www.example.com/... will be redirected to http://example.com/...)
   # uncomment the following:
-  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-  RewriteRule ^ http%{ENV:protossl}://%1%{REQUEST_URI} [L,R=301]
+  # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  # RewriteRule ^ http%{ENV:protossl}://%1%{REQUEST_URI} [L,R=301]
 
-  RewriteBase /
-
-  # Rewrite URLs of the form 'wiki/x' to the form 'mediawiki/x'.
-  RewriteRule ^/?wiki/(.*)?$ /mediawiki/$1 [PT,DPI,QSA]
-
-  # Rewrite URLs of the form 'mediawiki/x' to the form 'mediawiki/index.php?q=x'.
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^/?mediawiki/(.*)?$ /mediawiki/index.php [L,QSA]
+  # Modify the RewriteBase if you are using Drupal in a subdirectory or in a
+  # VirtualDocumentRoot and the rewrite rules are not working properly.
+  # For example if your site is at http://example.com/drupal uncomment and
+  # modify the following line:
+  RewriteBase /drupal
+  #
+  # If your site is running in a VirtualDocumentRoot at http://example.com/,
+  # uncomment the following line:
+  # RewriteBase /
 
   # Pass all requests not referring directly to files in the filesystem to
   # index.php. Clean URLs are handled in drupal_environment_initialize().
   RewriteCond %{REQUEST_FILENAME} !-f
-  # Disable check for directory to make / also be forwarded to drupal
-  #RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_URI} !=/favicon.ico
-  RewriteRule ^.*$ /drupal/$0 [QSA]
+  RewriteRule ^.*$ index.php?q=$0 [L,QSA]
 
   # Rules to correctly serve gzip compressed CSS and JS files.
   # Requires both mod_rewrite and mod_headers to be enabled.
@@ -124,4 +141,3 @@ DirectoryIndex index.php index.html index.htm
     </FilesMatch>
   </IfModule>
 </IfModule>
-
