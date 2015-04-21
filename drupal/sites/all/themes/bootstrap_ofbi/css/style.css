@@ -14,25 +14,25 @@ color: #69A54F;
 }
 
 /* Forum */
-div#forum>table>tbody>tr>td.container>div.name {
+div#forum table>tbody>tr>td.container>div.name {
     font-weight: bold;
 }
-div#forum>table>tbody>tr>td.container {
-    padding-left: 0px;
-}
-div#forum>table>tbody>tr>td.forum {
+div#forum table>tbody>tr>td.container {
     padding-left: 25px;
 }
-div#forum>table>tbody>tr>td.title>div:nth-child(1) {
+div#forum table>tbody>tr>td.forum {
+    padding-left: 50px;
+}
+div#forum table>tbody>tr>td.title>div:nth-child(1) {
     font-weight: bold;
 }
-div#forum>table>tbody>tr>td.title>div:nth-child(2) {
+div#forum table>tbody>tr>td.title>div:nth-child(2) {
     padding-left: 25px;
 }
-div#forum>table>thead * {
-    text-decoration:underline;
-}
-div#forum>table>tbody:before {
+//div#forum table>thead * {
+//    text-decoration:underline;
+//}
+div#forum table>tbody:before {
     line-height:1em;
     content:"-";
     color:white; /* to hide text */
