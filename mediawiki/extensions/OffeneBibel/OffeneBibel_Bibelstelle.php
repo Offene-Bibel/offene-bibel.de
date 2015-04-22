@@ -4,7 +4,6 @@ include_once (dirname ( __FILE__ ) . '/OffeneBibel_abk.php');
 class BibelStelle extends SpecialPage {
   function __construct() {
     parent::__construct ('Bibelstelle');
-    wfLoadExtensionMessages ('Bibelstelle');
   }
 
   function execute( $par ) {
