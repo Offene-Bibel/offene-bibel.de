@@ -6,6 +6,7 @@ requirejs.config({
 });
 
 require([
+'nojs',
 'bootstrap_setup',
 'bootstrap-hover-dropdown',
 'login_popover',
