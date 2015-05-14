@@ -104,7 +104,7 @@ function getOfBiHeader() {
 </li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
-                      <li id="ofbi-auth-logged-in-button" class="dropdown ofbi-nojs">
+                      <li class="dropdown ofbi-nojs">
                           <a href="/wiki/Spezial:Anmelden">Einloggen/Registrieren</a>
                       </li>
                       <li id="ofbi-auth-login-button" class="dropdown" data-container="body" data-hover="dropdown" data-toggle="popover" data-placement="bottom" style="display: none" data-html="true" data-content="
