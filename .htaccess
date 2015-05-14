@@ -83,6 +83,9 @@ DirectoryIndex index.php index.html index.htm
 
   RewriteBase /
 
+  # Make old links of type "/wiki/index.php5?title=Psalm_3" work.
+  RewriteRule ^/?wiki/index.php5$ /mediawiki/index.php [L,R=301]
+
   # Rewrite URLs of the form 'wiki/x' to the form 'mediawiki/x'.
   RewriteRule ^/?wiki/(.*)?$ /mediawiki/$1 [PT,DPI,QSA]
 
