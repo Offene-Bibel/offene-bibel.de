@@ -187,6 +187,8 @@ class OffeneBibelTemplate extends QuickTemplate {
                   echo '</div> <!-- pBody -->';
                 } else {
                   ?>
+<!--
+This is a Drupal login. Since the website now uses a SSO bridge where mediawiki is master, it doesn't work anymore. Thus remove.
                   <h5>Benutzeranmeldung</h5>
                   <div class="pBody">
                     <form action="/?destination=wiki/?title=<?php echo htmlspecialchars ($this->text ('title')); ?>"  accept-charset="UTF-8" method="post" id="user-login-form">
@@ -194,23 +196,24 @@ class OffeneBibelTemplate extends QuickTemplate {
                         <div class="form-item" id="edit-name-wrapper">
                           <label for="edit-name">Benutzername: <span class="form-required" title="Dieses Feld wird benötigt.">*</span></label>
                           <input type="text" maxlength="60" name="name" id="edit-name" size="15" value="" class="form-text required" style="width:100%" />
-                        </div> <!-- form-item -->
+                        </div>
                         <div class="form-item" id="edit-pass-wrapper">
                           <label for="edit-pass">Passwort: <span class="form-required" title="Dieses Feld wird benötigt.">*</span></label>
                           <input type="password" name="pass" id="edit-pass"  maxlength="60"  size="15"  class="form-text required" style="width:100%" />
-                        </div> <!-- form-item -->
+                        </div>
                         <input type="submit" name="op" id="edit-submit-1" value="Anmelden"  class="form-submit" style="width:100%; margin: 0.3em 0 0 0;" />
                         <div class="item-list">
                           <ul>
                             <li class="first"><a href="/user/register" title="Ein neues Benutzerkonto erstellen.">Registrieren</a></li>
                             <li class="last"><a href="/user/password" title="Ein neues Passwort per E-Mail anfordern.">Neues Passwort anfordern</a></li>
                           </ul>
-                        </div> <!-- item-list -->
+                        </div>
                         <input type="hidden" name="form_build_id" id="form-e4ba62c993ea5ae8a0b7d7d351f43df7" value="form-e4ba62c993ea5ae8a0b7d7d351f43df7"  />
                         <input type="hidden" name="form_id" id="edit-user-login-block" value="user_login_block"  />
                       </div>
                     </form>
-                  </div> <!-- pBody -->
+                  </div>
+-->
                 <?php } ?>
               </div> <!-- p-personal -->
             <?php } elseif ($bar == 'TOOLBOX') { ?>
