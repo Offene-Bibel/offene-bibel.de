@@ -40,6 +40,7 @@ div#forum table>tbody:before {
 }
 
 div#ofbi-startpage-jumbo {
+    background:#86A6E5;
     background-image: url('/static/img/clouds_bright.png');
     background-position: center center;
     background-size: cover;
@@ -49,8 +50,13 @@ div#ofbi-startpage-jumbo {
     border-width: 1px;
 }
 
-#ofbi-startpage-jumbo a:not(.btn) {
-    color: #97CEFE;
+div#ofbi-startpage-jumbo small {
+    background:rgba(135, 165, 230, 0.5);
+}
+
+div#ofbi-startpage-jumbo a:not(.btn) {
+    color:white;
+    text-decoration:underline;
 }
 
 #ofbi-text-offene {
