@@ -91,6 +91,10 @@ DirectoryIndex index.php index.html index.htm
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^/?mediawiki/(.*)?$ /mediawiki/index.php [L,QSA]
 
+  # The above rule fails for empty suffix, since the folder /mediawiki/ exists.
+  # Thus this rule to explicitly forward that path.
+  RewriteRule ^/?mediawiki/$ /mediawiki/index.php [L,QSA]
+
   # Pass all requests not referring directly to files in the filesystem to
   # index.php. Clean URLs are handled in drupal_environment_initialize().
   RewriteCond %{REQUEST_FILENAME} !-f
