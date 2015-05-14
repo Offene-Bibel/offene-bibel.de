@@ -16,8 +16,8 @@ class BibelStelle extends SpecialPage {
     $ergebnisse = $abk->analyse ($suche);
 
     $output = '';
-    $output .= '<form action="' . $GLOBALS ['wgScriptPath'] . '"><p>';
-    $output .= '<input type="hidden" name="title" value="Special:Bibelstelle_aufschlagen" />';
+    $output .= '<form action="' . $GLOBALS ['wgScriptPath'] . '/index.php"><p>';
+    $output .= '<input type="hidden" name="title" value="Special:Bibelstelle" />';
     $output .= '<label for="input_bibelstelle">Bibelstelle</label>: ';
     $output .= '<input type="text" name="abk" id="input_bibelstelle" value="' . htmlspecialchars ($suche) . '" />';
     $output .= '<input type="submit" value="Suchen!" />';

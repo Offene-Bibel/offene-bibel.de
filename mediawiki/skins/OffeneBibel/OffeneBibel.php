@@ -130,8 +130,8 @@ class OffeneBibelTemplate extends QuickTemplate {
               <div id="p-biblepassage" class="portlet">
                 <h5><label for="biblepassage">Bibelstelle aufschlagen</label></h5>
                 <div class="pBody">
-                  <form action="<?php echo $GLOBALS ['wgScriptPath']?>" method="get">
-                    <input type="hidden" name="title" value="Special:Bibelstelle_aufschlagen" />
+                  <form action="<?php echo $GLOBALS ['wgScriptPath']?>/index.php" method="get">
+                    <input type="hidden" name="title" value="Spezial:Bibelstelle" />
                     <div style="display: table; width: 100%;"><span style="display: table-row;">
                       <span style="display: table-cell; text-align: left; vertical-align: middle; width: 6em;"><input type="submit" value="Gehe zu:" style="width: 5em;" /></span>
                       <span style="display: table-cell; vertical-align: middle;"><input type="text" name="abk" id="biblepassage" value="" style="width: 100%;" /></span>
