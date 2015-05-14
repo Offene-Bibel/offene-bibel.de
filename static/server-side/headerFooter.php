@@ -17,7 +17,7 @@ function getOfBiHeader() {
             <div class="navbar-collapse collapse main-navbar-collapse">
                 <ul class="nav navbar-nav">
 <li class="dropdown">
-  <a href="" class="dropdown-toggle" data-toggle="dropdown">Lesen <span class="caret"></span></a>
+  <a href="" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Lesen <span class="caret"></span></a>
   <div class="dropdown-menu multi-column">
         <!-- there would normally be a row class on this div. But that added broken margin on the left and right. Leaving it of somehow doesn't break much... -->
                 <ul class="dropdown-menu col-md-6">
@@ -48,7 +48,7 @@ function getOfBiHeader() {
        </div>
 </li>
 <li class="dropdown">
-        <a href="#about" class="dropdown-toggle" data-toggle="dropdown">Über uns <span class="caret"></span></a>
+        <a href="#about" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Über uns <span class="caret"></span></a>
         <ul class="dropdown-menu">
                 <li><a href="/kurzinfo">Kurzinfo</a></li>
                 <li><a href="/wiki/über_uns">Unsere Ziele</a></li>
@@ -58,14 +58,15 @@ function getOfBiHeader() {
         </ul>
 </li>
 <li class="dropdown">
-        <a href="#about" class="dropdown-toggle" data-toggle="dropdown">Aktuelles <span class="caret"></span></a>
+        <a href="#about" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Aktuelles <span class="caret"></span></a>
         <ul class="dropdown-menu">
+                <li><a href="/news">News</a></li>
                 <li><a href="/blog">Blog</a></li>
                 <li><a href="/neuigkeiten">Letzte Aktivitäten</a></li>
         </ul>
 </li>
 <li class="dropdown">
-  <a href="" class="dropdown-toggle" data-toggle="dropdown">Mitmachen/Feedback <span class="caret"></span></a>
+  <a href="" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Mitmachen/Feedback <span class="caret"></span></a>
   <div class="dropdown-menu multi-column">
         <!-- there would normally be a row class on this div. But that added broken margin on the left and right. Leaving it of somehow doesn't break much... -->
                 <ul class="dropdown-menu col-md-6">
@@ -103,7 +104,7 @@ function getOfBiHeader() {
 </li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
-                      <li id="ofbi-auth-login-button" class="dropdown" data-container="body" data-toggle="popover" data-placement="bottom" style="display: none" data-html="true" data-content="
+                      <li id="ofbi-auth-login-button" class="dropdown" data-container="body" data-hover="dropdown" data-toggle="popover" data-placement="bottom" style="display: none" data-html="true" data-content="
 <form role='form' accept-charset='UTF-8' id='ofbi-auth-login'>
     <div class='form-group'>
         <label class='control-label' for='ofbi-login-name'>Benutzername:</label>
@@ -128,7 +129,7 @@ function getOfBiHeader() {
                           <a href='#'>Einloggen</a>
                       </li>
                       <li id="ofbi-auth-logged-in-button" class="dropdown" style="display: none">
-                          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span id="ofbi-auth-logged-in-name"></span> <b class="caret"></b></a>
+                          <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" href="#"><span id="ofbi-auth-logged-in-name"></span> <b class="caret"></b></a>
                           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                               <li role="presentation"><a role="menuitem" tabindex="-1" href="/wiki/Spezial:Beobachtungsliste">Beobachtungsliste</a></li>
                               <li role="presentation"><a id="ofbi-auth-userpage" role="menuitem" tabindex="-1" href="#">Eigene Benutzerseite</a></li>
