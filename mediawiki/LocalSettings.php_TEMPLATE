@@ -312,6 +312,11 @@ $wgGroupPermissions['user']['collectionsaveasuserpage'] = true;
 #$wgGroupPermissions['user']['collectionsaveascommunitypage'] = false;
 
 # Create some more groups we have.
+# Be sure to not overwrite predefined Mediawiki groups!
+# That causes the permissions of these groups to be nulled.
+#$wgGroupPermissions['sysop'] = $wgGroupPermissions['user'];
+#$wgGroupPermissions['bureaucrat'] = $wgGroupPermissions['user'];
+#$wgGroupPermissions['emailconfirmed'] = $wgGroupPermissions['user'];
 $wgGroupPermissions['Benutzermoderator'] = $wgGroupPermissions['user'];
 $wgGroupPermissions['Blogger'] = $wgGroupPermissions['user'];
 $wgGroupPermissions['Forenadmin'] = $wgGroupPermissions['user'];
@@ -319,9 +324,6 @@ $wgGroupPermissions['News-Redakteur'] = $wgGroupPermissions['user'];
 $wgGroupPermissions['Seiten_bearbeiten'] = $wgGroupPermissions['user'];
 $wgGroupPermissions['Sub-Admin'] = $wgGroupPermissions['user'];
 $wgGroupPermissions['Vereinsvorstand'] = $wgGroupPermissions['user'];
-$wgGroupPermissions['bureaucrat'] = $wgGroupPermissions['user'];
-$wgGroupPermissions['emailconfirmed'] = $wgGroupPermissions['user'];
-$wgGroupPermissions['sysop'] = $wgGroupPermissions['user'];
 
 
 //////////Ende Collection-Extension für Bücher und PDFs ////
