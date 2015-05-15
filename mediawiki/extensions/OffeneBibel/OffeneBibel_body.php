@@ -50,6 +50,9 @@ class OfBi {
   }
 
   function hook_ParserBeforeTidy ( &$parser, &$text ) {
+    if (strpos ($text, '-klammer-inhalt">') !== false) {
+      return true;
+   }
     # Search patterns...
     # (?<FOO>pattern) is a named capture. They can be referenced with \g{FOO} later on.
     # ++ is 1 or more, without backtracking.
@@ -621,7 +624,7 @@ class OfBi {
         if($parser->getRevisionId() == null) {
             // This is entered when no revision ID is generated yet. Due to the flag above the page is
             // generated a second time, once the revision ID is available.
-            return "dummy";
+            return "";
         }
     }
     $dbr = wfGetDB(DB_SLAVE);
