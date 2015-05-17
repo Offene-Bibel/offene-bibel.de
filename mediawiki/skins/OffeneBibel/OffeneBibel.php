@@ -99,6 +99,7 @@ class OffeneBibelTemplate extends QuickTemplate {
               </script>
               <?php
               foreach( $this->data['content_actions'] as $key => $tab ) {
+                   if (substr($key, 0, 5) === 'nstab')  {
                                 echo '
                         <li id="', Sanitizer::escapeId( "ca-$key" ), '"';
                                 if ( $tab['class'] ) {
@@ -108,7 +109,99 @@ class OffeneBibelTemplate extends QuickTemplate {
                                         Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('ca-'.$key)), '>',
                                         htmlspecialchars($tab['text']),
                                         '</a></li>';
+                }
               }?>
+              <?php
+              foreach( $this->data['content_actions'] as $key => $tab ) {
+                   if ($key === 'talk')  {
+                                echo '
+                        <li id="', Sanitizer::escapeId( "ca-$key" ), '"';
+                                if ( $tab['class'] ) {
+                                        echo ' class="', htmlspecialchars($tab['class']), '"';
+                                }
+                                echo '><a href="', htmlspecialchars($tab['href']), '"',
+                                        Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('ca-'.$key)), '>',
+                                        htmlspecialchars($tab['text']),
+                                        '</a></li>';
+                }
+              }?>
+             <li class="dropdown">
+               <a href="" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Bearbeiten <span class="caret"></span></a>
+                 <ul class="dropdown-menu pull-right">
+
+              <?php
+              foreach( $this->data['content_actions'] as $key => $tab ) {
+                   if ($key !== 'talk' && substr($key, 0, 5) !== 'nstab')  {
+                                echo '
+                        <li id="', Sanitizer::escapeId( "ca-$key" ), '"';
+                                if ( $tab['class'] ) {
+                                        echo ' class="', htmlspecialchars($tab['class']), '"';
+                                }
+                                echo '><a href="', htmlspecialchars($tab['href']), '"',
+                                        Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('ca-'.$key)), '>',
+                                        htmlspecialchars($tab['text']),
+                                        '</a></li>';
+                }
+              }?>
+                  </ul>
+               </li>
+               <li class="dropdown">
+               <a href="" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><?php $this->msg('toolbox') ?> <span class="caret"></span></a>
+                 <ul class="dropdown-menu pull-right">
+                    <?php
+                    if( $this->data['notspecialpage'] ) { ?>
+                      <li id="t-whatlinkshere"><a href="<?php
+                      echo htmlspecialchars($this->data['nav_urls']['whatlinkshere']['href'])
+                      ?>"<?php echo Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('t-whatlinkshere')) ?>><?php $this->msg('whatlinkshere') ?></a></li>
+                      <?php
+                      if( $this->data['nav_urls']['recentchangeslinked'] ) { ?>
+                        <li id="t-recentchangeslinked"><a href="<?php
+                        echo htmlspecialchars($this->data['nav_urls']['recentchangeslinked']['href'])
+                        ?>"<?php echo Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('t-recentchangeslinked')) ?>><?php $this->msg('recentchangeslinked') ?></a></li>
+                      <?php
+                      }
+                    }
+
+                    if ( isset( $this->data['nav_urls']['trackbacklink'] ) ) { ?>
+                      <li id="t-trackbacklink"><a href="<?php
+                      echo htmlspecialchars($this->data['nav_urls']['trackbacklink']['href'])
+                      ?>"<?php echo Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('t-trackbacklink')) ?>><?php $this->msg('trackbacklink') ?></a></li>
+                    <?php
+                    }
+
+                    if( $this->data['feeds'] ) { ?>
+                      <li id="feedlinks"><?php foreach($this->data['feeds'] as $key => $feed) {
+                      ?><span id="feed-<?php echo Sanitizer::escapeId($key) ?>"><a href="<?php
+                      echo htmlspecialchars($feed['href']) ?>"<?php echo Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('feed-'.$key)) ?>><?php echo htmlspecialchars($feed['text'])?></a>&nbsp;</span>
+                      <?php } ?>
+                      </li>
+                    <?php
+                    }
+  
+                    foreach( array( 'contributions', 'blockip', 'emailuser', 'upload', 'specialpages' ) as $special ) {
+                      if( $this->data['nav_urls'][$special] ) {
+                        ?><li id="t-<?php echo $special ?>"><a href="<?php echo htmlspecialchars($this->data['nav_urls'][$special]['href'])
+                        ?>"<?php echo Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('t-'.$special)) ?>><?php $this->msg($special) ?></a></li>
+                      <?php
+                      }
+                    }
+  
+                    if(false && !empty( $this->data['nav_urls']['print']['href'] ) ) { ?>
+                      <li id="t-print"><a href="<?php echo htmlspecialchars($this->data['nav_urls']['print']['href'])
+                      ?>"<?php echo Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('t-print')) ?>><?php $this->msg('printableversion') ?></a></li><?php
+                    }
+  
+                    if( !empty( $this->data['nav_urls']['permalink']['href'] ) ) { ?>
+                      <li id="t-permalink"><a href="<?php echo htmlspecialchars($this->data['nav_urls']['permalink']['href'])
+                      ?>"<?php echo Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('t-permalink')) ?>><?php $this->msg('permalink') ?></a></li><?php
+                    } elseif( $this->data['nav_urls']['permalink']['href'] === '' ) { ?>
+                      <li id="t-ispermalink"<?php echo $skin->tooltip('t-ispermalink') ?>><?php $this->msg('permalink') ?></li><?php
+                    }
+  
+                    wfRunHooks( 'MonoBookTemplateToolboxEnd', array( &$this ) );
+                  ?>
+                  </ul>
+               </li>
             </ul>
           </div> <!-- pBody -->
         </div> <!-- p-cactions -->
@@ -160,6 +253,7 @@ class OffeneBibelTemplate extends QuickTemplate {
                 </div> <!-- pBody -->
               </div> <!-- p-search -->
 
+              <noscript>
               <div class="portlet" id="p-personal">
                 <?php
                 if (isset ($this->data['personal_urls'] ['logout'])) { 
@@ -187,95 +281,10 @@ class OffeneBibelTemplate extends QuickTemplate {
                   echo '</div> <!-- pBody -->';
                 } else {
                   ?>
-<!--
-This is a Drupal login. Since the website now uses a SSO bridge where mediawiki is master, it doesn't work anymore. Thus remove.
-                  <h5>Benutzeranmeldung</h5>
-                  <div class="pBody">
-                    <form action="/?destination=wiki/?title=<?php echo htmlspecialchars ($this->text ('title')); ?>"  accept-charset="UTF-8" method="post" id="user-login-form">
-                      <div>
-                        <div class="form-item" id="edit-name-wrapper">
-                          <label for="edit-name">Benutzername: <span class="form-required" title="Dieses Feld wird benötigt.">*</span></label>
-                          <input type="text" maxlength="60" name="name" id="edit-name" size="15" value="" class="form-text required" style="width:100%" />
-                        </div>
-                        <div class="form-item" id="edit-pass-wrapper">
-                          <label for="edit-pass">Passwort: <span class="form-required" title="Dieses Feld wird benötigt.">*</span></label>
-                          <input type="password" name="pass" id="edit-pass"  maxlength="60"  size="15"  class="form-text required" style="width:100%" />
-                        </div>
-                        <input type="submit" name="op" id="edit-submit-1" value="Anmelden"  class="form-submit" style="width:100%; margin: 0.3em 0 0 0;" />
-                        <div class="item-list">
-                          <ul>
-                            <li class="first"><a href="/user/register" title="Ein neues Benutzerkonto erstellen.">Registrieren</a></li>
-                            <li class="last"><a href="/user/password" title="Ein neues Passwort per E-Mail anfordern.">Neues Passwort anfordern</a></li>
-                          </ul>
-                        </div>
-                        <input type="hidden" name="form_build_id" id="form-e4ba62c993ea5ae8a0b7d7d351f43df7" value="form-e4ba62c993ea5ae8a0b7d7d351f43df7"  />
-                        <input type="hidden" name="form_id" id="edit-user-login-block" value="user_login_block"  />
-                      </div>
-                    </form>
-                  </div>
--->
                 <?php } ?>
               </div> <!-- p-personal -->
+              </noscript>
             <?php } elseif ($bar == 'TOOLBOX') { ?>
-              <div class="portlet" id="p-tb">
-                <h5><?php $this->msg('toolbox') ?></h5>
-                <div class="pBody">
-                  <ul>
-                    <?php
-                    if( $this->data['notspecialpage'] ) { ?>
-                      <li id="t-whatlinkshere"><a href="<?php
-                      echo htmlspecialchars($this->data['nav_urls']['whatlinkshere']['href'])
-                      ?>"<?php echo Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('t-whatlinkshere')) ?>><?php $this->msg('whatlinkshere') ?></a></li>
-                      <?php
-                      if( $this->data['nav_urls']['recentchangeslinked'] ) { ?>
-                        <li id="t-recentchangeslinked"><a href="<?php
-                        echo htmlspecialchars($this->data['nav_urls']['recentchangeslinked']['href'])
-                        ?>"<?php echo Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('t-recentchangeslinked')) ?>><?php $this->msg('recentchangeslinked') ?></a></li>
-                      <?php
-                      }
-                    }
-
-                    if ( isset( $this->data['nav_urls']['trackbacklink'] ) ) { ?>
-                      <li id="t-trackbacklink"><a href="<?php
-                      echo htmlspecialchars($this->data['nav_urls']['trackbacklink']['href'])
-                      ?>"<?php echo Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('t-trackbacklink')) ?>><?php $this->msg('trackbacklink') ?></a></li>
-                    <?php
-                    }
-
-                    if( $this->data['feeds'] ) { ?>
-                      <li id="feedlinks"><?php foreach($this->data['feeds'] as $key => $feed) {
-                      ?><span id="feed-<?php echo Sanitizer::escapeId($key) ?>"><a href="<?php
-                      echo htmlspecialchars($feed['href']) ?>"<?php echo Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('feed-'.$key)) ?>><?php echo htmlspecialchars($feed['text'])?></a>&nbsp;</span>
-                      <?php } ?>
-                      </li>
-                    <?php
-                    }
-  
-                    foreach( array( 'contributions', 'blockip', 'emailuser', 'upload', 'specialpages' ) as $special ) {
-                      if( $this->data['nav_urls'][$special] ) {
-                        ?><li id="t-<?php echo $special ?>"><a href="<?php echo htmlspecialchars($this->data['nav_urls'][$special]['href'])
-                        ?>"<?php echo Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('t-'.$special)) ?>><?php $this->msg($special) ?></a></li>
-                      <?php
-                      }
-                    }
-  
-                    if( !empty( $this->data['nav_urls']['print']['href'] ) ) { ?>
-                      <li id="t-print"><a href="<?php echo htmlspecialchars($this->data['nav_urls']['print']['href'])
-                      ?>"<?php echo Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('t-print')) ?>><?php $this->msg('printableversion') ?></a></li><?php
-                    }
-  
-                    if( !empty( $this->data['nav_urls']['permalink']['href'] ) ) { ?>
-                      <li id="t-permalink"><a href="<?php echo htmlspecialchars($this->data['nav_urls']['permalink']['href'])
-                      ?>"<?php echo Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('t-permalink')) ?>><?php $this->msg('permalink') ?></a></li><?php
-                    } elseif( $this->data['nav_urls']['permalink']['href'] === '' ) { ?>
-                      <li id="t-ispermalink"<?php echo $skin->tooltip('t-ispermalink') ?>><?php $this->msg('permalink') ?></li><?php
-                    }
-  
-                    wfRunHooks( 'MonoBookTemplateToolboxEnd', array( &$this ) );
-                  ?>
-                  </ul>
-                </div> <!-- pBody -->
-              </div> <!-- p-tb -->
             <?php } elseif ($bar == 'LANGUAGES') { ?>
               <?php if( $this->data['language_urls'] ) { ?>
                 <div id="p-lang" class="portlet">
@@ -290,7 +299,7 @@ This is a Drupal login. Since the website now uses a SSO bridge where mediawiki 
                   </div> <!-- pBody -->
                 </div> <!-- p-lang -->
               <?php } ?>
-            <?php } elseif ($bar !== 'Rubriken') { ?>
+            <?php } elseif ($bar !== 'TOOLBOX') { ?>
               <div class='portlet' id='p-<?php echo Sanitizer::escapeId( $bar ) ?>'<?php echo $skin->tooltip('p-'.$bar) ?>>
                 <h5><?php $out = wfMsg( $bar ); if( wfEmptyMsg( $bar, $out ) ) echo $bar; else echo $out; ?></h5>
                 <div class='pBody'>

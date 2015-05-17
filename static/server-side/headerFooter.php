@@ -25,10 +25,10 @@ function getOfBiHeader() {
                                 <b>Bibel</b>
                         </li>
                 <li>
-                  <a href="/wiki/Übersetzungen">Online</a>
+                  <a href="/wiki/Die_Offene_Bibel_online_lesen">Online lesen</a>
                 </li>
                 <li>
-                  <a href="/wiki/Offene_Bibel_Module_für_Bibelprogramme">Download</a>
+                  <a href="/wiki/Download:_Die_Offene_Bibel_in_Bibelprogrammen_und_als_PDF">Download</a>
                 </li>
         </ul>
         <ul class="dropdown-menu col-md-6">
@@ -36,13 +36,13 @@ function getOfBiHeader() {
                                 <b>Nebenprojekte</b>
                         </li>
                 <li>
-                  <a href="/wiki/Bibellexikon">Bibellexikon</a>
+                  <a href="/wiki/Kategorie:Lexikon">Bibellexikon</a>
                 </li>
                 <li>
-                  <a href="/wiki/Grammatik">Grammatik</a>
+                  <a href="/wiki/Kategorie:Grammatik">Grammatik</a>
                 </li>
                 <li>
-                  <a href="/wiki/Sekundärliteratur_Hauptseite">Sekundärliteratur</a>
+                  <a href="/wiki/Offene_Sekundärliteratur">Sekundärliteratur</a>
                 </li>
         </ul>
        </div>
@@ -51,10 +51,10 @@ function getOfBiHeader() {
         <a href="#about" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Über uns <span class="caret"></span></a>
         <ul class="dropdown-menu">
                 <li><a href="/kurzinfo">Kurzinfo</a></li>
-                <li><a href="/wiki/über_uns">Unsere Ziele</a></li>
-                <li><a href="/wiki/Übersetzungskriterien">Eigenschaften der Übersetzungen</a></li>
+                <li><a href="/wiki/Unsere_Ziele">Unsere Ziele</a></li>
+                <li><a href="/wiki/Übersetzungskriterien">Übersetzungskriterien</a></li>
                 <li><a href="/wiki/Leichte_Sprache">Bibel in Leichter Sprache</a></li>
-                <li><a href="/verein">Verein</a></li>
+                <li><a href="/verein">Verein / Kontakt</a></li>
         </ul>
 </li>
 <li class="dropdown">
@@ -74,7 +74,7 @@ function getOfBiHeader() {
                   <b>Mitmachen</b>
                 </li>
                 <li>
-                  <a href="/wiki/Mithelfen">Wie kann ich helfen?</a>
+                  <a href="/wiki/Wie_kann_ich_helfen%3F">Wie kann ich helfen?</a>
                 </li>
                 <li>
                   <a href="/wiki/Autorenportal">Autorenportal</a>
@@ -83,7 +83,7 @@ function getOfBiHeader() {
                   <a href="/spenden">Spenden</a>
                 </li>
                 <li>
-                  <a href="/wiki/Werben">Weitersagen</a>
+                  <a href="/wiki/Weitersagen">Weitersagen</a>
                 </li>
         </ul>
         <ul class="dropdown-menu col-md-6">
