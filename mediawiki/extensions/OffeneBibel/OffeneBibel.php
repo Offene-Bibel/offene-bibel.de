@@ -95,9 +95,9 @@ function addLicencing(&$out,&$skin) {
 EOT;
             $replacement_count = 0;
             $out->mBodytext = preg_replace("/$search_token/","$replacement",$out->mBodytext, -1, $replacement_count);
-            if($replacement_count != 1) {
-                die("Registration form terms of service logic broken.");
-            }
+            #if($replacement_count != 1) {
+            #    die("Registration form terms of service logic broken.");
+            #}
         }
     }
     return true;
