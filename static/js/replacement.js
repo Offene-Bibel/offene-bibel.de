@@ -66,7 +66,7 @@ function  () {
          * Returns whether the given element is a genitive.
          */
         this.isGenitiv = function (obj) {
-            return /^(?:[Uu]nseres|[Ee]ures) Herrn$/.test (this.pattern (obj));
+            return /^(?:[Uu]nseres|[Ee]ures) Herrn$/.test (obj.getAttribute ("data-pattern2"));
         }
 
         /*
