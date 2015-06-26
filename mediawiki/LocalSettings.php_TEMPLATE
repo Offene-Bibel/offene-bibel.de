@@ -22,30 +22,32 @@ if( defined( 'MW_INSTALL_PATH' ) ) {
 $path = array( "$IP", "$IP/includes", "$IP/languages" );
 set_include_path( implode( PATH_SEPARATOR, $path ) . PATH_SEPARATOR . get_include_path() );
 require_once( "$IP/includes/DefaultSettings.php" );
-require_once("$IP/extensions/Collection/Collection.php");
-require_once($IP.'/extensions/Poem/Poem.php');
+require_once( "$IP/extensions/Collection/Collection.php" );
+require_once( "$IP/extensions/ImageMap/ImageMap.php" );
+require_once( "$IP/extensions/Poem/Poem.php");
 require_once( "$IP/extensions/OffeneBibel/OffeneBibel.php" );
-require_once ( "$IP/extensions/ParserFunctions/ParserFunctions.php" );
+require_once( "$IP/extensions/ParserFunctions/ParserFunctions.php" );
 $wgPFEnableStringFunctions = true;
-require_once ( "$IP/extensions/Variables/Variables.php" );
+require_once( "$IP/extensions/Variables/Variables.php" );
 require_once( "$IP/extensions/Loops/Loops.php" );
 ExtLoops::$maxLoops = 1080;
 require_once( "$IP/extensions/CategoryTests/CategoryTests.php" );
 require_once( "$IP/extensions/MagicNoCache/MagicNoCache.php" );
-require_once("$IP/extensions/Gadgets/Gadgets.php");
+require_once( "$IP/extensions/Gadgets/Gadgets.php" );
 require_once( "$IP/extensions/ConfirmEdit/ConfirmEdit.php" );
-require_once( "$IP/extensions/ConfirmEdit/ReCaptcha.php" );
-$wgCaptchaClass = 'ReCaptcha';
-$wgReCaptchaPublicKey = '<&recaptcha_public_key&>';
-$wgReCaptchaPrivateKey = '<&recaptcha_private_key&>';
+require_once( "$IP/extensions/ConfirmEdit/QuestyCaptcha.php" );
+$wgCaptchaQuestions[] = array( 'question' => "Wie heißt dieses Projekt?", 'answer' => "Offene Bibel");
+$wgCaptchaQuestions[] = array( 'question' => 'Welchen Tag im Monat haben wir jetzt gerade laut <a href="http://google.de/search?q=gmt+time">Greenwich Mean Time</a> (GMT)? Bitte als Zahl ohne führende Null. ', 'answer' => date('j') );
+$wgCaptchaQuestions[] = array( 'question' => 'Welche Farbe hat das Wort "Bibel" in unserem Logo?', 'answer' => array( 'blau', 'Blau' ) );
+$wgCaptchaQuestions[] = array( 'question' => 'Welche Farbe hat das Wort "Offene" in unserem Logo?', 'answer' => array( 'grün', 'Grün', 'gruen', 'Gruen' ) );
 $wgGroupPermissions['emailconfirmed']['skipcaptcha'] = true;
 $ceAllowConfirmedEmail = true;
-require_once("$IP/extensions/NewSignupPage/NewSignupPage.php");
+require_once( "$IP/extensions/NewSignupPage/NewSignupPage.php" );
 #Piwik
-#require_once('extensions/Piwik/Piwik.php');
+require_once('extensions/piwik/Piwik.php');
 $wgPiwikURL = "piwik.offene-bibel.de/";
-$wgGroupPermissions['user']['viewpiwik'] = true;
-$wgPiwikSpecialPageDate = 'today';
+//$wgGroupPermissions['user']['viewpiwik'] = true;
+//$wgPiwikSpecialPageDate = 'today';
 $wgPiwikIDSite = "1";
 
 //$wgSendToTwitterUsername      = 'OfBiWiki'; 
@@ -92,10 +94,10 @@ $wgEmailConfirmToEdit = true;
 
 ## Database settings
 $wgDBtype           = "mysql";
-$wgDBserver         = "<&db_host&>:<&db_port&>";
-$wgDBname           = "<&db_db&>";
-$wgDBuser           = "<&db_user&>";
-$wgDBpassword       = "<&db_password&>";
+$wgDBserver         = "<&db_host&>:<&db_port&>";//<<&REPLACEMENT&>>$wgDBserver         = "<&db_host&>:<&db_port&>";
+$wgDBname           = "<&db_db&>";//<<&REPLACEMENT&>>$wgDBname           = "<&db_db&>";
+$wgDBuser           = "<&db_user&>";//<<&REPLACEMENT&>>$wgDBuser           = "<&db_user&>";
+$wgDBpassword       = "<&db_password&>";//<<&REPLACEMENT&>>$wgDBpassword       = "<&db_password&>";
 
 # MySQL specific settings
 $wgDBprefix         = "bibelwiki";
@@ -185,7 +187,7 @@ $wgLocalInterwiki   = strtolower( $wgSitename );
 
 $wgLanguageCode = "de";
 
-$wgSecretKey = "<&mw_secret&>";
+$wgSecretKey = "<&mw_secret&>"; //<<&REPLACEMENT&>>$wgSecretKey = "<&mw_secret&>";
 
 ## Default skin: you can change the default skin. Use the internal symbolic
 ## names, ie 'standard', 'nostalgia', 'cologneblue', 'monobook':
@@ -276,167 +278,9 @@ $wgDefaultUserOptions ['editsection'] = 0;
 #);
 
 
-// Achtung das muss auch in der wiki/extensions/DrupalAuth/Mediawiki.Module geändert werden!
-//$wgCookieDomain = "offene-bibel.de";
-
-
-/*
-######################################################################
-# User authentication via Drupal using AuthDrupal
-# AuthDrupal v 0.6, 2008-0620
-
-// disable registration and sign-in from the wiki front page
-$wgGroupPermissions['*']['edit'] = false; // MediaWiki 1.5+ Settings
-$wgGroupPermissions['*']['createaccount'] = false; // MediaWiki 1.5+ Settings
-
-
-//
-// Replace this key string with something non-trivial to prevent
-// user login spoofing. Make it hardto guess, as if it is a password.
-// 
-// YOU MUST CHANGE THIS to something unique to your site and it must
-// match this setting in Mediawiki.module
-$wgAuthDrupal_security_key = 'd9cea054c32b6c8d4a5a485529d607bba1acd0b2f4db3dd0e043b74e61e60a7a';
-
-// is Drupal in a different database than Mediawiki?
-$wgAuthDrupal_UseExtDatabase = true;
-#$wgAuthDrupal_UseExtDatabase = false
-
-//NOTE: You only need the next four settings if you set $wgAuthDrupal_UseExtDatabase to true.
-$wgAuthDrupal_MySQL_Host     = "mysql.goneo.de";      // Drupal MySQL Host Name.
-$wgAuthDrupal_MySQL_Username = "13661m1900_2";        // Drupal MySQL Username.
-$wgAuthDrupal_MySQL_Password = "blablabla";    // Drupal MySQL Password.
-$wgAuthDrupal_MySQL_Database = "13661m1900_2";           // Drupal MySQL Database Name.
-
-
-
-
-
-$wgAuthDrupal_TablePrefix      = "drupal_";
-$wgAuthDrupal_UserTable     = 'users';        // name of drupal user table without prefix; normally 'users'
-$wgAuthDrupal_RolesTable     	= 'role';       // Name of your Drupal user table. (normally 'role')
-$wgAuthDrupal_UsersRolesTable	= 'users_roles'; // Name of your Drupal user table. (normally 'users_roles')
-
-
-// $wgAuthDrupal_GetRealNames :
-// Drupal's default user table schema does not include a field for real names
-// If you use Drupal's profile.module and add fields profile_first_name and
-// profile_last_name, the Auth Module can copy the names into the user's
-// wiki profile
-$wgAuthDrupal_GetRealNames = false;
-
-// $wgAuthDrupal_PropagateRoles :
-// Set this to true if you want Drupal user roles to be turned into Mediawiki
-// group membership. If you want ALL roles to be turned into groups, leave
-// $wgAuthDrupal_Roles empty. You can limit the roles that should be propagated 
-// by setting $wgAuthDrupal_Roles to an array containing names of roles to be
-// propagated, like $wgAuthDrupal_Roles = array( 'staff', 'member' );
-$wgAuthDrupal_PropagateRoles = false;
-$wgAuthDrupal_Roles = null;  // null means propagate all roles
-
-// You probably do not need to change these
-// $wgAuthDrupal_RealNames_fields_table; // set if different than 'profile_fields'
-// $wgAuthDrupal_RealNames_values_table; // set if different than 'profile_values'
-
-// $wgAuthDrupal_RealNames_first_name_field; // set if different than 'profile_first_name'
-// $wgAuthDrupal_RealNames_last_name_field;  // set if different than 'profile_last_name'
-
-// set to false to retain wiki's own login/logout
-$wgAuthDrupal_ReplaceLogin = false;
-
-// if ReplaceLogin is true, set these URLs to appropriate targets:
-#$wgAuthDrupal_LoginURL = 'http://freiebibel.freizeit-arbeit.de/';
-#$wgAuthDrupal_LogoutURL = 'http://freiebibel.freizeit-arbeit.de/?q=logout';
-
-// Do you want status messages in your Drupal watchdog log?
-$wgAuthDrupal_LogMessages = true;
-
-require_once 'extensions/AuthDrupal/AuthDrupal.php';
-SetupAuthDrupal();
-*/
-
-######################################################################
-# User authentication via Drupal using AuthDrupal
-# AuthDrupal v 0.6, 2008-0620
-
-// disable registration and sign-in from the wiki front page
-#$wgGroupPermissions['*']['edit'] = false; // MediaWiki 1.5+ Settings
-#$wgGroupPermissions['*']['createaccount'] = false; // MediaWiki 1.5+ Settings
-
-#$wgCookieDomain = '<&cookie_domain&>';
-
-//
-// Replace this key string with something non-trivial to prevent
-// user login spoofing. Make it hardto guess, as if it is a password.
-// 
-// YOU MUST CHANGE THIS to something unique to your site and it must
-// match this setting in Mediawiki.module
-$wgAuthDrupal_security_key = 'd9cea054c32b6c8d4a5a485529d607bba1acd0b2f4db3dd0e043b74e61e60a7a';
-
-// is Drupal in a different database than Mediawiki?
-$wgAuthDrupal_UseExtDatabase = true;
-
-
-//NOTE: You only need the next four settings if you set $wgAuthDrupal_UseExtDatabase to true.
-// Drupal MySQL Host Name.
-$wgAuthDrupal_MySQL_Host     = "<&db_host&>";
-// Drupal MySQL Username.
-$wgAuthDrupal_MySQL_Username = "<&db_username&>";
-// Drupal MySQL Password.
-$wgAuthDrupal_MySQL_Password = "<&db_password&>";
-// Drupal MySQL Database Name.
-$wgAuthDrupal_MySQL_Database = "<&db_db&>";
-
-
-
-$wgAuthDrupal_TablePrefix      = "bibeldrupal";
-$wgAuthDrupal_UserTable     = 'users';        // name of drupal user table without prefix; normally 'users'
-$wgAuthDrupal_RolesTable     	= 'role';       // Name of your Drupal user table. (normally 'role')
-$wgAuthDrupal_UsersRolesTable	= 'users_roles'; // Name of your Drupal user table. (normally 'users_roles')
-
-
-// $wgAuthDrupal_GetRealNames :
-// Drupal's default user table schema does not include a field for real names
-// If you use Drupal's profile.module and add fields profile_first_name and
-// profile_last_name, the Auth Module can copy the names into the user's
-// wiki profile
-$wgAuthDrupal_GetRealNames = false;
-
-// $wgAuthDrupal_PropagateRoles :
-// Set this to true if you want Drupal user roles to be turned into Mediawiki
-// group membership. If you want ALL roles to be turned into groups, leave
-// $wgAuthDrupal_Roles empty. You can limit the roles that should be propagated 
-// by setting $wgAuthDrupal_Roles to an array containing names of roles to be
-// propagated, like $wgAuthDrupal_Roles = array( 'staff', 'member' );
-$wgAuthDrupal_PropagateRoles = false;
-$wgAuthDrupal_Roles = null;  // null means propagate all roles
-
-// You probably do not need to change these
-// $wgAuthDrupal_RealNames_fields_table; // set if different than 'profile_fields'
-// $wgAuthDrupal_RealNames_values_table; // set if different than 'profile_values'
-
-// $wgAuthDrupal_RealNames_first_name_field; // set if different than 'profile_first_name'
-// $wgAuthDrupal_RealNames_last_name_field;  // set if different than 'profile_last_name'
-
-// set to false to retain wiki's own login/logout
-$wgAuthDrupal_ReplaceLogin = true;
-
-// if ReplaceLogin is true, set these URLs to appropriate targets:
-$wgAuthDrupal_LoginURL = '/';
-$wgAuthDrupal_LogoutURL = '/logout';
-
-// Do you want status messages in your Drupal watchdog log?
-$wgAuthDrupal_LogMessages = false;
-
-#require_once 'extensions/AuthDrupal/AuthDrupal.php';
-#SetupAuthDrupal();
-
-/////////////////////////////////////////////////////////////
-
 //////////Die Extension für Tooltips, z.B. bei JHWH ////
 require_once("$IP/extensions/Lingo/Lingo.php");
 $wgexLingoPage = 'Terminologie';
-
 
 
 //////////Die Collection-Extension für Bücher und PDFs ////
@@ -468,10 +312,29 @@ $wgCollectionLicenseURL = '/wiki/Die_Offene_Bibel:Lizenz&action=raw';
 $wgGroupPermissions['user']['collectionsaveasuserpage'] = true;
 #$wgGroupPermissions['user']['collectionsaveascommunitypage'] = false;
 
+# Create some more groups we have.
+# Be sure to not overwrite predefined Mediawiki groups!
+# That causes the permissions of these groups to be nulled.
+#$wgGroupPermissions['sysop'] = $wgGroupPermissions['user'];
+#$wgGroupPermissions['bureaucrat'] = $wgGroupPermissions['user'];
+#$wgGroupPermissions['emailconfirmed'] = $wgGroupPermissions['user'];
+$wgGroupPermissions['Benutzermoderator'] = $wgGroupPermissions['user'];
+$wgGroupPermissions['Blogger'] = $wgGroupPermissions['user'];
+$wgGroupPermissions['Forenadmin'] = $wgGroupPermissions['user'];
+$wgGroupPermissions['News-Redakteur'] = $wgGroupPermissions['user'];
+$wgGroupPermissions['Seiten_bearbeiten'] = $wgGroupPermissions['user'];
+$wgGroupPermissions['Sub-Admin'] = $wgGroupPermissions['user'];
+$wgGroupPermissions['Vereinsvorstand'] = $wgGroupPermissions['user'];
 
 
 //////////Ende Collection-Extension für Bücher und PDFs ////
 
+require_once("$IP/extensions/ImportUsers/ImportUsers.php");
 
 require_once("$IP/skins/OffeneBibel/OffeneBibel.php");
+
+include_once ($IP . '/extensions/di/iwDrupal.php');
+
+# Enable this to get exception details when an exception is hit.
+#$wgShowExceptionDetails = true;
 

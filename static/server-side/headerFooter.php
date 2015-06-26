@@ -18,7 +18,7 @@ function getOfBiHeader() {
             <div class="navbar-collapse collapse main-navbar-collapse">
                 <ul class="nav navbar-nav">
 <li class="dropdown">
-  <a href="" class="dropdown-toggle" data-toggle="dropdown">Lesen <span class="caret"></span></a>
+  <a href="" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Lesen <span class="caret"></span></a>
   <div class="dropdown-menu multi-column">
         <!-- there would normally be a row class on this div. But that added broken margin on the left and right. Leaving it of somehow doesn't break much... -->
                 <ul class="dropdown-menu col-md-6">
@@ -26,10 +26,10 @@ function getOfBiHeader() {
                                 <b>Bibel</b>
                         </li>
                 <li>
-                  <a href="/wiki/Übersetzungen">Online</a>
+                  <a href="/wiki/Die_Offene_Bibel_online_lesen">Online lesen</a>
                 </li>
                 <li>
-                  <a href="/wiki/Offene_Bibel_Module_für_Bibelprogramme">Download</a>
+                  <a href="/wiki/Download:_Die_Offene_Bibel_in_Bibelprogrammen_und_als_PDF">Download</a>
                 </li>
         </ul>
         <ul class="dropdown-menu col-md-6">
@@ -37,36 +37,37 @@ function getOfBiHeader() {
                                 <b>Nebenprojekte</b>
                         </li>
                 <li>
-                  <a href="/wiki/Bibellexikon">Bibellexikon</a>
+                  <a href="/wiki/Kategorie:Lexikon">Bibellexikon</a>
                 </li>
                 <li>
-                  <a href="/wiki/Grammatik">Grammatik</a>
+                  <a href="/wiki/Kategorie:Grammatik">Grammatik</a>
                 </li>
                 <li>
-                  <a href="/wiki/Sekundärliteratur_Hauptseite">Sekundärliteratur</a>
+                  <a href="/wiki/Offene_Sekundärliteratur">Sekundärliteratur</a>
                 </li>
         </ul>
        </div>
 </li>
 <li class="dropdown">
-        <a href="#about" class="dropdown-toggle" data-toggle="dropdown">Über uns <span class="caret"></span></a>
+        <a href="#about" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Über uns <span class="caret"></span></a>
         <ul class="dropdown-menu">
                 <li><a href="/kurzinfo">Kurzinfo</a></li>
-                <li><a href="/wiki/über_uns">Unsere Ziele</a></li>
-                <li><a href="/wiki/Übersetzungskriterien">Eigenschaften der Übersetzungen</a></li>
+                <li><a href="/wiki/Unsere_Ziele">Unsere Ziele</a></li>
+                <li><a href="/wiki/Übersetzungskriterien">Übersetzungskriterien</a></li>
                 <li><a href="/wiki/Leichte_Sprache">Bibel in Leichter Sprache</a></li>
-                <li><a href="/verein">Verein</a></li>
+                <li><a href="/verein">Verein / Kontakt</a></li>
         </ul>
 </li>
 <li class="dropdown">
-        <a href="#about" class="dropdown-toggle" data-toggle="dropdown">Aktuelles <span class="caret"></span></a>
+        <a href="#about" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Aktuelles <span class="caret"></span></a>
         <ul class="dropdown-menu">
+                <li><a href="/news">News</a></li>
                 <li><a href="/blog">Blog</a></li>
                 <li><a href="/neuigkeiten">Letzte Aktivitäten</a></li>
         </ul>
 </li>
 <li class="dropdown">
-  <a href="" class="dropdown-toggle" data-toggle="dropdown">Mitmachen/Feedback <span class="caret"></span></a>
+  <a href="" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Mitmachen/Feedback <span class="caret"></span></a>
   <div class="dropdown-menu multi-column">
         <!-- there would normally be a row class on this div. But that added broken margin on the left and right. Leaving it of somehow doesn't break much... -->
                 <ul class="dropdown-menu col-md-6">
@@ -74,7 +75,7 @@ function getOfBiHeader() {
                   <b>Mitmachen</b>
                 </li>
                 <li>
-                  <a href="/wiki/Mithelfen">Wie kann ich helfen?</a>
+                  <a href="/wiki/Wie_kann_ich_helfen%3F">Wie kann ich helfen?</a>
                 </li>
                 <li>
                   <a href="/wiki/Autorenportal">Autorenportal</a>
@@ -83,7 +84,7 @@ function getOfBiHeader() {
                   <a href="/spenden">Spenden</a>
                 </li>
                 <li>
-                  <a href="/wiki/Werben">Weitersagen</a>
+                  <a href="/wiki/Weitersagen">Weitersagen</a>
                 </li>
         </ul>
         <ul class="dropdown-menu col-md-6">
@@ -104,7 +105,10 @@ function getOfBiHeader() {
 </li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
-                      <li id="ofbi-auth-login-button" class="dropdown" data-container="body" data-toggle="popover" data-placement="bottom" style="display: none" data-html="true" data-content="
+                      <li class="dropdown ofbi-nojs">
+                          <a href="/wiki/Spezial:Anmelden">Einloggen/Registrieren</a>
+                      </li>
+                      <li id="ofbi-auth-login-button" class="dropdown" data-container="body" data-hover="dropdown" data-toggle="popover" data-placement="bottom" style="display: none" data-html="true" data-content="
 <form role='form' accept-charset='UTF-8' id='ofbi-auth-login'>
     <div class='form-group'>
         <label class='control-label' for='ofbi-login-name'>Benutzername:</label>
@@ -129,7 +133,7 @@ function getOfBiHeader() {
                           <a href='#'>Einloggen</a>
                       </li>
                       <li id="ofbi-auth-logged-in-button" class="dropdown" style="display: none">
-                          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span id="ofbi-auth-logged-in-name"></span> <b class="caret"></b></a>
+                          <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" href="#"><span id="ofbi-auth-logged-in-name"></span> <b class="caret"></b></a>
                           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                               <li role="presentation"><a role="menuitem" tabindex="-1" href="/wiki/Spezial:Beobachtungsliste">Beobachtungsliste</a></li>
                               <li role="presentation"><a id="ofbi-auth-userpage" role="menuitem" tabindex="-1" href="#">Eigene Benutzerseite</a></li>

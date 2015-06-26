@@ -99,6 +99,7 @@ class OffeneBibelTemplate extends QuickTemplate {
               </script>
               <?php
               foreach( $this->data['content_actions'] as $key => $tab ) {
+                   if (substr($key, 0, 5) === 'nstab')  {
                                 echo '
                         <li id="', Sanitizer::escapeId( "ca-$key" ), '"';
                                 if ( $tab['class'] ) {
@@ -108,116 +109,45 @@ class OffeneBibelTemplate extends QuickTemplate {
                                         Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('ca-'.$key)), '>',
                                         htmlspecialchars($tab['text']),
                                         '</a></li>';
+                }
               }?>
-            </ul>
-          </div> <!-- pBody -->
-        </div> <!-- p-cactions -->
-      </div> <!-- column-content -->
-      <div id="column-one">
-        <div id="one">
-          <script type="text/javascript">
-            if (navigator.cookieEnabled) {
-              document.write ('<div id="hide-sidebar" class="cactions" title="Seitenleiste ausblenden" style="position: absolute; margin:0; right: 0%; text-align: center; border: 1px solid #E4F0DE; border-right: none; border-top: none; vertical-align: middle; font-size: 125%; line-height: 1em; width: 1em;"><a href=\'javascript: document.getElementById ("column-content").id = "column-content-large"; document.getElementById ("show-sidebar").style.display = "inline"; document.getElementById ("column-one").style.display = "none"; void (document.cookie = "sidebar=false; path=/; domain=.offene-bibel.de");\'><span style="font-weight: bold;">«</span></a></div>');
-              if (document.cookie.indexOf ('sidebar=false') >= 0) {
-                document.getElementById ("column-content").id = "column-content-large";
-                document.getElementById ("show-sidebar").style.display = "inline";
-              }
-            }
-          </script>
+              <?php
+              foreach( $this->data['content_actions'] as $key => $tab ) {
+                   if ($key === 'talk')  {
+                                echo '
+                        <li id="', Sanitizer::escapeId( "ca-$key" ), '"';
+                                if ( $tab['class'] ) {
+                                        echo ' class="', htmlspecialchars($tab['class']), '"';
+                                }
+                                echo '><a href="', htmlspecialchars($tab['href']), '"',
+                                        Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('ca-'.$key)), '>',
+                                        htmlspecialchars($tab['text']),
+                                        '</a></li>';
+                }
+              }?>
+             <li class="dropdown">
+               <a href="" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Bearbeiten <span class="caret"></span></a>
+                 <ul class="dropdown-menu pull-right">
 
-          <?php foreach ($this->data['sidebar'] as $bar => $cont) { ?>
-            <?php if ($bar == 'SEARCH') {?>
-              <div id="p-biblepassage" class="portlet">
-                <h5><label for="biblepassage">Bibelstelle aufschlagen</label></h5>
-                <div class="pBody">
-                  <form action="<?php echo $GLOBALS ['wgScriptPath']?>" method="get">
-                    <input type="hidden" name="title" value="Special:Bibelstelle_aufschlagen" />
-                    <div style="display: table; width: 100%;"><span style="display: table-row;">
-                      <span style="display: table-cell; text-align: left; vertical-align: middle; width: 6em;"><input type="submit" value="Gehe zu:" style="width: 5em;" /></span>
-                      <span style="display: table-cell; vertical-align: middle;"><input type="text" name="abk" id="biblepassage" value="" style="width: 100%;" /></span>
-                    </span></div>
-                  </form>
-                </div> <!-- pBody -->
-              </div> <!-- p-biblepassage -->
-
-              <div id="p-search" class="portlet">
-                <h5><label for="suche">Volltextsuche</label></h5>
-                <div class="pBody">
-                  <form action="/suche.php" method="get">
-                    <div style="display: table; width: 100%;"><span style="display: table-row;">
-                      <span style="display: table-cell; text-align: left; vertical-align: middle; width: 6em;"><input type="submit" value="Suche:" style="width: 5em;" /></span>
-                      <span style="display: table-cell; vertical-align: middle;"><input id="suche" name="suche" type="text" style="width: 100%;" /></span>
-                    </span></div>
-                    <div style="display: table; width: 100%; margin: 0.3em 0 0 0;"><span style="display: table-row;">
-                      <label for="in" style="display: table-cell; vertical-align: middle;">in&nbsp;</label>
-                      <select id="in" name="in" style="display: table-cell; vertical-align: middle; width: 100%;">
-                        <option value="wiki">Übersetzungen/Kommentaren</option>
-                        <option value="diskussion">Diskussionsseiten</option>
-                        <option value="drupal">News, Blogs und Forum</option>
-                      </select>
-                    </span></div>
-                  </form>
-                </div> <!-- pBody -->
-              </div> <!-- p-search -->
-
-              <div class="portlet" id="p-personal">
-                <?php
-                if (isset ($this->data['personal_urls'] ['logout'])) { 
-                  echo '<h5>'.$this->data['personal_urls'] ['userpage'] ['text'].'</h5>';
-                  echo '<div class="pBody">';
-                  echo '<ul>';
-                  foreach ($this->data['personal_urls'] as $key => $item) {
-                    echo '<li id="'.Sanitizer::escapeId( "pt-$key" ).'"';
-                    if ($item ['active']) {
-                      echo ' class="active"';
-                    }
-                    echo '><a href="'.htmlspecialchars($item['href']).'"'.Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('pt-'.$key));
-                    if (!empty ($item ['class'])) {
-                      echo ' class="'.htmlspecialchars($item ['class']).'"';
-                    }
-                    echo '>';
-                    if ($key=='userpage') {
-                      echo 'Eigene Benutzerseite';
-                    } else {
-                      echo htmlspecialchars($item['text']);
-                    }
-                    echo '</a></li>';
-                  }
-                  echo '</ul>';
-                  echo '</div> <!-- pBody -->';
-                } else {
-                  ?>
-                  <h5>Benutzeranmeldung</h5>
-                  <div class="pBody">
-                    <form action="/?destination=wiki/?title=<?php echo htmlspecialchars ($this->text ('title')); ?>"  accept-charset="UTF-8" method="post" id="user-login-form">
-                      <div>
-                        <div class="form-item" id="edit-name-wrapper">
-                          <label for="edit-name">Benutzername: <span class="form-required" title="Dieses Feld wird benötigt.">*</span></label>
-                          <input type="text" maxlength="60" name="name" id="edit-name" size="15" value="" class="form-text required" style="width:100%" />
-                        </div> <!-- form-item -->
-                        <div class="form-item" id="edit-pass-wrapper">
-                          <label for="edit-pass">Passwort: <span class="form-required" title="Dieses Feld wird benötigt.">*</span></label>
-                          <input type="password" name="pass" id="edit-pass"  maxlength="60"  size="15"  class="form-text required" style="width:100%" />
-                        </div> <!-- form-item -->
-                        <input type="submit" name="op" id="edit-submit-1" value="Anmelden"  class="form-submit" style="width:100%; margin: 0.3em 0 0 0;" />
-                        <div class="item-list">
-                          <ul>
-                            <li class="first"><a href="/user/register" title="Ein neues Benutzerkonto erstellen.">Registrieren</a></li>
-                            <li class="last"><a href="/user/password" title="Ein neues Passwort per E-Mail anfordern.">Neues Passwort anfordern</a></li>
-                          </ul>
-                        </div> <!-- item-list -->
-                        <input type="hidden" name="form_build_id" id="form-e4ba62c993ea5ae8a0b7d7d351f43df7" value="form-e4ba62c993ea5ae8a0b7d7d351f43df7"  />
-                        <input type="hidden" name="form_id" id="edit-user-login-block" value="user_login_block"  />
-                      </div>
-                    </form>
-                  </div> <!-- pBody -->
-                <?php } ?>
-              </div> <!-- p-personal -->
-            <?php } elseif ($bar == 'TOOLBOX') { ?>
-              <div class="portlet" id="p-tb">
-                <h5><?php $this->msg('toolbox') ?></h5>
-                <div class="pBody">
-                  <ul>
+              <?php
+              foreach( $this->data['content_actions'] as $key => $tab ) {
+                   if ($key !== 'talk' && substr($key, 0, 5) !== 'nstab')  {
+                                echo '
+                        <li id="', Sanitizer::escapeId( "ca-$key" ), '"';
+                                if ( $tab['class'] ) {
+                                        echo ' class="', htmlspecialchars($tab['class']), '"';
+                                }
+                                echo '><a href="', htmlspecialchars($tab['href']), '"',
+                                        Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('ca-'.$key)), '>',
+                                        htmlspecialchars($tab['text']),
+                                        '</a></li>';
+                }
+              }?>
+                  </ul>
+               </li>
+               <li class="dropdown">
+               <a href="" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><?php $this->msg('toolbox') ?> <span class="caret"></span></a>
+                 <ul class="dropdown-menu pull-right">
                     <?php
                     if( $this->data['notspecialpage'] ) { ?>
                       <li id="t-whatlinkshere"><a href="<?php
@@ -256,7 +186,7 @@ class OffeneBibelTemplate extends QuickTemplate {
                       }
                     }
   
-                    if( !empty( $this->data['nav_urls']['print']['href'] ) ) { ?>
+                    if(false && !empty( $this->data['nav_urls']['print']['href'] ) ) { ?>
                       <li id="t-print"><a href="<?php echo htmlspecialchars($this->data['nav_urls']['print']['href'])
                       ?>"<?php echo Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('t-print')) ?>><?php $this->msg('printableversion') ?></a></li><?php
                     }
@@ -271,8 +201,90 @@ class OffeneBibelTemplate extends QuickTemplate {
                     wfRunHooks( 'MonoBookTemplateToolboxEnd', array( &$this ) );
                   ?>
                   </ul>
+               </li>
+            </ul>
+          </div> <!-- pBody -->
+        </div> <!-- p-cactions -->
+      </div> <!-- column-content -->
+      <div id="column-one">
+        <div id="one">
+          <script type="text/javascript">
+            if (navigator.cookieEnabled) {
+              document.write ('<div id="hide-sidebar" class="cactions" title="Seitenleiste ausblenden" style="position: absolute; margin:0; right: 0%; text-align: center; border: 1px solid #E4F0DE; border-right: none; border-top: none; vertical-align: middle; font-size: 125%; line-height: 1em; width: 1em;"><a href=\'javascript: document.getElementById ("column-content").id = "column-content-large"; document.getElementById ("show-sidebar").style.display = "inline"; document.getElementById ("column-one").style.display = "none"; void (document.cookie = "sidebar=false; path=/; domain=.offene-bibel.de");\'><span style="font-weight: bold;">«</span></a></div>');
+              if (document.cookie.indexOf ('sidebar=false') >= 0) {
+                document.getElementById ("column-content").id = "column-content-large";
+                document.getElementById ("show-sidebar").style.display = "inline";
+              }
+            }
+          </script>
+
+          <?php foreach ($this->data['sidebar'] as $bar => $cont) { ?>
+            <?php if ($bar == 'SEARCH') {?>
+              <div id="p-biblepassage" class="portlet">
+                <h5><label for="biblepassage">Bibelstelle aufschlagen</label></h5>
+                <div class="pBody">
+                  <form action="<?php echo $GLOBALS ['wgScriptPath']?>/index.php" method="get">
+                    <input type="hidden" name="title" value="Spezial:Bibelstelle" />
+                    <div style="display: table; width: 100%;"><span style="display: table-row;">
+                      <span style="display: table-cell; text-align: left; vertical-align: middle; width: 6em;"><input type="submit" value="Gehe zu:" style="width: 5em;" /></span>
+                      <span style="display: table-cell; vertical-align: middle;"><input type="text" name="abk" id="biblepassage" value="" style="width: 100%;" /></span>
+                    </span></div>
+                  </form>
                 </div> <!-- pBody -->
-              </div> <!-- p-tb -->
+              </div> <!-- p-biblepassage -->
+
+              <div id="p-search" class="portlet">
+                <h5><label for="suche">Volltextsuche</label></h5>
+                <div class="pBody">
+                  <form action="/suche.php" method="get">
+                    <div style="display: table; width: 100%;"><span style="display: table-row;">
+                      <span style="display: table-cell; text-align: left; vertical-align: middle; width: 6em;"><input type="submit" value="Suche:" style="width: 5em;" /></span>
+                      <span style="display: table-cell; vertical-align: middle;"><input id="suche" name="suche" type="text" style="width: 100%;" /></span>
+                    </span></div>
+                    <div style="display: table; width: 100%; margin: 0.3em 0 0 0;"><span style="display: table-row;">
+                      <label for="in" style="display: table-cell; vertical-align: middle;">in&nbsp;</label>
+                      <select id="in" name="in" style="display: table-cell; vertical-align: middle; width: 100%;">
+                        <option value="wiki">Übersetzungen/Kommentaren</option>
+                        <option value="diskussion">Diskussionsseiten</option>
+                        <option value="drupal">News, Blogs und Forum</option>
+                      </select>
+                    </span></div>
+                  </form>
+                </div> <!-- pBody -->
+              </div> <!-- p-search -->
+
+              <noscript>
+              <div class="portlet" id="p-personal">
+                <?php
+                if (isset ($this->data['personal_urls'] ['logout'])) { 
+                  echo '<h5>'.$this->data['personal_urls'] ['userpage'] ['text'].'</h5>';
+                  echo '<div class="pBody">';
+                  echo '<ul>';
+                  foreach ($this->data['personal_urls'] as $key => $item) {
+                    echo '<li id="'.Sanitizer::escapeId( "pt-$key" ).'"';
+                    if ($item ['active']) {
+                      echo ' class="active"';
+                    }
+                    echo '><a href="'.htmlspecialchars($item['href']).'"'.Xml::expandAttributes ($skin->tooltipAndAccesskeyAttribs('pt-'.$key));
+                    if (!empty ($item ['class'])) {
+                      echo ' class="'.htmlspecialchars($item ['class']).'"';
+                    }
+                    echo '>';
+                    if ($key=='userpage') {
+                      echo 'Eigene Benutzerseite';
+                    } else {
+                      echo htmlspecialchars($item['text']);
+                    }
+                    echo '</a></li>';
+                  }
+                  echo '</ul>';
+                  echo '</div> <!-- pBody -->';
+                } else {
+                  ?>
+                <?php } ?>
+              </div> <!-- p-personal -->
+              </noscript>
+            <?php } elseif ($bar == 'TOOLBOX') { ?>
             <?php } elseif ($bar == 'LANGUAGES') { ?>
               <?php if( $this->data['language_urls'] ) { ?>
                 <div id="p-lang" class="portlet">
@@ -287,7 +299,7 @@ class OffeneBibelTemplate extends QuickTemplate {
                   </div> <!-- pBody -->
                 </div> <!-- p-lang -->
               <?php } ?>
-            <?php } elseif ($bar !== 'Rubriken') { ?>
+            <?php } elseif ($bar !== 'TOOLBOX') { ?>
               <div class='portlet' id='p-<?php echo Sanitizer::escapeId( $bar ) ?>'<?php echo $skin->tooltip('p-'.$bar) ?>>
                 <h5><?php $out = wfMsg( $bar ); if( wfEmptyMsg( $bar, $out ) ) echo $bar; else echo $out; ?></h5>
                 <div class='pBody'>

@@ -6,6 +6,9 @@
 !extensions/
 extensions/*
 !extensions/OffeneBibel/
+!extensions/di/
+extensions/di/*
+!extensions/di/iwDrupalConfig.php_TEMPLATE
 
 !skins/
 skins/*
