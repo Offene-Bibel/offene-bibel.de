@@ -11,7 +11,8 @@ function getOfBiHeader() {
                     <span class="icon-bar"></span>
                 </button>
                 <a id="navbar-large-logo" class="navbar-brand" href="/startseite">
-                    <img id="header-image" src="/static/img/header.png"/>
+                    <img id="header-image" src="/static/img/header_small.png" class="hidden-sm"/>
+                    <img id="header-image-notext" src="/static/img/header_notext_small.png" class="hidden-xs hidden-lg hidden-md"/>
                 </a>
             </div>
             <div class="navbar-collapse collapse main-navbar-collapse">

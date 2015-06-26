@@ -40,7 +40,7 @@ div#forum table>tbody:before {
 }
 
 div#ofbi-startpage-jumbo {
-    background-image: url('/static/img/clouds_bright.png');
+    background-image: url('/static/img/clouds_bright_small.jpg');
     background-position: center center;
     background-size: cover;
     color: white;
