@@ -25,7 +25,7 @@ regions[page_bottom]    = 'Page bottom'
 ;; Stylesheets
 ;;;;;;;;;;;;;;;;;;;;;
 
-stylesheets[all][] = css/style.css
+; stylesheets[all][] = css/style.css
 
 
 ; For information on choosing the desired method, please read the Drupal
@@ -54,7 +54,7 @@ stylesheets[all][] = css/style.css
 ; scripts[] = 'bootstrap/js/transition.js'
 ;
 ; ; Disable BootstrapCDN if using Bootstrap source files in your sub-theme.
-; settings[bootstrap_cdn] = ''
+settings[bootstrap_cdn] = ''
 
 
 ; ;-------------------------

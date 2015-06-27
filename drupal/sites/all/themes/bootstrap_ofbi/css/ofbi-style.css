@@ -1,6 +1,3 @@
-@import url('/static/css/header_footer.css');
-@import url('/static/css/lib/bootstrap.css');
-
 body:not(.ofbi-full-width)>div#wrap>div.container>div.row>section
 {
     max-width: 750px;

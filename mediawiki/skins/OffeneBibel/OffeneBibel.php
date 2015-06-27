@@ -34,6 +34,7 @@ class SkinOffeneBibel extends SkinTemplate {
     // Append to the default screen common & print styles...
     $out->addStyle( '/static/css/lib/bootstrap.css', 'screen' );
     $out->addStyle( '/static/css/header_footer.css', 'screen' );
+    $out->addStyle( 'http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic&subset=latin,greek-ext,greek,latin-ext' );
     $out->addStyle( 'OffeneBibel/main.css', 'screen' );
   }
 }
