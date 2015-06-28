@@ -56,6 +56,11 @@ div#ofbi-startpage-jumbo a:not(.btn) {
     text-decoration:underline;
 }
 
+div#ofbi-startpage-jumbo a.btn-primary {
+    background-color: #428BCA;
+    border-color: #357EBD;
+}
+
 #ofbi-text-offene {
     /*color: #75bc5c;*/
     font-weight: bold;
