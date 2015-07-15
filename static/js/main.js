@@ -11,6 +11,7 @@ require([
 'bootstrap-hover-dropdown',
 'login_popover',
 'replacement',
-'chapter_navigator'
+'chapter_navigator',
+'beitrag_email'
 ], function () {});
 
