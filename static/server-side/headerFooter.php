@@ -67,7 +67,7 @@ function getOfBiHeader() {
         </ul>
 </li>
 <li class="dropdown">
-  <a href="" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Mitmachen/Feedback <span class="caret"></span></a>
+  <a href="" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Mitmachen<span class="visible-xs-inline visible-md-inline visible-lg-inline">/Feedback</span> <span class="caret"></span></a>
   <div class="dropdown-menu multi-column">
         <!-- there would normally be a row class on this div. But that added broken margin on the left and right. Leaving it of somehow doesn't break much... -->
                 <ul class="dropdown-menu col-md-6">
@@ -106,7 +106,7 @@ function getOfBiHeader() {
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
                       <li class="dropdown ofbi-nojs">
-                          <a href="/wiki/Spezial:Anmelden">Einloggen/Registrieren</a>
+                          <a href="/wiki/Spezial:Anmelden">Anmelden</a>
                       </li>
                       <li id="ofbi-auth-login-button" class="dropdown" data-container="body" data-hover="dropdown" data-toggle="popover" data-placement="bottom" style="display: none" data-html="true" data-content="
 <form role='form' accept-charset='UTF-8' id='ofbi-auth-login'>
@@ -119,18 +119,18 @@ function getOfBiHeader() {
         <input id='ofbi-login-password' class='form-control input-sm' type='password' name='pass' maxlength='60' size='15' placeholder='Passwort' required>
     </div>
     <div id='ofbi-login-error' class='form-group has-error hidden'>
-        <div class='help-block' >Benutzername oder Passwort falsch.</div>
+        <div class='help-block' >Benutzername oder Passwort falsch. Falls du dein Passwort zurückgesetzt hast, benutze bitte <a href='/wiki/Spezial:Anmelden'>dieses Anmeldeformular</a>.</div>
     </div>
     <button type='submit' name='op' class='btn btn-default'>Anmelden</button>
     <div class='item-list'>
         <ul>
           <li><a href='/wiki/Spezial:Anmelden?type=signup' title='Ein neues Benutzerkonto erstellen.'>Registrieren</a></li>
-          <li><a href='/wiki/Spezial:Anmelden' title='Ein neues Passwort per E-Mail anfordern.'>Neues Passwort anfordern</a></li>
+          <li><a href='/wiki/Spezial:Passwort_neu_vergeben' title='Ein neues Passwort per E-Mail anfordern.'>Neues Passwort anfordern</a></li>
         </ul>
     </div>
 </form>
 ">
-                          <a href='#'>Einloggen</a>
+                          <a href='#'>Anmelden</a>
                       </li>
                       <li id="ofbi-auth-logged-in-button" class="dropdown" style="display: none">
                           <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" href="#"><span id="ofbi-auth-logged-in-name"></span> <b class="caret"></b></a>
@@ -165,9 +165,9 @@ function getOfBiFooter() {
     <footer>
         <hr/>
         <small>
-            Der Inhalt ist verfügbar unter der Creative-Commons-Lizenz <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> bei Angabe von <a rel="cc:attributionURL" property="cc:attributionName" href="http://offene-bibel.de/">offene-bibel.de</a> als Quelle.
+            Der Inhalt ist verfügbar unter der Creative-Commons-Lizenz <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> bei Angabe von <a rel="cc:attributionURL" property="cc:attributionName" href="//offene-bibel.de/">offene-bibel.de</a> als Quelle.
             <br/>
-            <a href="http://www.offene-bibel.de/seiten/impressum">Impressum und Disclaimer</a>
+            <a href="/seiten/impressum">Impressum und Disclaimer</a>
         </small>
     </footer>
 </div><!-- container -->
