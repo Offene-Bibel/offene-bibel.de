@@ -628,7 +628,7 @@ class OfBi {
         }
     }
     $dbr = wfGetDB(DB_SLAVE);
-    $result = $dbr->select('ofbi_parse_errors', array('error_occurred', 'error_string'),
+    $result = $dbr->select('ofbi_parse_status', array('error_occurred', 'error_string'),
       array(
         'pageid=' . $parser->getTitle()->getArticleID(),
         'revid=' . $parser->getRevisionId()
@@ -694,13 +694,13 @@ EOT;
 
     $dbr = wfGetDB(DB_SLAVE);
     $res = $dbr->select(
-        array( 'page', 'revision', 'ofbi_parse_errors' ),
+        array( 'page', 'revision', 'ofbi_parse_status' ),
         array( 'page_id', 'error_string' ),
         array( 'error_occurred = 1' ),
         __METHOD__,
         array(),
         array( 'revision' => array( 'INNER JOIN', array( 'page_latest = rev_id' ) ),
-               'ofbi_parse_errors' => array( 'INNER JOIN', array( 'rev_id = revid' ) )
+               'ofbi_parse_status' => array( 'INNER JOIN', array( 'rev_id = revid' ) )
         )
     );
 
