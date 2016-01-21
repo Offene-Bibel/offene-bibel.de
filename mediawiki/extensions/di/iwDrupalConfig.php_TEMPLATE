@@ -15,13 +15,13 @@ if (!isset($iwParameters))
 //Installation parameters
 //Drupal config
 if (!array_key_exists('DrupalDBserver', $iwParameters))
-    $iwParameters['DrupalDBserver'] = "<&db_host&>:<&db_port&>";//<<&REPLACEMENT&>>    $iwParameters['DrupalDBserver'] = "<&db_host&>:<&db_port&>";
+    $iwParameters['DrupalDBserver'] = "<&db_host&>";
 if (!array_key_exists('DrupalDBuser', $iwParameters))
-    $iwParameters['DrupalDBuser'] = "<&db_user&>";//<<&REPLACEMENT&>>    $iwParameters['DrupalDBuser'] = "<&db_user&>";
+    $iwParameters['DrupalDBuser'] = "<&db_user&>";
 if (!array_key_exists('DrupalDBpassword', $iwParameters))
-    $iwParameters['DrupalDBpassword'] = "<&db_password&>";//<<&REPLACEMENT&>>    $iwParameters['DrupalDBpassword'] = "<&db_password&>";
+    $iwParameters['DrupalDBpassword'] = "<&db_password&>";
 if (!array_key_exists('DrupalDBname', $iwParameters))
-    $iwParameters['DrupalDBname'] = "<&db_db&>";//<<&REPLACEMENT&>>    $iwParameters['DrupalDBname'] = "<&db_db&>";
+    $iwParameters['DrupalDBname'] = "<&db_db&>";
 if (!array_key_exists('DrupalDBprefix', $iwParameters))
     $iwParameters['DrupalDBprefix'] = "bibeldrupal7_";
 if (!array_key_exists('iwDebug', $iwParameters))
@@ -37,4 +37,3 @@ from one place.
     $iwParameters['DrupalDBname'] = "drupal66";
     $iwParameters['DrupalDBprefix'] = "";
 */
-

@@ -22,7 +22,7 @@ if( defined( 'MW_INSTALL_PATH' ) ) {
 $path = array( "$IP", "$IP/includes", "$IP/languages" );
 set_include_path( implode( PATH_SEPARATOR, $path ) . PATH_SEPARATOR . get_include_path() );
 require_once( "$IP/includes/DefaultSettings.php" );
-require_once( "$IP/extensions/Collection/Collection.php" );
+// require_once( "$IP/extensions/Collection/Collection.php" );
 require_once( "$IP/extensions/ImageMap/ImageMap.php" );
 require_once( "$IP/extensions/Poem/Poem.php");
 require_once( "$IP/extensions/OffeneBibel/OffeneBibel.php" );
@@ -45,14 +45,14 @@ $ceAllowConfirmedEmail = true;
 require_once( "$IP/extensions/NewSignupPage/NewSignupPage.php" );
 #Piwik
 require_once('extensions/piwik/Piwik.php');
-$wgPiwikURL = "piwik.offene-bibel.de/";
+$wgPiwikURL = "piwik.<&domain&>/";
 //$wgGroupPermissions['user']['viewpiwik'] = true;
 //$wgPiwikSpecialPageDate = 'today';
 $wgPiwikIDSite = "1";
 
 //$wgSendToTwitterUsername      = 'OfBiWiki'; 
 //$wgSendToTwitterPassword      = ''; 
-//$wgSendToTwitterWikiURL       = 'http://www.offene-bibel.de/wiki/index.php5?title=';
+//$wgSendToTwitterWikiURL       = 'http://www.<&domain&>/wiki/index.php5?title=';
 //$wgSendToTwitterUseCheckBox   = true; 
 //$wgSendToTwitterChecked       = true;
 //require_once("$IP/extensions/SendToTwitter2/SendToTwitter2.php");
@@ -94,10 +94,10 @@ $wgEmailConfirmToEdit = true;
 
 ## Database settings
 $wgDBtype           = "mysql";
-$wgDBserver         = "<&db_host&>:<&db_port&>";//<<&REPLACEMENT&>>$wgDBserver         = "<&db_host&>:<&db_port&>";
-$wgDBname           = "<&db_db&>";//<<&REPLACEMENT&>>$wgDBname           = "<&db_db&>";
-$wgDBuser           = "<&db_user&>";//<<&REPLACEMENT&>>$wgDBuser           = "<&db_user&>";
-$wgDBpassword       = "<&db_password&>";//<<&REPLACEMENT&>>$wgDBpassword       = "<&db_password&>";
+$wgDBserver         = "<&db_host&>:<&db_port&>";
+$wgDBname           = "<&db_db&>";
+$wgDBuser           = "<&db_user&>";
+$wgDBpassword       = "<&db_password&>";
 
 # MySQL specific settings
 $wgDBprefix         = "bibelwiki";
@@ -187,7 +187,7 @@ $wgLocalInterwiki   = strtolower( $wgSitename );
 
 $wgLanguageCode = "de";
 
-$wgSecretKey = "<&mw_secret&>"; //<<&REPLACEMENT&>>$wgSecretKey = "<&mw_secret&>";
+$wgSecretKey = "<&mw_secret&>";
 
 ## Default skin: you can change the default skin. Use the internal symbolic
 ## names, ie 'standard', 'nostalgia', 'cologneblue', 'monobook':
