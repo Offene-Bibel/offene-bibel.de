@@ -232,16 +232,16 @@ class OfBi {
       list ($buchname, $kapitel) = OfBiAbk::buchnamekapitel ($titleObj->getText());
       if ($kapitel !== false) {
         $text = "{{Checkliste Studienfassung\n";
-        $text .= "|Alle Verse = \n";
+        $text .= "|Übersetzte Verse = \n";
+        $text .= "|Überprüfte Verse = \n";
         $text .= "|Alternativen = \n";
         $text .= "|Zweifelsfälle dokumentiert = \n";
-        $text .= "|Bedeutung erläutert = \n";
-        $text .= "|Textart = \n";
-        $text .= "|Andere Kriterien = \n";
-        $text .= "|Am Urtext überprüft = \n";
+        $text .= "|Studienfassung verstehbar = \n";
+        $text .= "|Anliegen dokumentiert = \n";
         $text .= "|Kommentare eingesehen = \n";
         $text .= "|Übersetzungsvergleich = \n";
-        $text .= "|Endkorrektur = \n";
+        $text .= "|Übrige Überprüfungen = \n";
+        $text .= "|Was fehlt = \n";
         $text .= "}}\n";
         $text .= "\n";
         $text .= "Hier dürfen Vorschläge, Rückfragen und andere Diskussionsbeiträge folgen:\n";

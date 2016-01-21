@@ -764,7 +764,53 @@ div.status {
     -moz-border-radius: 10px;
     -khtml-border-radius: 10px;
     font-size: 90%;
+    display: inline-block;
+    width: 100%;
     padding: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+div.status.sf {
+    border-color: #7C95AF;
+}
+
+div.status.achtung {
+    border-color: #CC0000;
+}
+
+.status.lf+.teilstatusliste>div.teilstatus {
+    border: 1px solid #ccc;
+    border-width: 0 0 1px 1px;
+    margin: 0 0 -1px 0;
+    flex: 1 0 auto;
+    max-width: 18em;
+    width: 13em;
+    padding: 0.5em;
+    display: inline-block;
+}
+
+.status.lf+.teilstatusliste>div {
+    flex: 0 0 auto;
+    float: left;
+}
+
+.status.lf+.teilstatusliste>div:last-child {
+    border: 1px solid #ccc;
+    border-width: 0 0 1px 1px;
+    margin: 0 0 -1px 0;
+    padding: .5em;
+}
+
+.status.lf+.teilstatusliste {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    font-size: 90%;
+    border: 1px solid #ccc;
+    border-width: 1px 1px 1px 0;
+}
+div.status .floatright, div.teilstatus .floatright {
+    padding:0 0 0 1.4em;
 }
 
 div.submitted {
@@ -790,6 +836,12 @@ padding: 0.3em 0.3em 0.3em 0.3em;
 .studienfassung, .lesefassung {
   margin: 0 0 0.5em 0;
   padding: 0;
+  display:inline-block;
+  width:100%;
+}
+
+.studienfassung+.navi {
+  margin-bottom: 2em;
 }
 
 .lesefassung .poem,
@@ -886,6 +938,7 @@ sup.versnummer {
 .kapitelwahl {
    float: right;
    display: table;
+   margin-bottom: 0.5em;
 }
 
 .ofbi-syntax-tag {
@@ -979,6 +1032,9 @@ sup.versnummer {
   border-spacing: 0;
   margin: 0.5em 2em 0 0;
 }
+.bemerkungen>:last-child{
+  margin-bottom: 2em;
+}
 
 .note_id {
   vertical-align: top;
@@ -1048,6 +1104,7 @@ sup.versnummer {
   text-decoration: none;
   border-bottom: 1px dotted #177BDE;   
 }
+
 /*** Fußnoten Ende ***/
 
   .muster {display : none; visibility : none;}
