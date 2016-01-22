@@ -15,3 +15,11 @@ sites/all/themes/*
 sites/default/*
 !sites/default/settings.php_TEMPLATE
 
+!sites/all
+sites/all/*
+!sites/all/modules
+sites/all/modules/*
+!sites/all/modules/mwi
+sites/all/modules/mwi/*
+!sites/all/modules/mwi/mwi.config_TEMPLATE
+

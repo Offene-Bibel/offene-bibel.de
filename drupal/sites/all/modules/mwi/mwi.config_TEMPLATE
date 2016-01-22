@@ -1,0 +1,24 @@
+<?php
+// Assign all MW settings here
+$GLOBALS['wgSitename'] = "Die Offene Bibel";
+$GLOBALS['wgCookiePrefix'] = "<&db_db&>_bibelwiki";//by default it is wiki DB name followed by "_" followed by DB prefix if set. If unsure look up how the cookies are named by listing the cookies when logged in to the wiki (in Firefox open the developer area and open the Storage tab).
+// Database settings should correspond to MediaWiki settings in LocalSettings.php
+// Wiki database type equals to $wgDBtype in LocalSettings.php
+$GLOBALS['wgDBtype'] = "mysql";
+// Wiki server equals to $wgDBserver in LocalSettings.php
+$GLOBALS['wgDBserver'] = "<&db_host&>:<&db_port&>";
+// Wiki database name equals to $wgDBname in LocalSettings.php
+$GLOBALS['wgDBname'] = "<&db_db&>";
+// Wiki database user name equals to $wgDBuser in LocalSettings.php
+$GLOBALS['wgDBuser'] = "<&db_user&>";
+// Wiki database user password equals to $wgDBpassword in LocalSettings.php
+$GLOBALS['wgDBpassword'] = "<&db_password&>";
+// Wiki database prefix equals to $wgDBprefix in LocalSettings.php
+$GLOBALS['wgDBprefix'] = "bibelwiki";
+// URL of the login page that will be used. MediaWiki login page was tested.
+$GLOBALS['wgPathToLogin'] = "http://<&domain&>/wiki/Spezial:Anmelden";
+// If false then anonymous user will be redirected to login page above
+// If true then anonymous user will be allowed to access Drupal
+$GLOBALS['wgAllowAnonymousBrowsingOfDrupal'] = true;
+// If true will output debug logging info into php log. Keep it false for production sites.
+$GLOBALS['iwDebug'] = false;

@@ -13,5 +13,5 @@ extensions/di/*
 !skins/
 skins/*
 !skins/OffeneBibel/
-
+skins/OffeneBibel/OffeneBibel.php
 
