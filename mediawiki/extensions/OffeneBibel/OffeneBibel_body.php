@@ -653,7 +653,7 @@ EOT;
     Syntax Broken
     </button>
     <!-- Modal -->
-    <div class="modal fade" id="syntaxErrorModal" tabindex="-1" role="dialog" aria-labelledby="syntaxErrorModalLabel" aria-hidden="true">
+    <div class="modal fade" id="syntaxErrorModal" tabindex="-1" data-backdrop="false" role="dialog" aria-labelledby="syntaxErrorModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">

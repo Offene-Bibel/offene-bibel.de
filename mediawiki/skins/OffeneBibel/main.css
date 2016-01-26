@@ -1113,3 +1113,9 @@ sup.versnummer {
   #inhalt li {display : block; margin : 0; padding : 0;}
   #inhalt a:link, #inhalt a:visited {text-decoration : none;}
 
+
+/*** Fix für Syntaxchecker Modal, damit der nicht unter der Navbar hängt. ***/
+.modal-dialog {
+    margin: 70px auto;
+}
+
