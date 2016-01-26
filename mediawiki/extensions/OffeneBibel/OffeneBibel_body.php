@@ -708,8 +708,8 @@ EOT;
 <table class='table table-striped'>
     <thead>
         <tr>
-            <th>Page</th>
-            <th>Error</th>
+            <th>Seite</th>
+            <th>Fehler</th>
         </tr>
     </thead>
 EOB;
