@@ -717,10 +717,11 @@ EOB;
         $title = Title::newFromID($row->page_id);
         $url = $title->getFullURL();
         $name = $title->getFullText();
+        $error_text = nl2br( htmlspecialchars( $row->error_string ));
         $result_html .= <<<EOC
     <tr>
         <th scope='row'><a href='$url'>$name</a></th>
-        <td>{$row->error_string}</td>
+        <td>$error_text</td>
     </tr>
 
 EOC;
