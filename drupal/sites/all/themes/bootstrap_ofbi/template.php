@@ -4,7 +4,7 @@
  * @file
  * template.php
  */
-drupal_add_css('/static/css/lib/bootstrap.css', array('group' => CSS_THEME, 'type' => 'external'));
+drupal_add_css('/static/css/bootstrap.css', array('group' => CSS_THEME, 'type' => 'external'));
 drupal_add_css(drupal_get_path('theme', 'bootstrap_ofbi') . '/css/overrides.css', array('group' => CSS_THEME, 'type' => 'file'));
 
 drupal_add_css('/static/css/header_footer.css', array('group' => CSS_THEME, 'type' => 'external'));
