@@ -653,7 +653,7 @@ EOT;
             $page_errors_translation = wfMessage( 'ofbi-page-errors' )->plain();
             $parser_errors_1_translation = wfMessage( 'ofbi-parser-errors-1' )->plain();
             $parser_errors_2_translation = wfMessage( 'ofbi-parser-errors-2' )->plain();
-            $parse_errors_close_translation = wfMessage( 'ofbi-parser-errors-close ' )->plain();
+            $parser_errors_close_translation = wfMessage( 'ofbi-parser-errors-close' )->plain();
           $result_html = <<<EOT
     <button type="button" class="btn btn-xs btn-danger ofbi-syntax-tag" data-toggle="modal" data-target="#syntaxErrorModal">
     {$syntax_broken_translation}
