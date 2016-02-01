@@ -635,12 +635,13 @@ class OfBi {
       )
     );
     if($result->numRows() > 1) {
-      return 'Datenbankfehler, ' . $result->numRows() . ' Eintraege fuer diese Seite gefunden, 0 oder 1 erwartet. PageID: ' . $parser->getTitle()->getArticleID() . ' RevID: ' . $parser->getRevisionId();
+      return 'Database error, ' . $result->numRows() . ' entries found for this page. 0 or 1 expected. PageID: ' . $parser->getTitle()->getArticleID() . ' RevID: ' . $parser->getRevisionId();
     }
     else if($result->numRows() == 0) {
+      $syntax_unchecked_translation = wfMessage( 'ofbi-syntax-unchecked' )->plain();
       $result_html = <<<EOT
 <span class="label label-warning ofbi-syntax-tag">
-  Syntax unchecked
+  {$syntax_unchecked_translation}
 </span>
 EOT;
       #return 'Noch kein Ergebnis verfuegbar. PageID: ' . $parser->getTitle()->getArticleID() . ' RevID: ' . $parser->getRevisionId();
@@ -648,9 +649,14 @@ EOT;
     else {
         $row = $result->fetchRow();
         if($row['error_occurred']) {
+            $syntax_broken_translation = wfMessage( 'ofbi-syntax-broken' )->plain();
+            $page_errors_translation = wfMessage( 'ofbi-page-errors' )->plain();
+            $parser_errors_1_translation = wfMessage( 'ofbi-parser-errors-1' )->plain();
+            $parser_errors_2_translation = wfMessage( 'ofbi-parser-errors-2' )->plain();
+            $parse_errors_close_translation = wfMessage( 'ofbi-parser-errors-close ' )->plain();
           $result_html = <<<EOT
     <button type="button" class="btn btn-xs btn-danger ofbi-syntax-tag" data-toggle="modal" data-target="#syntaxErrorModal">
-    Syntax Broken
+    {$syntax_broken_translation}
     </button>
     <!-- Modal -->
     <div class="modal fade" id="syntaxErrorModal" tabindex="-1" data-backdrop="false" role="dialog" aria-labelledby="syntaxErrorModalLabel" aria-hidden="true">
@@ -658,15 +664,15 @@ EOT;
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="syntaxErrorModalLabel">Diese Seite enthält einen oder mehrere Syntaxfehler</h4>
+            <h4 class="modal-title" id="syntaxErrorModalLabel">{$page_errors_translation}</h4>
           </div>
           <div class="modal-body">
-            Unser Parser hat diese Seite auf Syntaxfehler geprüft und folgendes ausgegeben:</br>
+            {$parser_errors_1_translation}</br>
             <pre>{$row['error_string']}</pre>
-      So lange die Fehler nicht behoben sind wird diese Seite nicht in unseren generierten Modulen auftauchen.
+            {$parser_errors_2_translation}</br>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">{$parser_errors_close_translation}</button>
           </div>
         </div>
       </div>
@@ -675,9 +681,10 @@ EOT;
           #return 'Fehler vorhanden:\n' . $row['error_string'] . 'PageID: ' . $parser->getTitle()->getArticleID() . ' RevID: ' . $parser->getRevisionId();
         }
         else {
+          $syntax_ok_translation = wfMessage( 'ofbi-syntax-ok' )->plain();
           $result_html = <<<EOT
     <span class="label label-success ofbi-syntax-tag">
-    Syntax OK <span class="glyphicon glyphicon-ok"></span>
+    {$syntax_ok_translation} <span class="glyphicon glyphicon-ok"></span>
     </span>
 EOT;
           #return 'Keine Fehler.' . 'PageID: ' . $parser->getTitle()->getArticleID() . ' RevID: ' . $parser->getRevisionId();
@@ -704,12 +711,14 @@ EOT;
         )
     );
 
+    $parser_error_table_page_translation = wfMessage( 'ofbi-parser-error-table-page' )->plain();
+    $parser_error_table_error_translation = wfMessage( 'ofbi-parser-error-table-error' )->plain();
     $result_html = <<<EOB
 <table class='table table-striped'>
     <thead>
         <tr>
-            <th>Seite</th>
-            <th>Fehler</th>
+            <th>{$parser_error_table_page_translation}</th>
+            <th>{$parser_error_table_error_translation}</th>
         </tr>
     </thead>
 EOB;

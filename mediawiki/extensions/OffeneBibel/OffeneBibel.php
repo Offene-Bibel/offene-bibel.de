@@ -12,6 +12,7 @@ $wgExtensionCredits ['parserhook'][] = array (
   'description' => 'Customisation for offene-bibel.de',
 );
 
+
 $wgHooks ['ParserFirstCallInit'][] = 'ofbiSetup';
 $wgHooks ['LanguageGetMagic'][]    = 'ofbiLanguageGetMagic';
 $wgHooks ['BeforePageDisplay'][]   = 'addLicencing';
@@ -21,6 +22,8 @@ $wgAutoloadClasses ['Bibelstelle'] = dirname ( __FILE__ ) . "/OffeneBibel_Bibels
 $wgSpecialPages ['Bibelstelle'] = 'Bibelstelle';
 $wgExtensionMessagesFiles ['Bibelstelle'] = dirname ( __FILE__ ) . '/OffeneBibel_Bibelstelle.i18n.php';
 $wgExtensionAliasesFiles ['Bibelstelle'] = dirname ( __FILE__ ) . '/OffeneBibel_Bibelstelle.alias.php';
+
+$wgMessagesDirs ['OffeneBibel'] = __DIR__ . "/i18n";
 
 function ofbiSetup (&$parser) {
   new OfBi;

@@ -1,0 +1,16 @@
+{                                                                                                   
+    "@metadata": {                                                                                  
+        "authors": [                                                                                
+            "Patrick Zimmermann"                                                                         
+        ]                                                                                           
+    },                                                                                              
+    "ofbi-syntax-ok": "Syntax OK",
+    "ofbi-syntax-broken": "Syntax broken",
+    "ofbi-syntax-unchecked": "Syntax unchecked",
+    "ofbi-page-errors": "This page contains one or more syntax errors",
+    "ofbi-parser-errors-1": "Our parser has checked this page for errors and printed the following:",
+    "ofbi-parser-errors-2": "As long as these errors are not resolved this page will not be contained in our generated modules.",
+    "ofbi-parser-errors-close": "Close",
+    "ofbi-parser-error-table-page": "Page",
+    "ofbi-parser-error-table-error": "Error"
+}
