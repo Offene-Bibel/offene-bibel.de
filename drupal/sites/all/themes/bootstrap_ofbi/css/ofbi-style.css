@@ -61,6 +61,14 @@ div#ofbi-startpage-jumbo a.btn-primary {
     border-color: #357EBD;
 }
 
+#ofbi-oer-badge {
+    position: absolute;
+    top: -50px;
+    right: -70px;
+    width: 220px;
+    transform: rotateZ(12deg);
+}
+
 #ofbi-text-offene {
     /*color: #75bc5c;*/
     font-weight: bold;
@@ -69,5 +77,4 @@ div#ofbi-startpage-jumbo a.btn-primary {
     /*color: #399bff;*/
     font-weight: bold;
 }
-
 
