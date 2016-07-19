@@ -77,7 +77,7 @@ class OfBi {
     $replace = array (
       'Tag' => array (),
       'Normal' => array (),
-      'Headline' => array ('Lesefassung'=>'', ),
+      'Headline' => array ('Lesefassung'=>'', 'LeichteSprache'=>'', ),
       'JHWH' => array ('Lesefassung'=>'', ),
       'OpeningRound' => array (
         'Studienfassung'=>'<span class="runde-klammer">(</span><span class="runde-klammer-inhalt">',
@@ -116,6 +116,8 @@ class OfBi {
       if ($mode == 'Start') {
         if (mb_strpos ($match ['Tag'], 'id="Lesefassung"') !== false) {
           $mode = 'Lesefassung';
+        } elseif (mb_strpos ($match ['Tag'], 'id="LeichteSprache"') !== false) {
+          $mode = 'LeichteSprache';
         }
       } elseif ($mode == 'Lesefassung') {
         if (mb_strpos ($match ['Tag'], 'id="Studienfassung"') !== false) {
@@ -174,7 +176,11 @@ class OfBi {
                 $text .= $match ['JHWH'];
               }
             } elseif ($key == 'Headline') {
-              $text .= '<h5 class="zwischenueberschrift">(' . $match ['Headline1'] . ')</h5>';
+              if ($mode === 'LeichteSprache') {
+                $text .= '<h5 class="zwischenueberschrift">' . $match ['Headline1'] . '</h5>';
+              } else {
+                $text .= '<h5 class="zwischenueberschrift">(' . $match ['Headline1'] . ')</h5>';
+              }
             } else {
               $text .= $values [$mode];
             }
@@ -365,7 +371,7 @@ class OfBi {
   function hook_poem ($input, $args, $parser, $frame) {
     if (! $this->in_poem) {
       $this->in_poem = true;
-      $text = $parser->recursiveTagParse ('<p class="poem">' . trim ($input) . '</p>', $frame);
+      $text = $parser->recursiveTagParse ('<p class="poem"><span>' . trim ($input) . "</span></p>", $frame);
       $this->in_poem = false;
 
       $offset = 0;
@@ -387,10 +393,11 @@ class OfBi {
     $text = preg_replace ("#(\n|\r|\r\n)#u", "<br />\r\n", $text);
     $text = preg_replace ('#(<br[\pZ\n\r]*+/?>)+#u', '<br />', $text);
     $text = preg_replace ("#\r\n<br />#u", "\r\n", $text);
-    $text = preg_replace ("#\r\n____([^\r\n]*)#u", "\r\n<span class='poem5'>\\1</span>", $text);
-    $text = preg_replace ("#\r\n___([^\r\n]*)#u", "\r\n<span class='poem4'>\\1</span>", $text);
-    $text = preg_replace ("#\r\n__([^\r\n]*)#u", "\r\n<span class='poem3'>\\1</span>", $text);
-    $text = preg_replace ("#\r\n_([^\r\n]*)#u", "\r\n<span class='poem2'>\\1</span>", $text);
+    $text = preg_replace ("#\r\n#u", "</span>\r\n<span class='poem1'>", $text);
+    $text = preg_replace ("#<span class='poem1'>____#u", "<span class='poem5'>", $text);
+    $text = preg_replace ("#<span class='poem1'>___#u", "<span class='poem4'>", $text);
+    $text = preg_replace ("#<span class='poem1'>__#u", "<span class='poem3'>", $text);
+    $text = preg_replace ("#<span class='poem1'>_#u", "<span class='poem2'>", $text);
     return $text;
   }
 
