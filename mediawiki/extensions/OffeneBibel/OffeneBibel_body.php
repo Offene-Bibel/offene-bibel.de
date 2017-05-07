@@ -59,7 +59,7 @@ class OfBi {
     $patterns = array (
       '(?<Tag>(<' . self::tag_content . '>)++)',
       '(?<Normal>[^<>(){}[\]]++)',
-      '(?<Headline>\(\((?<Headline1>[^)]++)\)\))',
+      '(?<Headline>\(\((?<Headline1>([^)]|\)[^)])++)\)\))',
       # This is the name-of-god replacement regex. It looks as follows:
       # (/PART1/PART2/PART3/)
       # PART1 is the default word to display, e.g. "|Gott|". It is optional.
@@ -495,7 +495,7 @@ class OfBi {
       $text .= '<div class="kapitelwahl">';
 
       $text .= '<form>';
-      $text .= '<input type="submit" id="submitbutton1" value="Geh zu" class="zelle" /> ';
+      $text .= '<input type="submit" class="submitbutton1" value="Geh zu" class="zelle" /> ';
       $text .= '<label for="ofbi-nav-book" class="zelle">&nbsp;Buch:&nbsp;</label>';
       $text .= '<span class="zelle">';
       $text .= '<select name="title" id="ofbi-nav-book">';
@@ -511,7 +511,7 @@ class OfBi {
 
       if (OfBiAbk::erstes_kapitel ($args ['name']) !== false) {
         $text .= '<form>';
-        $text .= '<input type="submit" id="submitbutton2" value="Geh zu" onload="" class="zelle" /> ';
+        $text .= '<input type="submit" class="submitbutton2" value="Geh zu" onload="" class="zelle" /> ';
         $text .= '<label for="ofbi-nav-chapter" class="zelle">&nbsp;Kapitel:&nbsp;</label>';
         $text .= '<span class="zelle">';
         $text .= '<select name="title" id="ofbi-nav-chapter">';
@@ -559,9 +559,9 @@ class OfBi {
       }
 
       $text .= '<script type="text/javascript"> ';
-      $text .= 'document.getElementById ("submitbutton1").style.display = "none"; ';
+      $text .= '[].forEach.call(document.querySelectorAll(".submitbutton1"), function(elem){elem.style.display = "none"}); ';
       if (OfBiAbk::erstes_kapitel ($args ['name']) !== false) {
-        $text .= 'document.getElementById ("submitbutton2").style.display = "none"; ';
+        $text .= '[].forEach.call(document.querySelectorAll(".submitbutton2"), function(elem){elem.style.display = "none"}); ';
       }
       $text .= '</script>';
 

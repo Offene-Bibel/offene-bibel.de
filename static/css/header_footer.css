@@ -11,7 +11,7 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    min-width: 45em;
+/*     min-width: 45em; */
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -110,12 +110,18 @@ h6 { font-size: 110%; }
     height: 42px;
 }
 
-.dropdown-menu > li > b {
+.ofbi-dropdown-menu > li > b {
     padding: 3px 20px;
 }
 
-.dropdown-menu > li > a {
+.ofbi-dropdown-menu > li > a, .ofbi-dropdown-menu > li > form {
     padding: 3px 40px;
+}
+.ofbi-dropdown-menu > li > table {
+    margin: 3px 40px;
+}
+.ofbi-dropdown-menu > li > form {
+    min-width: 15em; 
 }
 
 .btn-primary {
@@ -129,30 +135,24 @@ h6 { font-size: 110%; }
     border-color: #539a3a;
 }
 
-/* Fixed header */
-    html, body {
-        /* The html and body elements cannot have any padding or margin. */
-        padding-top: 40px;
+    html, body, #wrap {
+        width: 100%;
         height: 100%;
     }
-
-/* Wrapper for page content to push down footer */
+    
     #wrap {
-        min-height: 100%;
-        height: auto !important;
-        height: 100%;
-    /* Negative indent by footer + header height */
-        margin: 0 auto -120px;
-    /* Pad bottom by footer + header height */
-        padding: 0 0 120px;
+        display: flex;
+        flex-direction: column;
     }
-/* Set the fixed height of the footer here */
-    footer {
-        height: 80px;
+    
+    main {
+        position: relative;
+        flex: 1 1 auto;
+        overflow: auto;
     }
 
 /* Fixes for the options menu. Buttons in dropdowns don't work, since environment is position:absolute'd, so they always wrap. */
-    .dropdown-menu>li>div {
+    .ofbi-dropdown-menu>li>div {
         padding: 3px 20px;
         white-space: nowrap;
     }
@@ -162,32 +162,29 @@ h6 { font-size: 110%; }
     }
 
 /* Tuning to allow bigger logo in header menu */
-    #navbar-large-logo {
+    #ofbi-navbar-large-logo {
         padding-top:10px;
         padding-bottom:0px;
     }
 
-/* Bigger text in navbars */
-    .navbar-default .navbar-nav > li > a {
-        font-size: 130%;
-        color: #69A54F;
-    }
-
 /* No hover underline in header */
-    .navbar-default .navbar a:hover {
+    .ofbi-navbar .ofbi-navbar a:hover {
         border-bottom: none;
     }
 
-    .navbar-brand {
+    .ofbi-navbar-brand {
         font-size: 200%;
     }
 
 /* Fixes required for the two multi column dropdown menus in the header. */
-    .dropdown-menu.multi-column {
-        width: 400px;
+    .ofbi-dropdown-menu.multi-column {
+        min-width: 400px;
+    }
+    [data-toggled='true'] .ofbi-dropdown-menu.multi-column {
+        min-width: 0;
     }
 
-    .dropdown-menu.multi-column .dropdown-menu {
+    .ofbi-dropdown-menu.multi-column .ofbi-dropdown-menu {
         display: block !important;
         position: static !important;
         margin: 0 !important;
@@ -195,3 +192,139 @@ h6 { font-size: 110%; }
         box-shadow: none !important;
     }
 
+    .ofbi-navbar .ofbi-dropdown-toggle, #ofbi-navbar-toggle {
+        line-height: 20px;
+        padding: 15px;
+        font-size: 130%;
+        color: #69A54F;
+    }
+
+    .ofbi-dropdown-toggle, #ofbi-navbar-toggle {
+        display: block;
+        position: relative;
+    }
+    
+    #ofbi-navbar-toggle {
+        display: inline-block;
+        border: 1px solid #ddd;
+        padding: 11px 3px;
+        margin: 3px 11px;
+    }
+    
+/* CSS replacements for bootstrap functionality */
+
+     .ofbi-dropdown {
+         position: relative;
+     }
+     
+     .ofbi-dropdown:hover>.ofbi-dropdown-menu, [data-hasfocus]>.ofbi-dropdown-menu,
+     [data-toggled='true'] .ofbi-dropdown, [data-toggled='true'] .ofbi-dropdown-menu, [data-toggled='true'] #ofbi-navbar-toggle-container {
+         display: block !important;
+         visibility: visible !important;
+     }
+     [data-toggled='true'] .ofbi-dropdown, [data-toggled='true'] .ofbi-dropdown-menu, [data-toggled='true'] #ofbi-navbar-toggle-container {
+        position: static;
+        float: none !important;
+     }
+
+    .ofbi-dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+/*         min-width: 160px; */
+        margin: 0;
+        padding: 5px 0;
+        font-size: 14px;
+        text-align: left;
+        list-style: none;
+        background-color: #fff;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid #ccc;
+        border: 1px solid rgba(0,0,0,.15);
+        border-radius: 0 0 4px 4px;
+        -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    }
+    .ofbi-dropdown-right>.ofbi-dropdown-menu {
+        left: auto;
+        right: 0;
+    }
+    .ofbi-navbar .ofbi-dropdown-right:last-child>.ofbi-dropdown-menu {
+        margin-top: -2px;
+        max-width: 100%;
+    }
+    
+    .ofbi-dropdown-menu > li > a {
+        display: block;
+        clear: both;
+        font-weight: 400;
+        line-height: 1.42857143;
+        color: #333;
+        white-space: nowrap;
+    }
+    
+    :hover>.ofbi-dropdown-toggle, ul li.ofbi-dropdown a:hover, ul li.ofbi-dropdown a:focus, [data-hasfocus]>.ofbi-dropdown-toggle, [data-toggled='true'] #ofbi-navbar-toggle, :hover>#ofbi-navbar-toggle {
+        color: #000;
+        background-color: #e7e7e7;
+        border-bottom: 0;
+    }
+
+    .ofbi-nav > .ofbi-dropdown-right {
+        float: right;
+    }
+    .ofbi-nav > .ofbi-dropdown-right:last-child {
+        position: static;
+    }
+    #ofbi-navbar-logo-container {
+        float: left !important;
+    }
+    #ofbi-navbar-toggle-container {
+        float: right !important;
+        text-align: right;
+    }
+    [data-toggled='true'] #ofbi-navbar-toggle-container::after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+    .ofbi-nav {
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+        position: relative;
+    }
+    .ofbi-nav::after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+    .ofbi-navbar {
+        background-color: #f8f8f8;
+        border: 1px solid #e7e7e7;
+        border-width: 0 0 1px;
+        border-radius: 4px;
+    }
+    .ofbi-nav > li {
+        float: left;
+        position: relative;
+        display: block;
+    }
+    .ofbi-navbar-header {
+        float: left;
+    }
+    .ofbi-navbar-brand {
+        font-size: 200%;
+        display: inline-block;
+        height: 50px;
+        padding: 15px 15px;
+        font-size: 18px;
+        line-height: 20px;
+    }
+    .ofbi-dropdown-menu .divider {
+        height: 1px;
+        margin: 9px 0;
+        overflow: hidden;
+        background-color: #e5e5e5;
+    }

@@ -17,7 +17,7 @@ if (!isset($iwParameters))
 if (!array_key_exists('DrupalDBserver', $iwParameters))
     $iwParameters['DrupalDBserver'] = "<&db_host&>";
 if (!array_key_exists('DrupalDBuser', $iwParameters))
-    $iwParameters['DrupalDBuser'] = "<&db_user&>";
+    $iwParameters['DrupalDBuser'] = "<&db_db&>";
 if (!array_key_exists('DrupalDBpassword', $iwParameters))
     $iwParameters['DrupalDBpassword'] = "<&db_password&>";
 if (!array_key_exists('DrupalDBname', $iwParameters))

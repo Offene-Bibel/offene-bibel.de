@@ -69,7 +69,7 @@
  *   'username' => 'username',
  *   'password' => 'password',
  *   'host' => 'localhost',
- *   'port' => 3306,
+ *   'port' => <&db_port&>,
  *   'prefix' => 'myprefix_',
  *   'collation' => 'utf8_general_ci',
  * );
@@ -217,7 +217,7 @@ $databases = array (
     array(
       'driver' => 'mysql',
       'database' => '<&db_db&>',
-      'username' => '<&db_user&>',
+      'username' => '<&db_db&>',
       'password' => '<&db_password&>',
       'host' => '<&db_host&>',
       'port' => <&db_port&>,

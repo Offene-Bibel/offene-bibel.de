@@ -10,7 +10,7 @@ $GLOBALS['wgDBserver'] = "<&db_host&>:<&db_port&>";
 // Wiki database name equals to $wgDBname in LocalSettings.php
 $GLOBALS['wgDBname'] = "<&db_db&>";
 // Wiki database user name equals to $wgDBuser in LocalSettings.php
-$GLOBALS['wgDBuser'] = "<&db_user&>";
+$GLOBALS['wgDBuser'] = "<&db_db&>";
 // Wiki database user password equals to $wgDBpassword in LocalSettings.php
 $GLOBALS['wgDBpassword'] = "<&db_password&>";
 // Wiki database prefix equals to $wgDBprefix in LocalSettings.php

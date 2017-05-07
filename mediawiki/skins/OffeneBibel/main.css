@@ -28,7 +28,7 @@
 }
 
 #column-content-large {
-    position: absolute;
+/*     position: absolute; */
     overflow: visible;
     top: 0;
     right: 0px;
@@ -39,11 +39,11 @@
 }
 
 #column-content {
-    position: absolute;
+/*     position: absolute; */
     overflow: visible;
     top: 0;
     right: 0px;
-    width: 76.5%;
+/*     width: 76.5%; */
     z-index: 2;
     padding: 1em 0 2em 0;
     background-color: #FFFFFF;
@@ -54,7 +54,7 @@
 }
 
 #column-one {
-    position: absolute;
+/*     position: absolute; */
     top: 0;
     overflow: hidden;
     margin: 0 0 0 0;
@@ -694,8 +694,12 @@ div.gallerytext {
 }
 
 #p-cactions li, .cactions li {
-    display: inline;
+    display: inline-block;
     border: none;
+}
+
+#p-cactions li li, .cactions li li {
+    display: block;
 }
 
 #p-cactions li.selected, .cactions li.selected {
