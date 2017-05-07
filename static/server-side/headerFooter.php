@@ -7,8 +7,8 @@ function getOfBiHeader() {
             <ul class="ofbi-nav">
                 <li id="ofbi-navbar-logo-container" class="ofbi-dropdown">
                     <a id="ofbi-navbar-large-logo" class="ofbi-navbar-brand" href="/startseite">
-                        <img id="header-image" src="/static/img/header_small.png" class="hidden-sm"/>
-                        <img id="header-image-notext" src="/static/img/header_notext_small.png" class="hidden-xs hidden-lg hidden-md"/>
+                        <img id="header-image" src="/static/img/header_small.png" class="hidden-sm hidden-xs"/>
+                        <img id="header-image-notext" src="/static/img/header_notext_small.png" class="hidden-lg hidden-md"/>
                     </a>
                 </li>
                 <li class="ofbi-dropdown ofbi-dropdown-right hidden" id="ofbi-navbar-toggle-container">

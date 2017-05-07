@@ -78,3 +78,10 @@ div#ofbi-startpage-jumbo a.btn-primary {
     font-weight: bold;
 }
 
+/* We use our own nav bar.
+ * Kill some offset, the Bootstrap navbar required.
+ */
+body.navbar-is-fixed-top {
+    padding-top: 0px !important;
+}
+
