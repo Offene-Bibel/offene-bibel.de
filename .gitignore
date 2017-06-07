@@ -1,3 +1,4 @@
 *.swp
 .directory
+run-validator.php
 
