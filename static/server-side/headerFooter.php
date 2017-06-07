@@ -71,7 +71,7 @@ function getOfBiHeader() {
                     </div>
                 </li>
                 <li id="ofbi-menu-login" class="ofbi-dropdown ofbi-dropdown-right" data-hidden-xs="1">
-                    <div id="ofbi-auth-logged-in-name" class="ofbi-dropdown-toggle" tabindex="0">Anmelden<span class="caret"></span></div>
+                    <div id="ofbi-auth-logged-in-name" class="ofbi-dropdown-toggle" tabindex="0">Anmelden <span class="caret"></span></div>
                     <ul class="ofbi-dropdown-menu hidden">
                         <li data-logged-in=""><a href='/wiki/Spezial:Anmelden?type=signup' title='Ein neues Benutzerkonto erstellen.'>Neu registrieren</a></li>
                         <li data-logged-out="" data-logged-in="">
@@ -106,7 +106,7 @@ function getOfBiHeader() {
                     </ul>
                 </li>
                 <li class="ofbi-dropdown ofbi-dropdown-right">
-                    <div class="ofbi-dropdown-toggle" tabindex="0">Suche<span class="caret"></span></div>
+                    <div class="ofbi-dropdown-toggle" tabindex="0">Suche <span class="caret"></span></div>
                     <ul class="ofbi-dropdown-menu hidden">
                         <li>
                             <form action="/suche.php" method="get">

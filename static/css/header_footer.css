@@ -149,6 +149,7 @@ h6 { font-size: 110%; }
         position: relative;
         flex: 1 1 auto;
         overflow: auto;
+        padding-top: 3em;
     }
 
 /* Fixes for the options menu. Buttons in dropdowns don't work, since environment is position:absolute'd, so they always wrap. */
@@ -194,7 +195,7 @@ h6 { font-size: 110%; }
 
     .ofbi-navbar .ofbi-dropdown-toggle, #ofbi-navbar-toggle {
         line-height: 20px;
-        padding: 15px;
+        padding: 15px 8px;
         font-size: 130%;
         color: #69A54F;
     }
@@ -327,4 +328,12 @@ h6 { font-size: 110%; }
         margin: 9px 0;
         overflow: hidden;
         background-color: #e5e5e5;
+    }
+
+    #ofbi-auth-logged-in-name {
+        position: relative;
+        max-width: 7em;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
