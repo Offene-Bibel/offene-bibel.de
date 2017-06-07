@@ -22,29 +22,29 @@ if( defined( 'MW_INSTALL_PATH' ) ) {
 $path = array( "$IP", "$IP/includes", "$IP/languages" );
 set_include_path( implode( PATH_SEPARATOR, $path ) . PATH_SEPARATOR . get_include_path() );
 require_once( "$IP/includes/DefaultSettings.php" );
-// require_once( "$IP/extensions/Collection/Collection.php" );
-require_once( "$IP/extensions/ImageMap/ImageMap.php" );
-require_once( "$IP/extensions/Poem/Poem.php");
-require_once( "$IP/extensions/OffeneBibel/OffeneBibel.php" );
-require_once( "$IP/extensions/ParserFunctions/ParserFunctions.php" );
+wfLoadExtension( 'ImageMap' );
+wfLoadExtension( 'Poem' );
+require_once("$IP/extensions/OffeneBibel/OffeneBibel.php");
+wfLoadExtension( 'ParserFunctions' );
 $wgPFEnableStringFunctions = true;
-require_once( "$IP/extensions/Variables/Variables.php" );
-require_once( "$IP/extensions/Loops/Loops.php" );
+require_once("$IP/extensions/Variables/Variables.php");
+require_once("$IP/extensions/Loops/Loops.php");
 ExtLoops::$maxLoops = 1080;
-require_once( "$IP/extensions/CategoryTests/CategoryTests.php" );
-require_once( "$IP/extensions/MagicNoCache/MagicNoCache.php" );
-require_once( "$IP/extensions/Gadgets/Gadgets.php" );
-require_once( "$IP/extensions/ConfirmEdit/ConfirmEdit.php" );
-require_once( "$IP/extensions/ConfirmEdit/QuestyCaptcha.php" );
-$wgCaptchaQuestions[] = array( 'question' => "Wie heißt dieses Projekt?", 'answer' => "Offene Bibel");
-$wgCaptchaQuestions[] = array( 'question' => 'Welchen Tag im Monat haben wir jetzt gerade laut <a href="http://google.de/search?q=gmt+time">Greenwich Mean Time</a> (GMT)? Bitte als Zahl ohne führende Null. ', 'answer' => date('j') );
-$wgCaptchaQuestions[] = array( 'question' => 'Welche Farbe hat das Wort "Bibel" in unserem Logo?', 'answer' => array( 'blau', 'Blau' ) );
-$wgCaptchaQuestions[] = array( 'question' => 'Welche Farbe hat das Wort "Offene" in unserem Logo?', 'answer' => array( 'grün', 'Grün', 'gruen', 'Gruen' ) );
+require_once("$IP/extensions/CategoryTests/CategoryTests.php");
+require_once("$IP/extensions/MagicNoCache/MagicNoCache.php");
+wfLoadExtension( 'Gadgets' );
+wfLoadExtensions( array( 'ConfirmEdit', 'ConfirmEdit/QuestyCaptcha' ) );
+$wgCaptchaQuestions[] = array(
+    'Wie heißt dieses Projekt?' => 'Offene Bibel',
+    'Welchen Tag im Monat haben wir jetzt gerade laut <a href="http://google.de/search?q=gmt+time">Greenwich Mean Time</a> (GMT)? Bitte als Zahl ohne führende Null.' => date('j'),
+    'Welche Farbe hat das Wort "Bibel" in unserem Logo?' => array( 'blau', 'Blau' ),
+    'Welche Farbe hat das Wort "Offene" in unserem Logo?' => array( 'grün', 'Grün', 'gruen', 'Gruen' ),
+);
 $wgGroupPermissions['emailconfirmed']['skipcaptcha'] = true;
 $ceAllowConfirmedEmail = true;
-require_once( "$IP/extensions/NewSignupPage/NewSignupPage.php" );
+wfLoadExtension( 'NewSignupPage' );
 #Piwik
-require_once('extensions/piwik/Piwik.php');
+require_once("$IP/extensions/Piwik/Piwik.php");
 $wgPiwikURL = "piwik.<&domain&>/";
 //$wgGroupPermissions['user']['viewpiwik'] = true;
 //$wgPiwikSpecialPageDate = 'today';
@@ -94,10 +94,10 @@ $wgEmailConfirmToEdit = true;
 
 ## Database settings
 $wgDBtype           = "mysql";
-$wgDBserver         = "<&db_host&>:<&db_port&>";
-$wgDBname           = "<&db_db&>";
-$wgDBuser           = "<&db_user&>";
-$wgDBpassword       = "<&db_password&>";
+$wgDBserver         = "<&db_host&>:<&db_port&>";//<<&REPLACEMENT&>>$wgDBserver         = "<&db_host&>:<&db_port&>";
+$wgDBname           = "<&db_db&>";//<<&REPLACEMENT&>>$wgDBname           = "<&db_db&>";
+$wgDBuser           = "<&db_db&>";//<<&REPLACEMENT&>>$wgDBuser           = "<&db_db&>";
+$wgDBpassword       = "<&db_password&>";//<<&REPLACEMENT&>>$wgDBpassword       = "<&db_password&>";
 
 # MySQL specific settings
 $wgDBprefix         = "bibelwiki";
@@ -222,7 +222,7 @@ $wgFavicon = "/sites/default/files/amity_island_favicon_3.gif";
 
 
 
-require_once( "$IP/extensions/WikiEditor/WikiEditor.php" );
+wfLoadExtension( 'WikiEditor' );
 
 $wgWikiEditorModules['toc']['global'] = false; // disable the TOC for everyone
 $wgWikiEditorModules['toc']['user'] = false; // Don't allow users to turn the TOC on/off individually
@@ -279,7 +279,7 @@ $wgDefaultUserOptions ['editsection'] = 0;
 
 
 //////////Die Extension für Tooltips, z.B. bei JHWH ////
-require_once("$IP/extensions/Lingo/Lingo.php");
+wfLoadExtension( 'Lingo' );
 $wgexLingoPage = 'Terminologie';
 
 
@@ -329,11 +329,10 @@ $wgGroupPermissions['Vereinsvorstand'] = $wgGroupPermissions['user'];
 
 //////////Ende Collection-Extension für Bücher und PDFs ////
 
-require_once("$IP/extensions/ImportUsers/ImportUsers.php");
-
-require_once("$IP/skins/OffeneBibel/OffeneBibel.php");
-
-include_once ($IP . '/extensions/di/iwDrupal.php');
+require_once("$IP/extensions/di/iwDrupal.php");
+#require_once("$IP/extensions/ImportUsers/ImportUsers.php");
+ 
+require_once "$IP/skins/OffeneBibel/OffeneBibel.php";
 
 # Enable this to get exception details when an exception is hit.
 #$wgShowExceptionDetails = true;

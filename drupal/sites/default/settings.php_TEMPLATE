@@ -216,11 +216,11 @@ $databases = array (
     'default' =>
     array(
       'driver' => 'mysql',
-      'database' => '<&db_db&>',
-      'username' => '<&db_db&>',
-      'password' => '<&db_password&>',
-      'host' => '<&db_host&>',
-      'port' => <&db_port&>,
+      'database' => '<&db_db&>',//<<&REPLACEMENT&>>      'database' => '<&db_db&>',
+      'username' => '<&db_db&>',//<<&REPLACEMENT&>>      'username' => '<&db_db&>',
+      'password' => '<&db_password&>',//<<&REPLACEMENT&>>      'password' => '<&db_password&>',
+      'host' => '<&db_host&>',//<<&REPLACEMENT&>>      'host' => '<&db_host&>',
+      'port' => <&db_port&>,//<<&REPLACEMENT&>>      'port' => <&db_port&>,
       'prefix' => 'bibeldrupal7_',
       'collation' => 'utf8_general_ci',
     ),
