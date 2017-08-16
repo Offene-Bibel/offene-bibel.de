@@ -337,3 +337,17 @@ h6 { font-size: 110%; }
         text-overflow: ellipsis;
         overflow: hidden;
     }
+
+    
+    @media print {
+        .ofbi-navbar {
+            display: none;
+        }
+        main {
+            overflow: visible;
+        }
+        html, body, #wrap {
+            display: block;
+            height: auto;
+        }
+    }

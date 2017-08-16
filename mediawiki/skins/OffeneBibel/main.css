@@ -1145,3 +1145,11 @@ sup.versnummer {
     margin: 70px auto;
 }
 
+@media print {
+    .navi, .catlinks, .portlet, .kapitelwahl, .ofbi-syntax-tag, .teilstatusliste a[href]::after, .status a[href]::after {
+        display: none;
+    }
+    .printfooter, .studienfassung, .lesefassung, .leichtesprache {
+        display: block;
+    }
+}
