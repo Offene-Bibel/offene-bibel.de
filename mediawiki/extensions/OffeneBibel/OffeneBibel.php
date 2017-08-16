@@ -55,12 +55,10 @@ function addLicencing(&$out,&$skin) {
     $title = $context->getTitle();
     $pagename = '';
     list( $pagename, /*...*/ ) = SpecialPageFactory::resolveAlias( $title->getBaseText() );
-    if($title->isSpecialPage() && $pagename == "Userlogin"){
-        $query = $context->getRequest()->getQueryValues();
-        if(!empty($query["type"]) && $query["type"] == "signup") {
-            // Append the licence iframe and text message
-            $search_token = '<div class="mw-createacct-benefits-container">';
-            $replacement = <<<EOT
+    if($title->isSpecialPage() && $pagename == "CreateAccount"){
+        // Append the licence iframe and text message
+        $search_token = '<div class="mw-createacct-benefits-container">';
+        $replacement = <<<EOT
 <div>
 <h2>Nutzungsbedingungen</h2>
 <ul>
@@ -96,11 +94,10 @@ function addLicencing(&$out,&$skin) {
 </div>
 <div class="mw-createacct-benefits-container" style="display:none">
 EOT;
-            $replacement_count = 0;
-            $out->mBodytext = preg_replace("/$search_token/","$replacement",$out->mBodytext, -1, $replacement_count);
-            #if($replacement_count != 1) {
-            #    die("Registration form terms of service logic broken.");
-            #}
+        $replacement_count = 0;
+        $out->mBodytext = preg_replace("/$search_token/","$replacement",$out->mBodytext, -1, $replacement_count);
+        if($replacement_count != 1) {
+            die("Registration form terms of service logic broken.");
         }
     }
     return true;

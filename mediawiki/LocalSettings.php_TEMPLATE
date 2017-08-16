@@ -34,15 +34,15 @@ require_once("$IP/extensions/CategoryTests/CategoryTests.php");
 require_once("$IP/extensions/MagicNoCache/MagicNoCache.php");
 wfLoadExtension( 'Gadgets' );
 wfLoadExtensions( array( 'ConfirmEdit', 'ConfirmEdit/QuestyCaptcha' ) );
-$wgCaptchaQuestions[] = array(
-    'Wie heißt dieses Projekt?' => 'Offene Bibel',
+$wgCaptchaQuestions = [
+    'Wie heißt dieses Projekt?' => [ 'Offene Bibel', 'OffeneBibel', 'offene bibel', 'offenebibel', 'offene-bibel', 'Offene-Bibel'],
     'Welchen Tag im Monat haben wir jetzt gerade laut <a href="http://google.de/search?q=gmt+time">Greenwich Mean Time</a> (GMT)? Bitte als Zahl ohne führende Null.' => date('j'),
-    'Welche Farbe hat das Wort "Bibel" in unserem Logo?' => array( 'blau', 'Blau' ),
-    'Welche Farbe hat das Wort "Offene" in unserem Logo?' => array( 'grün', 'Grün', 'gruen', 'Gruen' ),
-);
+    'Welche Farbe hat das Wort "Bibel" in unserem Logo?' => [ 'blau', 'Blau' ],
+    'Welche Farbe hat das Wort "Offene" in unserem Logo?' => [ 'grün', 'Grün', 'gruen', 'Gruen' ],
+];
 $wgGroupPermissions['emailconfirmed']['skipcaptcha'] = true;
 $ceAllowConfirmedEmail = true;
-wfLoadExtension( 'NewSignupPage' );
+//wfLoadExtension( 'NewSignupPage' );
 #Piwik
 require_once("$IP/extensions/Piwik/Piwik.php");
 $wgPiwikURL = "piwik.<&domain&>/";
