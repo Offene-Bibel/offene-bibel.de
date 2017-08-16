@@ -274,11 +274,6 @@ function getOfBiFooter() {
         </div><!-- container -->
         </main>
 </div><!-- wrap -->
-<div id="ofbi-replacement-dropdown-content" style="display:none">
-    <!-- This container holds the contents injected into all replacement name selector dropdowns. -->
-    <div class="ofbi-replacements"><!-- Filled via JS --></div>
-    <p><small>Hier steht im Urtext der Gottesname <a href=/wiki/JHWH>JHWH</a>,<br/>dessen genaue Aussprache unbekannt ist und<br/>der im Christentum und Judentum meistens<br/>durch eine Ersatzlesung wiedergegeben wird.</small></p>
-</div>
 FOOTER_END;
 }
 

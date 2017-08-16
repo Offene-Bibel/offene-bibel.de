@@ -1,10 +1,7 @@
 require ([
-    'event_utils',
-//     'jquery',
-//     'bootstrap'
+    'event_utils'
 ], function (
-    eventUtils/*,
-    jq*/
+    eventUtils
 ) {
     /*
      * The name selector looks as follows:
@@ -197,70 +194,62 @@ require ([
      * Perform the replacement for the given name on all switches on the page.
      * Also sets the Ersatzlesung variable to its new value.
      */
-    function replaceAllNames (neuerName) {
+    function replaceAllNames (div, neuerName) {
         [].forEach.call( document.querySelectorAll( '.ofbi-schalter' ), function( elem, index ) {
-            Ersatzlesungen [neuerName].replaceName ( this );
+            Ersatzlesungen [neuerName].replaceName ( elem );
         });
 
-        document.querySelectorAll( '.' + currentErsatzlesung ).style.fontWeight = 'normal';
         currentErsatzlesung = replaceClassNameForErsatzlesung( neuerName );
     }
 
     eventUtils.onReady( function() {
-        // Fill in the replacements in the replacement dropdown.
-        var html = "<div>";
-        var count = 0;
-        for( var ersatzlesung in Ersatzlesungen ) {
-            var id_tag, replacement_name;
-            if( count++ >= 5 ) {
-                html += "</div><div>";
-                count = 1;
-            }
-            class_tag = replaceClassNameForErsatzlesung( ersatzlesung );
-            replacement_name = htmlspecialchars( ersatzlesung );
-            html += '<p><a class="' + class_tag + '">' + replacement_name + '</a></p>';
-        }
-        html += "</div>";
-        document.querySelector( '#ofbi-replacement-dropdown-content div.ofbi-replacements' ).innerHTML = html;
-
         // Fill the data-original attribue in all switch elements.
         [].forEach.call( document.querySelectorAll( '.ofbi-schalter' ), function ( elem ) {
             elem.setAttribute( "data-original", elem.innerHTML );
             elem.addEventListener( 'click', function() {
+                var div = document.createElement('div');
+                // Fill in the replacements in the replacement dropdown.
+                var html = "<div>";
+                var count = 0;
+                for( var ersatzlesung in Ersatzlesungen ) {
+                    var id_tag, replacement_name;
+                    if( count++ >= 5 ) {
+                        html += "</div><div>";
+                        count = 1;
+                    }
+                    class_tag = replaceClassNameForErsatzlesung( ersatzlesung );
+                    replacement_name = htmlspecialchars( ersatzlesung );
+                    html += '<p><a class="' + class_tag + '">' + replacement_name + '</a></p>';
+                }
+                html += '</div>';
+                html += '<p><small>Hier steht im Urtext der Gottesname <a href=/wiki/JHWH>JHWH</a>,';
+                html += '<br/>dessen genaue Aussprache unbekannt ist und';
+                html += '<br/>der im Christentum und Judentum meistens';
+                html += '<br/>durch eine Ersatzlesung wiedergegeben wird.</small></p>';
+                div.innerHTML = html;
+                div.querySelector( '.' + currentErsatzlesung ).style.fontWeight = 'bold';
+
                 // Now that the dropdown content is duplicated to every button we set the handlers.
                 for( var ersatzlesung in Ersatzlesungen ) {
                     var class_tag = replaceClassNameForErsatzlesung( ersatzlesung );
-                    document.querySelector( '.' + class_tag ).addEventListener('click', function() {
+                    div.querySelector( '.' + class_tag ).addEventListener('click', function() {
                         var closureErsatzlesung = ersatzlesung;
+                        var closureDiv = div;
                         return function() {
-                            replaceAllNames( closureErsatzlesung );
+                            replaceAllNames( closureDiv, closureErsatzlesung );
+                            closureDiv.parentElement.removeChild(closureDiv);
                         }
                     }() );
                 }
+                div.style.position = 'absolute';
+                div.style.border = '1px solid #ccc';
+                div.style.borderRadius = '1em';
+                div.style.padding = '1em';
+                div.style.zIndex = '99';
+                div.style.background = 'rgba(255,255,255,.8)';
+                elem.parentElement.insertBefore(div, elem);
             });
         });
-//         jq( '.ofbi-schalter' ).popover({
-//             html: true,
-//             container: 'body',
-//             placement: 'bottom',
-//             title: 'Ersatzlesung auswählen',
-//             template: '<div class="popover ofbi-popover-dynamic-width"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
-//             content: function() {
-//                 return document.getElementById( 'ofbi-replacement-dropdown-content' ).innerHTML;
-//             }
-//         })
-//         .addEventListener( 'shown.bs.popover', function() {
-//             // Now that the dropdown content is duplicated to every button we set the handlers.
-//             for( var ersatzlesung in Ersatzlesungen ) {
-//                 var class_tag = replaceClassNameForErsatzlesung( ersatzlesung );
-//                 document.querySelector( '.' + class_tag ).addEventListener('click', function() {
-//                     var closureErsatzlesung = ersatzlesung;
-//                     return function() {
-//                         replaceAllNames( closureErsatzlesung );
-//                     }
-//                 }() );
-//             }
-//         });
     });
 });
 
