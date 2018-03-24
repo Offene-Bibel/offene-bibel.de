@@ -3,7 +3,7 @@
 class OfBiAbk {
   public static function buchnamekapitel ($eingabe) {
     $singularnamen = array_flip (self::$pluralnamen);
-
+    
     if (isset ($singularnamen [$eingabe])) {
       $eingabe = $singularnamen [$eingabe];
     }
@@ -15,6 +15,20 @@ class OfBiAbk {
       return array ($eingabe, false);
     }
 
+    $slashpos = mb_strpos ($eingabe, '/');
+    if ($slashpos !== false) {
+      $eingabe = mb_substr ($eingabe, 0, $slashpos);
+    }
+    
+    if (strtolower(substr($eingabe, -20)) === ' in leichter sprache') {
+      $eingabe = mb_substr ($eingabe, 0, -20);
+    }
+    
+    $commapos = mb_strpos ($eingabe, ',');
+    if ($commapos !== false) {
+      $eingabe = mb_substr ($eingabe, 0, $commapos);
+    }
+    
     $spacepos = mb_strrpos ($eingabe, ' ');
     if ($spacepos !== false) {
       $buchname = mb_substr ($eingabe, 0, $spacepos);

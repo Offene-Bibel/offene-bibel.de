@@ -82,3 +82,6 @@ body.navbar-is-fixed-top {
     padding-top: 0px !important;
 }
 
+.ofbi_no_images img {
+    display: none;
+}
