@@ -65,7 +65,6 @@ function getOfBiHeader() {
                         <ul class="ofbi-dropdown-menu col-md-6">
                             <li><b>Feedback</b></li>
                             <li><a href="/forum">Forum</a></li>
-                            <li><a href="/chat">Chat</a></li>
                             <li><a href="/mailingliste">Mailingliste</a></li>
                         </ul>
                     </div>
