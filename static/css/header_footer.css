@@ -135,219 +135,306 @@ h6 { font-size: 110%; }
     border-color: #539a3a;
 }
 
-    html, body, #wrap {
-        width: 100%;
-        height: 100%;
-    }
-    
-    #wrap {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    main {
-        position: relative;
-        flex: 1 1 auto;
-        overflow: auto;
-        padding-top: 3em;
-    }
+html, body, #wrap {
+    width: 100%;
+    height: 100%;
+}
+
+#wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    position: relative;
+    flex: 1 1 auto;
+    overflow: auto;
+    padding-top: 4.2rem;
+}
 
 /* Fixes for the options menu. Buttons in dropdowns don't work, since environment is position:absolute'd, so they always wrap. */
-    .ofbi-dropdown-menu>li>div {
-        padding: 3px 20px;
-        white-space: nowrap;
-    }
+.ofbi-dropdown-menu>li>div {
+    padding: 3px 20px;
+    white-space: nowrap;
+}
 
-    #options-menu {
-        width:322px;
-    }
+#options-menu {
+    width:322px;
+}
 
 /* Tuning to allow bigger logo in header menu */
-    #ofbi-navbar-large-logo {
-        padding-top:10px;
-        padding-bottom:0px;
-    }
+#ofbi-navbar-large-logo {
+    padding-top:10px;
+    padding-bottom:0px;
+}
 
 /* No hover underline in header */
-    .ofbi-navbar .ofbi-navbar a:hover {
-        border-bottom: none;
-    }
+.ofbi-navbar .ofbi-navbar a:hover {
+    border-bottom: none;
+}
 
-    .ofbi-navbar-brand {
-        font-size: 200%;
-    }
+.ofbi-navbar-brand {
+    font-size: 200%;
+}
 
 /* Fixes required for the two multi column dropdown menus in the header. */
-    .ofbi-dropdown-menu.multi-column {
-        min-width: 400px;
-    }
-    [data-toggled='true'] .ofbi-dropdown-menu.multi-column {
-        min-width: 0;
-    }
+.ofbi-dropdown-menu.multi-column {
+    min-width: 400px;
+}
+[data-toggled='true'] .ofbi-dropdown-menu.multi-column {
+    min-width: 0;
+}
 
-    .ofbi-dropdown-menu.multi-column .ofbi-dropdown-menu {
-        display: block !important;
-        position: static !important;
-        margin: 0 !important;
-        border: none !important;
-        box-shadow: none !important;
-    }
+.ofbi-dropdown-menu.multi-column .ofbi-dropdown-menu {
+    display: block !important;
+    position: static !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
 
-    .ofbi-navbar .ofbi-dropdown-toggle, #ofbi-navbar-toggle {
-        line-height: 20px;
-        padding: 15px 8px;
-        font-size: 130%;
-        color: #69A54F;
-    }
+.ofbi-navbar .ofbi-dropdown-toggle, #ofbi-navbar-toggle {
+    line-height: 20px;
+    padding: 15px 8px;
+    font-size: 130%;
+    color: #69A54F;
+}
 
-    .ofbi-dropdown-toggle, #ofbi-navbar-toggle {
-        display: block;
-        position: relative;
-    }
-    
-    #ofbi-navbar-toggle {
-        display: inline-block;
-        border: 1px solid #ddd;
-        padding: 11px 3px;
-        margin: 3px 11px;
-    }
-    
+.ofbi-dropdown-toggle, #ofbi-navbar-toggle {
+    display: block;
+    position: relative;
+}
+
+#ofbi-navbar-toggle {
+    display: inline-block;
+    border: 1px solid #ddd;
+    padding: 11px 3px;
+    margin: 3px 11px;
+}
+
 /* CSS replacements for bootstrap functionality */
 
-     .ofbi-dropdown {
-         position: relative;
-     }
-     
-     .ofbi-dropdown:hover>.ofbi-dropdown-menu, [data-hasfocus]>.ofbi-dropdown-menu,
-     [data-toggled='true'] .ofbi-dropdown, [data-toggled='true'] .ofbi-dropdown-menu, [data-toggled='true'] #ofbi-navbar-toggle-container {
-         display: block !important;
-         visibility: visible !important;
-     }
-     [data-toggled='true'] .ofbi-dropdown, [data-toggled='true'] .ofbi-dropdown-menu, [data-toggled='true'] #ofbi-navbar-toggle-container {
-        position: static;
-        float: none !important;
-     }
+  .ofbi-dropdown {
+      position: relative;
+  }
+  
+  .ofbi-dropdown:hover>.ofbi-dropdown-menu, [data-hasfocus]>.ofbi-dropdown-menu,
+  [data-toggled='true'] .ofbi-dropdown, [data-toggled='true'] .ofbi-dropdown-menu, [data-toggled='true'] #ofbi-navbar-toggle-container {
+      display: block !important;
+      visibility: visible !important;
+  }
+  [data-toggled='true'] .ofbi-dropdown, [data-toggled='true'] .ofbi-dropdown-menu, [data-toggled='true'] #ofbi-navbar-toggle-container {
+    position: static;
+    float: none !important;
+  }
 
-    .ofbi-dropdown-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        z-index: 1000;
+.ofbi-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
 /*         min-width: 160px; */
-        margin: 0;
-        padding: 5px 0;
-        font-size: 14px;
-        text-align: left;
-        list-style: none;
-        background-color: #fff;
-        -webkit-background-clip: padding-box;
-        background-clip: padding-box;
-        border: 1px solid #ccc;
-        border: 1px solid rgba(0,0,0,.15);
-        border-radius: 0 0 4px 4px;
-        -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
-        box-shadow: 0 6px 12px rgba(0,0,0,.175);
-    }
-    .ofbi-dropdown-right>.ofbi-dropdown-menu {
-        left: auto;
-        right: 0;
-    }
-    .ofbi-navbar .ofbi-dropdown-right:last-child>.ofbi-dropdown-menu {
-        margin-top: -2px;
-        max-width: 100%;
-    }
-    
-    .ofbi-dropdown-menu > li > a {
-        display: block;
-        clear: both;
-        font-weight: 400;
-        line-height: 1.42857143;
-        color: #333;
-        white-space: nowrap;
-    }
-    
-    :hover>.ofbi-dropdown-toggle, ul li.ofbi-dropdown a:hover, ul li.ofbi-dropdown a:focus, [data-hasfocus]>.ofbi-dropdown-toggle, [data-toggled='true'] #ofbi-navbar-toggle, :hover>#ofbi-navbar-toggle {
-        color: #000;
-        background-color: #e7e7e7;
-        border-bottom: 0;
-    }
+    margin: 0;
+    padding: 5px 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 0 0 4px 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+.ofbi-dropdown-right>.ofbi-dropdown-menu {
+    left: auto;
+    right: 0;
+}
+.ofbi-navbar .ofbi-dropdown-right:last-child>.ofbi-dropdown-menu {
+    margin-top: -2px;
+    max-width: 100%;
+}
 
-    .ofbi-nav > .ofbi-dropdown-right {
-        float: right;
-    }
-    .ofbi-nav > .ofbi-dropdown-right:last-child {
-        position: static;
-    }
-    #ofbi-navbar-logo-container {
-        float: left !important;
-    }
-    #ofbi-navbar-toggle-container {
-        float: right !important;
-        text-align: right;
-    }
-    [data-toggled='true'] #ofbi-navbar-toggle-container::after {
-        content: '';
-        display: block;
-        clear: both;
-    }
-    .ofbi-nav {
-        padding-left: 0;
-        margin-bottom: 0;
-        list-style: none;
-        position: relative;
-    }
-    .ofbi-nav::after {
-        content: '';
-        display: block;
-        clear: both;
-    }
-    .ofbi-navbar {
-        background-color: #f8f8f8;
-        border: 1px solid #e7e7e7;
-        border-width: 0 0 1px;
-        border-radius: 4px;
-    }
-    .ofbi-nav > li {
-        float: left;
-        position: relative;
-        display: block;
-    }
-    .ofbi-navbar-header {
-        float: left;
-    }
-    .ofbi-navbar-brand {
-        font-size: 200%;
-        display: inline-block;
-        height: 50px;
-        padding: 15px 15px;
-        font-size: 18px;
-        line-height: 20px;
-    }
-    .ofbi-dropdown-menu .divider {
-        height: 1px;
-        margin: 9px 0;
-        overflow: hidden;
-        background-color: #e5e5e5;
-    }
+.ofbi-dropdown-menu > li > a {
+    display: block;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
 
-    #ofbi-auth-logged-in-name {
-        position: relative;
-        max-width: 7em;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-    }
+:hover>.ofbi-dropdown-toggle, ul li.ofbi-dropdown a:hover, ul li.ofbi-dropdown a:focus, [data-hasfocus]>.ofbi-dropdown-toggle, [data-toggled='true'] #ofbi-navbar-toggle, :hover>#ofbi-navbar-toggle {
+    color: #000;
+    background-color: #e7e7e7;
+    border-bottom: 0;
+}
 
-    
-    @media print {
-        .ofbi-navbar {
-            display: none;
-        }
-        main {
-            overflow: visible;
-        }
-        html, body, #wrap {
-            display: block;
-            height: auto;
-        }
+.ofbi-nav > .ofbi-dropdown-right {
+    float: right;
+}
+.ofbi-nav > .ofbi-dropdown-right:last-child {
+    position: static;
+}
+#ofbi-navbar-logo-container {
+    float: left !important;
+}
+#ofbi-navbar-toggle-container {
+    float: right !important;
+    text-align: right;
+}
+[data-toggled='true'] #ofbi-navbar-toggle-container::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.ofbi-nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    position: relative;
+}
+.ofbi-nav::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.ofbi-navbar {
+    background-color: #f8f8f8;
+    border: 1px solid #e7e7e7;
+    border-width: 0 0 1px;
+    border-radius: 4px;
+}
+.ofbi-nav > li {
+    float: left;
+    position: relative;
+    display: block;
+}
+.ofbi-navbar-header {
+    float: left;
+}
+.ofbi-navbar-brand {
+    font-size: 200%;
+    display: inline-block;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+}
+.ofbi-dropdown-menu .divider {
+    height: 1px;
+    margin: 9px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
+
+#ofbi-auth-logged-in-name {
+    position: relative;
+    max-width: 7em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.kapitelwahl > form, .kapitelwahl .ofbi-dropdown, .kapitelwahl .ofbi-toggle {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.kapitelwahl .form-group {
+  padding: .7em .7em 0;
+}
+
+.kapitelwahl label {
+  padding: 0;
+  cursor: pointer;
+}
+
+.kapitelwahl button {
+  border: 0;
+}
+
+.kapitelwahl .zelle {
+  vertical-align: baseline;
+}
+
+.kapitelwahl > form > .form-group {
+  padding: 0;
+  margin: 0;
+}
+
+.kapitelwahl > form > .form-group input {
+  width: 16em;
+  max-width: 100%;
+}
+
+.kapitelwahl select, .kapitelwahl input {
+  background: #fff;
+  color: #666666;
+  border: 1px solid #ccc;
+  vertical-align: baseline;
+}
+
+.umschalter {
+  position: relative;
+  margin: .5em 0 1.5em;
+}
+
+.umschalter .buchwahl {
+    margin-right: 1em;
+    color: #666666;
+    position: static;
+}
+
+.umschalter .buchwahl > .ofbi-dropdown-menu {
+    top: 1.5em;
+    margin-left: -2px;
+    margin-right: -2px;
+    padding: 4px 2px;
+}
+
+.bible-link-table {display: flex; flex-wrap: wrap-reverse; margin: 0 0 -.5em .25em}
+.bible-link-table *, .bible-link-table ::before, .bible-link-table ::after {box-sizing: border-box}
+
+.bible-link-table > tbody {border-spacing: .25em; margin-bottom: .5em}
+.bible-link-table > :first-child {order: 1; flex-basis: 14em; flex-grow: 14; display: flex; flex-direction: column; margin-right: .25em}
+.bible-link-table > :last-child {flex-basis: 25.5em; flex-grow: 14}
+.bible-link-table > :first-child > tr {display: block}
+.bible-link-table tr {background: #f8f8f8}
+.bible-link-table > :first-child > :last-child {columns: 3 6.75em; column-rule: .25em solid #fff; column-gap: .25em; flex-grow: 1}
+.bible-link-table > :last-child > tr {display: flex; flex-wrap: wrap}
+.bible-link-table tr > * {flex-basis: 6em; flex-grow: 3; text-align: left; vertical-align: top; margin: .25em .25em 0 0; box-shadow: 0 -.25em #fff, .25em 0 #fff, .25em -.25em #fff; width: 100%; display: inline-block; padding: .25em 0; position: relative}
+.bible-link-table [colspan="4"] {flex-grow: 21}
+.bible-link-table th {background: #fff; padding: 0 .25em; margin-top: 0; box-shadow: .25em 0 #fff}
+.bible-link-table tr + tr > th {padding-top: .5em}
+.bible-link-table td[aria-label] {padding-top: 1em}
+.bible-link-table td[data-short-label]::before {content: attr(aria-label); float:right; font-size: 70%; max-width: 95%; margin: -1.3em .134em 0 -100%; word-wrap: break-word; white-space: pre-wrap; line-height: 1.3; padding:1.75em .5em .25em .25em; z-index: 0; position: relative; border: 1.5em solid transparent; border-width: 0 0 1.5em 1.75em}
+.bible-link-table td[data-short-label]:hover::before {z-index: 2; border-image: radial-gradient(rgba(255,255,255,1), rgba(255,255,255,0)) 49.5% fill}
+.bible-link-table td[aria-label]::after {content: attr(aria-label); position: absolute; font-size: 70%; top: 0; left: .5em; right: .5em; text-align: right; line-height: 1.3; z-index: 5; color:#777; white-space: nowrap; overflow: hidden}
+.bible-link-table td[data-short-label]::after {content:  "▿ " attr(data-short-label)}
+.bible-link-table td[data-short-label]:hover::after {content: "▾ " attr(data-short-label)}
+.bible-link-table td > :first-child::before {content: ''; top: 0; bottom: 0; left: 0; right: 0; position: absolute; background: #f8f8f8; z-index: 0}
+.bible-link-table td > :first-child > * {position: relative; z-index: 1}
+.bible-link-table td:hover > :first-child::before {z-index: 3; background: transparent}
+.bible-link-table td > :first-child:hover > * {z-index: 4}
+.bible-link-table td > :first-child:hover::before {background: #f7f7f7}
+.bible-link-table div {display: flex; flex-wrap: wrap}
+.bible-link-table div > * {flex-basis: 6.5em; flex-grow: 1}
+.bible-link-table div > :last-child {columns: 3 5.5em; column-gap: .25em; flex-basis: 11.25em; flex-grow: 2}
+.bible-link-table p {margin: 0}
+.bible-link-table a[href] {text-decoration: none; display: inline-block; width: 100%; line-height: 1; padding: .5em}
+
+@media print {
+    .ofbi-navbar, .kapitelwahl {
+        display: none;
     }
+    main {
+        overflow: visible;
+    }
+    html, body, #wrap {
+        display: block;
+        height: auto;
+    }
+}

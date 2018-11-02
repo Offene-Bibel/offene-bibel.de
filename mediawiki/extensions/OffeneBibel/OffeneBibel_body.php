@@ -31,6 +31,7 @@ class OfBi {
     $GLOBALS ['wgParser']->setHook ('yhwh' , array ($this, 'hook_yhwh'));
     $GLOBALS ['wgParser']->setFunctionHook ('chapternumber' , array ($this, 'functionhook_chapternumber'));
     $GLOBALS ['wgParser']->setFunctionHook ('bookname' , array ($this, 'functionhook_bookname'));
+    $GLOBALS ['wgParser']->setFunctionHook ('version_menu' , array ($this, 'functionhook_version_menu'));
     $GLOBALS ['wgParser']->setFunctionHook ('nextchapter' , array ($this, 'functionhook_nextchapter'));
     $GLOBALS ['wgParser']->setFunctionHook ('previouschapter' , array ($this, 'functionhook_previouschapter'));
     $GLOBALS ['wgParser']->setFunctionHook ('firstchapter' , array ($this, 'functionhook_firstchapter'));
@@ -223,36 +224,49 @@ class OfBi {
   }
 
   function hook_EditFormPreloadText ( &$text, &$titleObj ) {
-    if ($titleObj->getNamespace() == NS_MAIN) {
-      list ($buchname, $kapitel) = OfBiAbk::buchnamekapitel ($titleObj->getText());
-      if ($kapitel !== false) {
-        $text = "{{Lesefassung}} ''(kommt später)''\n\n{{Studienfassung}}\n\n";
-        foreach (OfBiAbk::versnummern ($buchname, $kapitel) as $versnummer) {
-          $text .= "{{S|" . $versnummer . "}} \n\n";
-        }
+    $thisTitleText = $titleObj->getText();
+    list ($buchname, $kapitel) = OfBiAbk::buchnamekapitel ($thisTitleText);
 
-        $text .= "{{Bemerkungen}}\n\n{{Kapitelseite Fuß}}";
+    if ($kapitel === false) {
+      return false;
+    } elseif ($titleObj->getNamespace() === NS_TALK && strpos($thisTitleText, '/') === false && strpos(mb_strtolower($thisTitleText), ' in leichter sprache') === false) {
+      $text = "{{Checkliste Studienfassung\n";
+      $text .= "|Übersetzte Verse = \n";
+      $text .= "|Überprüfte Verse = \n";
+      $text .= "|Alternativen = \n";
+      $text .= "|Zweifelsfälle dokumentiert = \n";
+      $text .= "|Studienfassung verstehbar = \n";
+      $text .= "|Anliegen dokumentiert = \n";
+      $text .= "|Kommentare eingesehen = \n";
+      $text .= "|Übersetzungsvergleich = \n";
+      $text .= "|Übrige Überprüfungen = \n";
+      $text .= "|Was fehlt = \n";
+      $text .= "}}\n";
+      $text .= "\n";
+      $text .= "Hier dürfen Vorschläge, Rückfragen und andere Diskussionsbeiträge folgen:\n";
+    } elseif ($titleObj->getNamespace() !== NS_MAIN) {
+      return false;
+    } elseif (strpos(mb_strtolower($thisTitleText), ' in leichter sprache') !== false) {
+      if (strpos($thisTitleText, '/') !== false) {
+        $text = "{{Persönliche Fassung in Leichter Sprache}}\n\n";
+      } else {
+        $text = "{{Leichte Sprache}}\n\n";
       }
-      return true;
-    } else if ($titleObj->getNamespace() == NS_TALK) {
-      list ($buchname, $kapitel) = OfBiAbk::buchnamekapitel ($titleObj->getText());
-      if ($kapitel !== false) {
-        $text = "{{Checkliste Studienfassung\n";
-        $text .= "|Übersetzte Verse = \n";
-        $text .= "|Überprüfte Verse = \n";
-        $text .= "|Alternativen = \n";
-        $text .= "|Zweifelsfälle dokumentiert = \n";
-        $text .= "|Studienfassung verstehbar = \n";
-        $text .= "|Anliegen dokumentiert = \n";
-        $text .= "|Kommentare eingesehen = \n";
-        $text .= "|Übersetzungsvergleich = \n";
-        $text .= "|Übrige Überprüfungen = \n";
-        $text .= "|Was fehlt = \n";
-        $text .= "}}\n";
-        $text .= "\n";
-        $text .= "Hier dürfen Vorschläge, Rückfragen und andere Diskussionsbeiträge folgen:\n";
+      foreach (OfBiAbk::versnummern ($buchname, $kapitel) as $versnummer) {
+        $text .= "{{L|" . $versnummer . "}} \n\n";
       }
-      return true;
+    } elseif (strpos($thisTitleText, '/') !== false) {
+      $text = "{{Persönliche Fassung}}\n\n";
+      foreach (OfBiAbk::versnummern ($buchname, $kapitel) as $versnummer) {
+        $text .= "{{L|" . $versnummer . "}} \n\n";
+      }
+      $text .= "{{{{Persönliche Fassung Fuß|Bitte-füge-hier-den-Autorennamen-ein}}}}";
+    } else {
+      $text = "{{Lesefassung}} ''(kommt später)''\n\n{{Studienfassung}}\n\n";
+      foreach (OfBiAbk::versnummern ($buchname, $kapitel) as $versnummer) {
+        $text .= "{{S|" . $versnummer . "}} \n\n";
+      }
+      $text .= "{{Bemerkungen}}\n\n{{Kapitelseite Fuß}}";
     }
     return false;
   }
@@ -297,6 +311,11 @@ class OfBi {
   function functionhook_bookname ($parser, $pagename = '') {
     list ($buchname, $kapitel) = OfBiAbk::buchnamekapitel ($pagename);
     return $buchname === false ? '' : $buchname;
+  }
+
+  function functionhook_version_menu ($parser, $pagename = '') {
+//     return OfBiAbk::fassungen_umschalter($pagename);
+    return '';
   }
 
   function functionhook_nextchapter ($parser, $bookname = '', $chapternumber = '') {
@@ -490,92 +509,8 @@ class OfBi {
   }
 
   function hook_selectchapter ($input, $args, $parser, $frame) {
-    $text = '';
-    if (isset ($args ['name']) && isset ($args ['chapter'])) {
-      $text .= '<div class="kapitelwahl">';
-
-      $text .= '<form>';
-      $text .= '<input type="submit" class="submitbutton1" value="Geh zu" class="zelle" /> ';
-      $text .= '<label for="ofbi-nav-book" class="zelle">&nbsp;Buch:&nbsp;</label>';
-      $text .= '<span class="zelle">';
-      $text .= '<select name="title" id="ofbi-nav-book">';
-
-      $current_bookname = $args ['name'];
-      $options = OfBiAbk::buchnamen_alphabetisch ($current_bookname);
-      foreach ($options as $display=>$option) {
-        $text .= $this->make_option ($option, $display, $current_bookname == $display);
-      }
-      $text .= '</select>';
-      $text .= '</span>';
-      $text .= '</form>';
-
-      if (OfBiAbk::erstes_kapitel ($args ['name']) !== false) {
-        $text .= '<form>';
-        $text .= '<input type="submit" class="submitbutton2" value="Geh zu" onload="" class="zelle" /> ';
-        $text .= '<label for="ofbi-nav-chapter" class="zelle">&nbsp;Kapitel:&nbsp;</label>';
-        $text .= '<span class="zelle">';
-        $text .= '<select name="title" id="ofbi-nav-chapter">';
-
-        if (intval (trim ($args ['chapter'])) == 0) {
-          $text .= $this->make_option ($args ['name'], '(auswählen)', true);
-        }
-        $chapternumber = OfBiAbk::erstes_kapitel ($args ['name']);
-        do {
-          $option = htmlspecialchars ($args ['name'] . ' ' . $chapternumber);
-          $titleObj = Title::makeTitle( NS_MAIN, $option);
-          if ($titleObj->exists ()) {
-            $text .= $this->make_option ($option, $chapternumber, $chapternumber == trim ($args ['chapter']));
-          } else {
-            $text .= $this->make_option ($option, '(' . $chapternumber . ')', $chapternumber == trim ($args ['chapter']));
-          }
-          $text .= '</option>';
-          $chapternumber = OfBiAbk::naechstes_kapitel ($args ['name'], $chapternumber);
-        } while ($chapternumber !== false);
-
-        $text .= '</select>';
-
-        if (OfBiAbk::voriges_kapitel ($args ['name'], $args ['chapter']) !== false) {
-          $titleObj = Title::makeTitle( NS_MAIN, $args ['name'] . ' ' . OfBiAbk::voriges_kapitel ($args ['name'], $args ['chapter']));
-          $text .= ' <a href="' . htmlspecialchars ($titleObj->getLocalURL ()) . '"';
-          $text .= ' title="' . htmlspecialchars ($args ['name'] . ' ' . OfBiAbk::voriges_kapitel ($args ['name'], $args ['chapter'])) . '"';
-          if (! $titleObj->exists ()) {
-            $text .= ' class="new"';
-          }
-          $text .= '>←</a> ';
-        }
-
-        if (OfBiAbk::naechstes_kapitel ($args ['name'], $args ['chapter']) !== false) {
-          $titleObj = Title::makeTitle( NS_MAIN, $args ['name'] . ' ' . OfBiAbk::naechstes_kapitel ($args ['name'], $args ['chapter']));
-          $text .= ' <a href="' . htmlspecialchars ($titleObj->getLocalURL ()) . '"';
-          $text .= ' title="' . htmlspecialchars ($args ['name'] . ' ' . OfBiAbk::naechstes_kapitel ($args ['name'], $args ['chapter'])) . '"';
-          if (! $titleObj->exists ()) {
-            $text .= ' class="new"';
-          }
-          $text .= '>→</a> ';
-        }
-
-        $text .= '</span>';
-        $text .= '</form>';
-      }
-
-      $text .= '<script type="text/javascript"> ';
-      $text .= '[].forEach.call(document.querySelectorAll(".submitbutton1"), function(elem){elem.style.display = "none"}); ';
-      if (OfBiAbk::erstes_kapitel ($args ['name']) !== false) {
-        $text .= '[].forEach.call(document.querySelectorAll(".submitbutton2"), function(elem){elem.style.display = "none"}); ';
-      }
-      $text .= '</script>';
-
-      $text .= '</div>';
-    }
-    return $text;
-  }
-
-  function make_option ($value, $text, $active) {
-    if ($active) {
-      return '<option value="' . htmlspecialchars ($value) . '" selected="selected">' . htmlspecialchars ($text) . '</option>';
-    } else {
-      return '<option value="' . htmlspecialchars ($value) . '">' . htmlspecialchars ($text) . '</option>';
-    }
+//     return OfBiAbk::kapitel_umschalter($args['name'] . ' ' . $args['chapter']);
+    return '';
   }
 
   function hook_versionlinks ($input, $args, $parser, $frame) {
@@ -600,6 +535,7 @@ class OfBi {
     if (isset ($args ['to'])) {
       $this->to = intval ($args ['to']);
     }
+    return '';
   }
 
   function get_from () {
@@ -752,4 +688,3 @@ EOE;
     return array( $result_html, "markerType" => 'nowiki' );
   }
 }
-?>

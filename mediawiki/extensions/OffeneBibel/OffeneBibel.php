@@ -34,6 +34,8 @@ function ofbiLanguageGetMagic (&$magicWords, $langCode = 0) {
   $magicWords ['chapternumber'] = array ('0', 'chapternumber');
   $magicWords ['bookname'] = array ('0', 'bookname');
 
+  $magicWords ['version_menu'] = array ('0', 'version_menu');
+
   $magicWords ['firstchapter'] = array ('0', 'firstchapter');
   $magicWords ['nextchapter'] = array ('0', 'nextchapter');
   $magicWords ['previouschapter'] = array ('0', 'previouschapter');

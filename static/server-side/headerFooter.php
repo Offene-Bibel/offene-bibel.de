@@ -39,7 +39,7 @@ function getOfBiHeader() {
                         <li><a href="/kurzinfo">Kurzinfo</a></li>
                         <li><a href="/wiki/Unsere_Ziele">Unsere Ziele</a></li>
                         <li><a href="/wiki/Übersetzungskriterien">Übersetzungskriterien</a></li>
-                        <li><a href="/wiki/Leichte_Sprache">Bibel in Leichter Sprache</a></li>
+                        <li><a href="/wiki/Über_Leichte_Sprache">Über Leichte Sprache</a></li>
                         <li><a href="/verein">Verein / Kontakt</a></li>
                     </ul>
                 </li>
@@ -52,7 +52,7 @@ function getOfBiHeader() {
                     </ul>
                 </li>
                 <li class="ofbi-dropdown" data-hidden-xs="1">
-                    <div class="ofbi-dropdown-toggle" tabindex="0">Mitmachen<span class="visible-xs-inline visible-md-inline visible-lg-inline">/Feedback</span> <span class="caret"></span></div>
+                    <div class="ofbi-dropdown-toggle" tabindex="0">Mitmachen <span class="caret"></span></div>
                     <div class="ofbi-dropdown-menu hidden multi-column">
                         <!-- there would normally be a row class on this div. But that added broken margin on the left and right. Leaving it of somehow doesn't break much... -->
                         <ul class="ofbi-dropdown-menu col-md-6">
@@ -65,9 +65,13 @@ function getOfBiHeader() {
                         <ul class="ofbi-dropdown-menu col-md-6">
                             <li><b>Feedback</b></li>
                             <li><a href="/forum">Forum</a></li>
+                            <li><a href="/chat">Chat</a></li>
                             <li><a href="/mailingliste">Mailingliste</a></li>
                         </ul>
                     </div>
+                </li>
+                <li class="ofbi-dropdown ofbi-dropdown-right" data-hidden-xs="1">
+                    <div><a class="ofbi-dropdown-toggle" href="/wiki/Leichte_Sprache">Leichte Sprache</a></div>
                 </li>
                 <li id="ofbi-menu-login" class="ofbi-dropdown ofbi-dropdown-right" data-hidden-xs="1">
                     <div id="ofbi-auth-logged-in-name" class="ofbi-dropdown-toggle" tabindex="0">Anmelden <span class="caret"></span></div>
@@ -104,161 +108,12 @@ function getOfBiHeader() {
                         <li data-logged-out=""><a role="menuitem" tabindex="-1" href="/wiki/Spezial:Einstellungen">Einstellungen</a></li>
                     </ul>
                 </li>
-                <li class="ofbi-dropdown ofbi-dropdown-right">
-                    <div class="ofbi-dropdown-toggle" tabindex="0">Suche <span class="caret"></span></div>
-                    <ul class="ofbi-dropdown-menu hidden">
-                        <li>
-                            <form action="/suche.php" method="get">
-                                <div class='form-group'>
-                                    <input class='form-control input-sm' id="ofbi-suche" name="suche" maxlength='60' size='15' placeholder='Suchbegriff' required>
-                                    <select class='form-control' id="ofbi-suche-in" name="in">
-                                        <option value="bibelstelle">Bibelstelle</option>
-                                        <option value="volltext">Volltext</option>
-                                        <option value="drupal">News, Blogs und Forum</option>
-                                    </select>
-                                    <button type='submit' name='op' class='btn btn-default'>Suche</button>
-                                </div>
-                            </form>
-                        </li>
-                    </ul>
-                </li>
             </ul>
         </div><!-- container -->
     </nav><!-- ofbi-navbar -->
     <main><div class="container">
 HEADER_END;
 }
-
-
-//                         <li>
-//                             <table><tr>
-//                                 <th colspan=4>Altes Testament</th>
-//                                 <th colspan=3>Neues Testament</th>
-//                             </tr><tr>
-//                                 <td style="vertical-align:top">
-//                                     <ul>
-//                                         <li>Genesis (1 Mose)
-//                                         <li>Exodus (2 Mose)
-//                                         <li>Levitikus (3 Mose)
-//                                         <li>Numeri (4 Mose)
-//                                         <li>Deutero&shy;nomium (5 Mose)
-//                                     </ul>
-//                                 </td>
-//                                 <td style="vertical-align:top">
-//                                     <ul>
-//                                         <li>Josua
-//                                         <li>Richter
-//                                         <li>1-2 Samuel
-//                                         <li>1-2 Könige
-//                                     </ul>
-//                                     <hr>
-//                                     <ul>
-//                                         <li>Jesaja
-//                                         <li>Jeremia
-//                                         <li>Ezechiel (Hesekiel)
-//                                     </ul>
-//                                 </td>
-//                                 <td style="vertical-align:top">
-//                                     <ul>
-//                                         <li>Hosea
-//                                         <li>Joel
-//                                         <li>Amos
-//                                         <li>Obadja
-//                                         <li>Jona
-//                                         <li>Micha
-//                                         <li>Nahum
-//                                         <li>Habakuk
-//                                         <li>Zefanja
-//                                         <li>Haggai
-//                                         <li>Sacharja
-//                                         <li>Maleachi
-//                                     </ul>
-//                                 </td>
-//                                 <td style="vertical-align:top">
-//                                     <ul>
-//                                         <li>Psalmen
-//                                         <li>Ijob (Hiob)
-//                                         <li>Sprichwörter
-//                                         <li>Rut
-//                                         <li>Hohelied
-//                                         <li>Kohelet (Prediger)
-//                                     </ul>
-//                                     <hr>
-//                                     <ul>
-//                                         <li>Klagelieder
-//                                         <li>Ester
-//                                         <li>Daniel
-//                                         <li>Esra
-//                                         <li>Nehemia
-//                                         <li>1-2 Chronik
-//                                     </ul>
-//                                 </td>
-//                                 <td style="vertical-align:top">
-//                                     <ul>
-//                                         <li>Matthäus
-//                                         <li>Markus
-//                                         <li>Lukas
-//                                         <li>Johannes
-//                                     </ul>
-//                                     <hr>
-//                                     <ul>
-//                                         <li>Apostel&shy;geschichte
-//                                     </ul>
-//                                 </td>
-//                                 <td style="vertical-align:top">
-//                                     <ul>
-//                                         <li>Römer
-//                                         <li>1-2 Korinther
-//                                         <li>Galater
-//                                         <li>Epheser
-//                                         <li>Philipper
-//                                         <li>Kolosser
-//                                         <li>1-2 Thessa&shy;lonicher
-//                                         <li>1-2 Timotheus
-//                                         <li>Titus
-//                                         <li>Philemon
-//                                         <li>Hebräer
-//                                     </ul>
-//                                 </td>
-//                                 <td style="vertical-align:top">
-//                                     <ul>
-//                                         <li>Jakobus
-//                                         <li>1-2 Petrus
-//                                         <li>1-3 Johannes
-//                                         <li>Judas
-//                                     </ul>
-//                                     <hr>
-//                                     <ul>
-//                                         <li>Offenbarung
-//                                     </ul>
-//                                 </td>
-//                             </tr><tr>
-//                                 <th style="vertical-align:top">Spätschriften</th>
-//                                 <td style="vertical-align:top">
-//                                     <ul>
-//                                         <li>Baruch
-//                                     </ul>
-//                                 </td>
-//                                 <td colspan="2" style="vertical-align:top">
-//                                     <ul>
-//                                         <li>Psalmen (Ergänzungen)
-//                                         <li>Ester (griechische Version)
-//                                         <li>Daniel (griechische Version)
-//                                         <li>Esra (Ergänzungen)
-//                                     </ul>
-//                                 </td>
-//                                 <td colspan="3" style="vertical-align:top">
-//                                     <ul>
-//                                         <li>Judit
-//                                         <li>Tobit
-//                                         <li>1-4 Makkabäer
-//                                         <li>Oden (Manasse)
-//                                     </ul>
-//                                 </td>
-//                             </tr></table>
-//                         </li>
-
-
 
 function getOfBiFooter() {
     return <<<FOOTER_END
@@ -267,7 +122,7 @@ function getOfBiFooter() {
         <small>
             Der Inhalt ist verfügbar unter der Creative-Commons-Lizenz <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> bei Angabe von <a rel="cc:attributionURL" property="cc:attributionName" href="//offene-bibel.de/">offene-bibel.de</a> als Quelle.
             <br/>
-            <a href="/seiten/impressum">Impressum und Disclaimer</a>
+            <a href="/seiten/impressum">Impressum und Disclaimer</a> – <a href="/wiki/datenschutz">Datenschutz</a>
         </small>
     </footer>
         </div><!-- container -->
@@ -275,5 +130,3 @@ function getOfBiFooter() {
 </div><!-- wrap -->
 FOOTER_END;
 }
-
-?>

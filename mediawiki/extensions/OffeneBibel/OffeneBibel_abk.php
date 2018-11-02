@@ -2,11 +2,7 @@
 
 class OfBiAbk {
   public static function buchnamekapitel ($eingabe) {
-    $singularnamen = array_flip (self::$pluralnamen);
-    
-    if (isset ($singularnamen [$eingabe])) {
-      $eingabe = $singularnamen [$eingabe];
-    }
+    $eingabe = self::plural2singular($eingabe);
 
     if (isset (self::$versnummern [$eingabe])) {
       if (count (self::$versnummern [$eingabe]) == 1 && key (self::$versnummern [$eingabe]) === 0) {
@@ -46,6 +42,7 @@ class OfBiAbk {
   }
 
   public static function versnummern ($buchname, $kapitel)  {
+    $buchname = self::plural2singular($buchname);
     if (isset (self::$versnummern [$buchname]) && isset (self::$versnummern [$buchname] [$kapitel])) {
       $versnummern = self::$versnummern [$buchname] [$kapitel];
       if (is_int ($versnummern)) {
@@ -103,13 +100,26 @@ class OfBiAbk {
       return false;
     }
   }
+  
+  public static function singular2plural ($buchname) {
+    if (isset (self::$pluralnamen [$buchname])) {
+      $buchname = self::$pluralnamen [$buchname];
+    }
+    return $buchname;
+  }
+  
+  public static function plural2singular ($buchname) {
+    $singularnamen = array_flip (self::$pluralnamen);
+    if (isset ($singularnamen [$buchname])) {
+      $buchname = $singularnamen [$buchname];
+    }
+    return $buchname;
+  }
 
-  public static function buchnamen_alphabetisch (&$aktueller_buchname) {
+  public static function buchnamen_alphabetisch ($aktueller_buchname) {
     $liste = self::$alternativnamen;
     foreach (self::$buchnamen as $buchname) {
-      if (isset (self::$pluralnamen [$buchname])) {
-        $buchname = self::$pluralnamen [$buchname];
-      }
+      $buchname = self::singular2plural($buchname);
       if (isset (self::$kurznamen [$buchname])) {
         $liste [self::$kurznamen [$buchname]] = $buchname;
       } else {
@@ -119,16 +129,14 @@ class OfBiAbk {
 
     uksort($liste, "strnatcasecmp");
 
-    if (isset (self::$pluralnamen [$aktueller_buchname])) {
-      $aktueller_buchname = self::$pluralnamen [$aktueller_buchname];
-    }
+    $aktueller_buchname = self::singular2plural($aktueller_buchname);
     if (isset (self::$kurznamen [$aktueller_buchname])) {
       $aktueller_buchname = self::$kurznamen [$aktueller_buchname];
     } elseif (! isset ($liste [$aktueller_buchname])) {
-      $liste = array ('(auswählen)'=>'') + $liste;
-      $aktueller_buchname = '(auswählen)';
+      $liste = array ('Buch aufschlagen:'=>'') + $liste;
+      $aktueller_buchname = 'Buch aufschlagen:';
     }
-    return $liste;
+    return array($liste, $aktueller_buchname);
   }
 
   public static function analyse ($eingabe) {
@@ -277,7 +285,339 @@ class OfBiAbk {
     }
     return $ergebnisse;
   }
+  
+  public static function kapitel_umschalter ($pagename) {
+    $make_option = function ($value, $text, $active) {
+      if ($active) {
+        return '<option value="' . htmlspecialchars ($value) . '" selected="selected">' . htmlspecialchars ($text) . '</option>';
+      } else {
+        return '<option value="' . htmlspecialchars ($value) . '">' . htmlspecialchars ($text) . '</option>';
+      }
+    };
+    
+    list($name, $kapitel) = self::buchnamekapitel($pagename);
 
+    $text = '';
+    $kapitel = (int)trim($kapitel);
+    $text .= '<div class="kapitelwahl">';
+
+    $text .= '<div class="buchwahl ofbi-dropdown">
+      <div class="ofbi-dropdown-toggle">Bibelstelle/Suche <span class="caret"></span></div>
+      <div class="ofbi-dropdown-menu hidden">
+        <form action="/mediawiki/" method="get">
+          <div class="form-group">
+            <div class="input-group">
+              <input type=hidden name=title value="Spezial:Bibelstelle">
+              <input class="form-control" id="ofbi-suche" name="abk" maxlength="60" size="15" placeholder="Stellenangabe oder Suchwort" aria-label="Stellenangabe oder Suchwort" required>
+              <label class="input-group-addon"><button type="submit">Suche</button>
+            </div>
+          </div>
+        </form>
+        <table class="bible-link-table">
+          <tbody>
+            <tr>
+              <th colspan="6">
+                Neues&nbsp;Testament:
+              </th>
+            </tr>
+            <tr>
+              <td aria-label="Evan&#173;ge&#173;lien">
+                <p>
+                  <a href="/wiki/Matthäus">Matt&shy;häus</a>
+                  <a href="/wiki/Markus">Markus</a>
+                  <a href="/wiki/Lukas">Lukas</a>
+                  <a href="/wiki/Johannes">Johan&shy;nes</a>
+                </p>
+              </td>
+              <td>
+                <p>
+                  <a href="/wiki/Apostelgeschichte">Apostel&shy;geschichte</a>
+                </p>
+              </td>
+              <td aria-label="Paulus&#173;briefe">
+                <p>
+                  <a href="/wiki/Römer">Römer</a>
+                  <a href="/wiki/1-2_Korinther">1-2 Korinther</a>
+                  <a href="/wiki/Galater">Galater</a>
+                  <a href="/wiki/Epheser">Epheser</a>
+                  <a href="/wiki/Philipper">Philipper</a>
+                  <a href="/wiki/Kolosser">Kolosser</a>
+                  <a href="/wiki/1-2_Thessalonicher">1-2 Thessa&shy;lo&shy;nicher</a>
+                  <a href="/wiki/1-2_Timotheus">1-2 Timotheus</a>
+                  <a href="/wiki/Titus">Titus</a>
+                  <a href="/wiki/Philemon">Philemon</a>
+                </p>
+              </td>
+              <td aria-label="Brief ">
+                <p>
+                  <a href="/wiki/Hebräer">Hebräer</a>
+                </p>
+              </td>
+              <td aria-label="Pastoral&#173;briefe">
+                <p>
+                  <a href="/wiki/Jakobus">Jakobus</a>
+                  <a href="/wiki/1-2_Petrus">1-2 Petrus</a>
+                  <a href="/wiki/1-3_Johannes">1-3 Johannes</a>
+                  <a href="/wiki/Judas">Judas</a>
+                </p>
+              </td>
+              <td>
+                <p>
+                  <a href="/wiki/Offenbarung">Offen&shy;ba&shy;rung​​​<br>=Apo&shy;kalypse</a>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <th colspan="6">
+                Altes Testament:
+              </th>
+            </tr>
+            <tr>
+              <td data-short-label="Mose" aria-label="Penta&#173;teuch,&#xa;jüdisch: „Tora“ (Gesetz),&#xa;christ&#173;lich: Geschichts&#173;bücher">
+                <p>
+                  <a href="/wiki/Genesis">1M.=&#8203;Genesis​​​&#8203;</a>
+                  <a href="/wiki/Exodus">2M.=&#8203;Exodus​​​&#8203;</a>
+                  <a href="/wiki/Levitikus">3M.=&#8203;Levitikus​​​&#8203;</a>
+                  <a href="/wiki/Numeri">4M.=&#8203;Numeri​​​&#8203;</a>
+                  <a href="/wiki/Deuteronomium">5M.=&#8203;Deute&shy;ro&shy;nomium​​​&#8203;</a>
+                </p>
+              </td>
+              <td data-short-label="dtr.Geschichte" aria-label="Deute&#173;rono&#173;misti&#173;sches Ges&#173;chichts&#173;werk,&#xa;jüdisch: „Vordere Pro&#173;phe&#173;ten“,&#xa;christ&#173;lich: Geschichts&#173;bücher">
+                <p>
+                  <a href="/wiki/Josua">Josua</a>
+                  <a href="/wiki/Richter">Richter</a>
+                  <a href="/wiki/1-2_Samuel">1-2 Samuel</a>
+                  <a href="/wiki/1-2_Könige">1-2 Könige</a>
+                </p>
+              </td>
+              <td colspan="4" data-short-label="Pro&#173;phe&#173;tie" aria-label="Pro&#173;pheten&#173;bücher&#xa;jüdisch: „Hintere Pro&#173;phe&#173;ten“">
+                <div>
+                  <p>
+                    <a href="/wiki/Jesaja">Jesaja</a>
+                    <a href="/wiki/Jeremia">Jeremia</a>
+                    <a href="/wiki/Ezechiel">Ezechiel​​​<br/>=Hesekiel</a>
+                  </p>
+                  <p>
+                    <a href="/wiki/Hosea">Hosea</a>
+                    <a href="/wiki/Joel">Joel</a>
+                    <a href="/wiki/Amos">Amos</a>
+                    <a href="/wiki/Obadja">Obadja</a>
+                    <a href="/wiki/Jona">Jona</a>
+                    <a href="/wiki/Micha">Micha</a>
+                    <a href="/wiki/Nahum">Nahum</a>
+                    <a href="/wiki/Habakuk">Habakuk</a>
+                    <a href="/wiki/Zefanja">Zefanja</a>
+                    <a href="/wiki/Haggai">Haggai</a>
+                    <a href="/wiki/Sacharja">Sacharja</a>
+                    <a href="/wiki/Maleachi">Maleachi</a>
+                  </p>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td data-short-label="Poesie" aria-label="Poe&#173;ti&#173;sche Schrif&#173;ten,&#xa;christ&#173;lich: Lehr&#173;bücher">
+                <p>
+                  <a href="/wiki/Psalmen">Psalmen</a>
+                  <a href="/wiki/Ijob">Ijob​​​&#8203;=Hiob</a>
+                  <a href="/wiki/Sprichwörter">Sprich&shy;wörter</a>
+                </p>
+              </td>
+              <td data-short-label="Schrift/Geschichte" aria-label="jüdisch: Schrif&#173;ten,&#xa;christ&#173;lich: Geschichts&#173;bücher">
+                <p>
+                  <a href="/wiki/1-2_Chronik">1-2 Chronik</a>
+                  <a href="/wiki/Esra">Esra</a>
+                  <a href="/wiki/Nehemia">Nehemia</a>
+                </p>
+              </td>
+              <td colspan="4" data-short-label="Schrift/Prophetie" aria-label="jüdisch: Schrif&#173;ten,&#xa;christ&#173;lich: Pro&#173;phe&#173;ten">
+                <p>
+                  <a href="/wiki/Daniel">Daniel</a>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td data-short-label="Festrolle/Lehre" aria-label="jüdisch: Schrif&#173;ten der „Megil&#173;lot“ (Fest&#173;rolle),&#xa;christ&#173;lich: Lehr&#173;bücher">
+                <p>
+                  <a href="/wiki/Hohelied">Hohelied</a>
+                  <a href="/wiki/Kohelet">Kohelet​​​&#8203;=Prediger</a>
+                </p>
+              </td>
+              <td data-short-label="Festrolle/Geschichte" aria-label="jüdisch: Schrif&#173;ten der „Megil&#173;lot“ (Fest&#173;rolle),&#xa;christ&#173;lich: Geschichts&#173;bücher">
+                <p>
+                  <a href="/wiki/Rut">Rut</a>
+                  <a href="/wiki/Ester">Ester</a>
+                </p>
+              </td>
+              <td colspan="4" data-short-label="Festrolle/Prophetie" aria-label="jüdisch: Schrif&#173;ten der „Megil&#173;lot“ (Fest&#173;rolle),&#xa;christ&#173;lich: Pro&#173;phe&#173;ten">
+                <p>
+                  <a href="/wiki/Klagelieder">Klage&shy;lieder</a>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <th colspan="6">
+                Spätschriften zum Alten Testament:
+              </th>
+            </tr>
+            <tr>
+              <td width="243" data-short-label="Lehre" aria-label="katho&#173;lisch und ortho&#173;dox: Lehr&#173;bücher&#xa;evan&#173;ge&#173;lisch: „apokryph“ (verdeckt, dunkel)">
+                <p>
+                  <a href="/wiki/Psalmen_(Ergänzungen)">Psalmen (Ergän&shy;zungen)</a>
+                  <a href="/wiki/Oden">Oden</a>
+                  <a href="/wiki/Weisheit">Weisheit</a>
+                  <a href="/wiki/Jesus_Sirach">Jesus Sirach</a>
+                </p>
+              </td>
+              <td data-short-label="Geschichte" aria-label="katho&#173;lisch und ortho&#173;dox: Geschichts&#173;bücher&#xa;evan&#173;ge&#173;lisch: „apokryph“ (verdeckt, dunkel)">
+                <p>
+                  <a href="/wiki/Esra_(Ergänzungen)">Esra (Ergän&shy;zungen)</a>
+                  <a href="/wiki/Judith">Judith</a>
+                  <a href="/wiki/Tobit">Tobit</a>
+                  <a href="/wiki/Ester">Ester (grie&shy;chi&shy;sche Version)</a>
+                  <a href="/wiki/Makkabäer">1-4&nbsp;Makka&shy;bäer</a>
+                </p>
+              </td>
+              <td colspan="4" data-short-label="Prophetie" aria-label="katho&#173;lisch und ortho&#173;dox: Pro&#173;phe&#173;ten&#xa;evan&#173;ge&#173;lisch: „apokryph“ (verdeckt, dunkel)">
+                <p>
+                  <a href="/wiki/Baruch">Baruch</a>
+                  <a href="/wiki/Brief_des_Jeremia">Brief des Jeremia</a>
+                  <a href="/wiki/Daniel_(griechische_Version)">Daniel (grie&shy;chische Version), Susanna, Bel </a>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>';
+
+    if (self::erstes_kapitel ($name) !== false) {
+      $text .= '<form> ';
+      $text .= '<input type="submit" class="submitbutton2" value="Geh zu" onload="" class="zelle" /> ';
+      $text .= '<span class="zelle">';
+      $text .= '<select name="title" id="ofbi-nav-chapter" aria-label="Kapitel:">';
+
+      if ($kapitel === 0) {
+        $text .= $make_option ($name, 'Kapitel:', true);
+      }
+      $chapternumber = self::erstes_kapitel ($name);
+      do {
+        $pagename_for_option = $name . ' ' . $chapternumber;
+        $option = htmlspecialchars ($pagename_for_option);
+        $titleObj = Title::makeTitle( NS_MAIN, $option);
+        if (! $titleObj->exists ()) {
+          $pagename_for_option = '(' . $pagename_for_option . ')';
+        }
+        $text .= $make_option ($option, $pagename_for_option, $chapternumber === $kapitel);
+        $chapternumber = self::naechstes_kapitel ($name, $chapternumber);
+      } while ($chapternumber !== false);
+
+      $text .= '</select>';
+
+      if (self::voriges_kapitel ($name, $kapitel) !== false) {
+        $titleObj = Title::makeTitle( NS_MAIN, $name . ' ' . self::voriges_kapitel ($name, $kapitel));
+        $text .= ' <a href="' . htmlspecialchars ($titleObj->getLocalURL ()) . '"';
+        $text .= ' title="' . htmlspecialchars ($name . ' ' . self::voriges_kapitel ($name, $kapitel)) . '"';
+        if (! $titleObj->exists ()) {
+          $text .= ' class="new"';
+        }
+        $text .= '>←</a> ';
+      }
+
+      if (self::naechstes_kapitel ($name, $kapitel) !== false) {
+        $titleObj = Title::makeTitle( NS_MAIN, $name . ' ' . self::naechstes_kapitel ($name, $kapitel));
+        $text .= ' <a href="' . htmlspecialchars ($titleObj->getLocalURL ()) . '"';
+        $text .= ' title="' . htmlspecialchars ($name . ' ' . self::naechstes_kapitel ($name, $kapitel)) . '"';
+        if (! $titleObj->exists ()) {
+          $text .= ' class="new"';
+        }
+        $text .= '>→</a> ';
+      }
+
+      $text .= '</span>';
+      $text .= '</form>';
+    }
+
+    $text .= '<script type="text/javascript"> ';
+    $text .= '[].forEach.call(document.querySelectorAll(".submitbutton1"), function(elem){elem.style.display = "none"}); ';
+    if (self::erstes_kapitel ($name) !== false) {
+      $text .= '[].forEach.call(document.querySelectorAll(".submitbutton2"), function(elem){elem.style.display = "none"}); ';
+    }
+    $text .= '</script>';
+
+    $text .= '</div>';
+    return $text;
+  }
+
+  public static function fassungen_umschalter ($pagename) {
+    $result = '';
+    $category = null;
+    $sortedTitles = array();
+
+    list ($buchname, $kapitel) = self::buchnamekapitel ($pagename);
+    if (is_string($kapitel)) {
+      $category = Category::newFromName($buchname . ' ' . $kapitel);
+    }
+
+    if ($category instanceof Category) {
+      $titles = array();
+      foreach ($category->getMembers() as $title) {
+        $titleText = $title->getText();
+        $titles[$titleText] = $title;
+      }
+
+      // Skip current page title
+      $thisTitleText = Title::newFromText($pagename)->getText();
+      unset($titles[$thisTitleText]);
+
+      // If the current page title contains " in Leichter Sprache",
+      // then add all title with " in Leichter Sprache" first
+      if (strpos(mb_strtolower($thisTitleText), ' in leichter sprache') !== false) {
+        foreach ($titles as $titleText=>$title) {
+          if (strpos(mb_strtolower($titleText), ' in leichter sprache') !== false) { 
+            $sortedTitles[$titleText] = $title;
+            unset($titles[$titleText]);
+          }
+        }
+      }
+
+      // Then add the page "<Bookname> <Chapternumber>"
+      $title = Title::newFromText($buchname . ' ' . $kapitel);
+      $titleText = $title->getText();
+      if (array_key_exists($titleText, $titles)) {
+        $sortedTitles[$titleText] = $title;
+        unset($titles[$titleText]);
+      }
+    
+      // Then add the page "<Bookname> <Chapternumber> in Leichter Sprache"
+      $title = Title::newFromText($buchname . ' ' . $kapitel . ' in Leichter Sprache');
+      $titleText = $title->getText();
+      if (array_key_exists($titleText, $titles)) {
+        $sortedTitles[$titleText] =  $title;
+        unset($titles[$titleText]);
+      }
+
+      // Add all other pages from this category last
+      foreach ($titles as $titleText=>$title) {
+        $sortedTitles[$titleText] =  $title;
+      }
+    }
+    
+    if (count($sortedTitles) > 0) {
+        $result = '<div class="andere-fassungen ofbi-dropdown"><div class="ofbi-dropdown-toggle">';
+        $result .= 'Andere Fassungen von ' . $buchname . ' ' . $kapitel;
+        $result .= ' <span class="caret"></span></div><ul class="ofbi-dropdown-menu hidden">';
+        
+        foreach ($sortedTitles as $titleText=>$title) {
+        $result .= '<li><a href="' . htmlspecialchars ($title->getFullURL()) . '">' . htmlspecialchars($titleText) . '</a></li>';
+        }
+        $result .= '</ul></div>';
+    }
+
+    return $result;
+  }
+  
   public static $buchnamen = array (
     'genesis' => 'Genesis',
     'exodus' => 'Exodus',

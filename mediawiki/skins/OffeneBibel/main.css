@@ -34,19 +34,94 @@
     right: 0px;
     width: 100%;
     z-index: 2;
-    padding: 1em 0 2em 0;
+    padding: 1em 0 0;
     background-color: #FFFFFF;
 }
 
 #column-content {
 /*     position: absolute; */
+    display: flex;
+    flex-wrap: wrap;
     overflow: visible;
     top: 0;
     right: 0px;
 /*     width: 76.5%; */
     z-index: 2;
-    padding: .5em 0 2em 0;
+    padding: 0;
     background-color: #FFFFFF;
+    margin-top: -4.2rem;
+    justify-content: space-between;
+}
+
+#column-content > * {
+    flex-basis: 100%;
+    order: 10;
+}
+
+#column-content > .umschalter {
+    order: 2;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.umschalter > .kapitelwahl {
+    order: 1;
+    flex-basis: auto;
+    flex-grow: 1;
+    min-height: 2.5rem;
+}
+
+.umschalter > .andere-fassungen {
+    color: #666666;
+    order: 2;
+    flex-basis: auto;
+    min-height: 2.5rem;
+}
+
+.umschalter > .navi {
+    flex-basis: auto;
+    flex-grow: 1;
+    align-self: baseline;
+}
+
+.umschalter > .ofbi-syntax-tag {
+    flex-basis: auto;
+    height: 1.5em;
+    align-self: baseline;
+}
+
+#column-content > .search-result {
+  order: 1;
+  background: #f8f8f8;
+  border: 1px solid #e7e7e7;
+  border-top: 0;
+  padding: .5em .7em 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+#column-content > .search-result > form {
+  margin-right: 1em;
+}
+
+#column-content > .search-result input {
+  margin-left: .5em;
+}
+
+#column-content > .search-result > .navi {
+  flex-grow: 1;
+  text-align: right;
+}
+
+#column-content > .nothing-found {
+  padding: 3rem 0;
+  min-height: 70vh;
+}
+
+#column-content > #firstHeading {
+    padding-top: 3.5rem;
 }
 
 #content {
@@ -264,12 +339,12 @@ q {
     font-family: Times, "Times New Roman", serif;
     font-style: italic;
 }
-code { background-color: #f9f9f9; }
+code { background-color: #f8f8f8; }
 pre {
     padding: 1em;
     border: 1px dashed #2f6fab;
     color: Black;
-    background-color: #f9f9f9;
+    background-color: #f8f8f8;
     line-height: 1.1em;
 }
 
@@ -310,7 +385,7 @@ span.subpages { display: block; }
 }
 .catlinks {
     border:1px solid #aaaaaa;
-    background-color:#f9f9f9;
+    background-color:#f8f8f8;
     padding: 2px 5px;
     margin: 0.1em 0 0 0;
     clear: both;
@@ -356,7 +431,7 @@ table.small { font-size: 100% }
     /*border:1px solid #2f6fab;*/
     position: relative;
     border:1px solid #aaaaaa;
-    background-color:#f9f9f9;
+    background-color:#f8f8f8;
     padding:5px;
     font-size: 80%;
     margin: 0 0 1em 1em;
@@ -396,7 +471,7 @@ div.thumb {
 div.thumb div {
     border:1px solid #cccccc;
     padding: 3px !important;
-    background-color:#f9f9f9;
+    background-color:#f8f8f8;
     font-size: 94%;
     text-align: center;
     overflow: hidden;
@@ -465,7 +540,7 @@ img.thumbborder {
 }
 #preftoc li.selected {
 	font-weight: bold;
-	background-color: #f9f9f9;
+	background-color: #f8f8f8;
 	border: 1px solid #aaa;
 	border-bottom: none;
 	cursor: default;
@@ -497,7 +572,7 @@ img.thumbborder {
 	border: 1px solid #aaa;
 	clear: both;
 	padding: 1.5em;
-	background-color: #f9f9f9;
+	background-color: #f8f8f8;
 }
 .prefsection {
 	border: none;
@@ -513,7 +588,7 @@ img.thumbborder {
 	font-weight: bold;
 }
 .prefsection table, .prefsection legend {
-	background-color: #f9f9f9;
+	background-color: #f8f8f8;
 }
 .mainLegend {
 	display: none;
@@ -557,7 +632,7 @@ table.rimage {
 }
 .toccolours {
     border:1px solid #aaaaaa;
-    background-color:#f9f9f9;
+    background-color:#f8f8f8;
     padding:5px;
     font-size: 95%;
 }
@@ -605,7 +680,7 @@ table.gallery tr {
 
 table.gallery td {
       vertical-align:top;
-      background-color:#f9f9f9;
+      background-color:#f8f8f8;
       border: solid 2px white;
 }
 
@@ -663,15 +738,12 @@ div.gallerytext {
 }
 
 #p-cactions {
-    font-size: 80%;
-    position: absolute;
-    left: 0%;
-    right: 0%;
-    top: 0;
-    padding: 0;
-    margin: 0;
     white-space: nowrap;
     text-align: right;
+    order: 2;
+    flex-basis: auto;
+    flex-grow: 1;
+    min-height: 2.5rem;
 }
 
 .cactions {
@@ -912,6 +984,8 @@ sup.versnummer {
 
 .studienfassung .vor_vers {
   display: block;
+  position: relative;
+  top: -.5em;
 }
 
 .pfeil {
@@ -961,33 +1035,8 @@ sup.versnummer {
   font-size:125%;
 }
 
-.kapitelwahl {
-   float: right;
-   display: table;
-   margin-bottom: 0.5em;
-}
-
 .ofbi-syntax-tag {
    float: right;
-}
-
-#hauptseite .kapitelwahl {
-  padding: 0.25em 0.25em 0 0.25em;
-}
-
-.kapitelwahl form {
-  display: table-row;
-}
-
-.kapitelwahl .zelle {
-  display: table-cell;
-  vertical-align: middle;
-  font-size: 80%;
-}
-
-.kapitelwahl select, .kapitelwahl input {
-  vertical-align: baseline;
-  font-size: 80%;
 }
 
 /*** Vernummern Ende ***/
@@ -1131,9 +1180,22 @@ sup.versnummer {
   border-bottom: 1px dotted #177BDE;   
 }
 
+
+.page-Leichte_Sprache .mw-redirectedfrom,
+.page-Bibel_in_Leichter_Sprache .mw-redirectedfrom {
+  display: none;
+  visibility: hidden;
+}
+
 /*** Fußnoten Ende ***/
 
-  .muster {display : none; visibility : none;}
+
+
+
+.historycredit {margin-top: 5rem; font-size: 90%}
+
+
+.muster {display : none; visibility : none;}
   #inhalt {float : right; border : 1px solid #ddd; background-color : #f7f7f7; padding : 0.5em;}
   #inhalt ul {margin : 0 0 0 1em; padding : 0;}
   #inhalt li {display : block; margin : 0; padding : 0;}
@@ -1142,14 +1204,17 @@ sup.versnummer {
 
 /*** Fix für Syntaxchecker Modal, damit der nicht unter der Navbar hängt. ***/
 .modal-dialog {
-    margin: 70px auto;
+  margin: 70px auto;
 }
 
 @media print {
-    .navi, .catlinks, .portlet, .kapitelwahl, .ofbi-syntax-tag, .teilstatusliste a[href]::after, .status a[href]::after {
-        display: none;
-    }
-    .printfooter, .studienfassung, .lesefassung, .leichtesprache {
-        display: block;
-    }
+  .navi, .catlinks, .portlet, .ofbi-syntax-tag, .andere-fassungen, .teilstatusliste a[href]::after, .status a[href]::after {
+    display: none;
+  }
+  .printfooter, .studienfassung, .lesefassung, .leichtesprache, #column-content {
+    display: block;
+  }
+  #toc {
+    float: none;
+  }
 }
